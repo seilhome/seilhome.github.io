@@ -12,3 +12,8 @@
 .viewerInner img{max-width:none !important;width:auto !important;min-width:0 !important;height:auto !important;}
 .viewerHint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:102;background:rgba(255,255,255,.95);border:1px solid #ddd;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:800;color:#333;box-shadow:0 4px 14px rgba(0,0,0,.12)}
 @media(max-width:760px){.viewerInner{padding:68px 12px 52px}.viewerHint{font-size:12px;bottom:12px}}
+
+/* v3.1 이미지 확대 보기 개선 */
+.viewerInner{touch-action:none;overscroll-behavior:contain;}
+.viewerInner img{transform-origin:center center;transition:transform .05s linear;will-change:transform;}
+.viewerHint::after{content:" · 두 번 터치하면 확대/축소";}
