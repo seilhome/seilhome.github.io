@@ -241,5 +241,38 @@
   </div>
 
   <script src="js/script.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 전화상담 클릭 추적
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        gtag('event', 'phone_click', {
+          event_category: 'contact',
+          event_label: '전화상담'
+        });
+      });
+    });
+
+    // 방문예약 버튼 클릭 추적
+    document.querySelectorAll('a[href="#reservation"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        gtag('event', 'reservation_click', {
+          event_category: 'lead',
+          event_label: '모델하우스 방문예약'
+        });
+      });
+    });
+
+    // 분양가 확인 버튼 클릭 추적
+    document.querySelectorAll('a[href="#price"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        gtag('event', 'price_click', {
+          event_category: 'interest',
+          event_label: '분양가 확인'
+        });
+      });
+    });
+  });
+</script>
 </body>
 </html>
