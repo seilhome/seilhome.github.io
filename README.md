@@ -1,19 +1,11 @@
-# 강릉 우미 린 더 프리미어 SEO v6
+# 우미린 홈페이지 v6.3 GA4 확인본
 
-## GitHub 업로드
-압축을 풀고 `index.html`, `css`, `js`, `images`, `sitemap.xml`, `robots.txt`, `rss.xml`, `manifest.json`, `favicon.svg` 전체를 GitHub 저장소에 덮어쓰기 업로드하세요.
+GitHub에 압축을 푼 파일 전체를 루트에 덮어쓰기 업로드하세요.
 
-## 네이버 서치어드바이저 제출
-소유확인 완료 후:
-- 사이트맵 제출: `sitemap.xml`
-- RSS 제출: `rss.xml`
-- 웹페이지 수집 요청: `https://gn-premier.com/`
+적용 확인:
+1. https://gn-premier.com 접속 후 Ctrl+F5
+2. 마우스 오른쪽 클릭 → 페이지 소스 보기
+3. Ctrl+F 로 `G-JV8BHGY9N7` 검색
+4. 검색되면 GA4 코드 적용 완료
 
-## 확인 주소
-- https://gn-premier.com/sitemap.xml
-- https://gn-premier.com/robots.txt
-- https://gn-premier.com/rss.xml
-
-
-## v6.1
-- Google Search Console verification meta tag added.
+네이버/구글 사이트맵과 RSS는 다시 제출하지 않아도 됩니다.

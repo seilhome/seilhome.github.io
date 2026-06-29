@@ -81,6 +81,19 @@ if(viewerInner){
   },{passive:false});
 }
 
+
+function trackEvent(eventName, params){
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params || {});
+  }
+}
+document.querySelectorAll('a[href^="tel:"]').forEach(link=>{
+  link.addEventListener('click',()=>trackEvent('phone_click',{event_category:'lead',event_label:'전화상담'}));
+});
+document.querySelectorAll('a[href="#reservation"], .apply').forEach(link=>{
+  link.addEventListener('click',()=>trackEvent('reservation_click',{event_category:'lead',event_label:'상담신청 버튼'}));
+});
+
 const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwrbnYlh5Iij8kS6uiy2dI9M-wvS5caQ-8hmdZgwP8FJ9J5coTN9EQpLBEQI-pzzPiM/exec';
 
 const dateInput=document.querySelector('input[name="visitDate"]');
@@ -114,6 +127,7 @@ document.getElementById('leadForm').addEventListener('submit',async(e)=>{
     await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     form.reset();
     showSuccess();
+    trackEvent('lead_submit_success',{event_category:'lead',event_label:'상담신청 완료',type:data.type||'',visit:data.visit||''});
   }catch(err){
     alert('접수 중 오류가 발생했습니다. 대표번호 033-760-5990으로 연락 부탁드립니다.');
   }finally{
