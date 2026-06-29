@@ -18,7 +18,7 @@ GitHub Pages 업로드용 파일입니다.
 4. js/script.js 파일의 아래 부분 교체
 
 ```js
-const GOOGLE_SCRIPT_URL='PASTE_GOOGLE_APPS_SCRIPT_URL_HERE';
+const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwrbnYlh5Iij8kS6uiy2dI9M-wvS5caQ-8hmdZgwP8FJ9J5coTN9EQpLBEQI-pzzPiM/exec';
 ```
 
 발급받은 URL을 따옴표 안에 넣으면 상담신청이 스프레드시트에 저장됩니다.
