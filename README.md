@@ -13,3 +13,7 @@
 - https://gn-premier.com/sitemap.xml
 - https://gn-premier.com/robots.txt
 - https://gn-premier.com/rss.xml
+
+
+## v6.1
+- Google Search Console verification meta tag added.
