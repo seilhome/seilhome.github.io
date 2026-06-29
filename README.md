@@ -32,3 +32,9 @@ function doPost(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 ```
+
+
+## 수정 사항
+- 하단 고정 버튼: 전화상담 / 상담신청 2개로 변경
+- 오픈채팅 버튼 제거
+- 상담신청은 구글 스프레드시트 연동 주소 입력 후 자동 저장

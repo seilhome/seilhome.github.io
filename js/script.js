@@ -1,4 +1,3 @@
-const KAKAO_URL = 'https://open.kakao.com/o/s4kktZri';
 const GOOGLE_SCRIPT_URL = ''; // 구글 Apps Script 배포 URL을 여기에 붙여넣으세요.
 
 const floorButtons = document.querySelectorAll('.floor-tabs button');
@@ -41,12 +40,10 @@ form.addEventListener('submit', async (e)=>{
       alert('상담 신청이 접수되었습니다. 빠르게 연락드리겠습니다.');
       form.reset();
     }else{
-      alert('카카오톡 상담으로 연결됩니다.');
-      window.open(KAKAO_URL,'_blank');
+      alert('구글 스프레드시트 연동 주소가 아직 입력되지 않았습니다. 연동 후 상담신청이 저장됩니다.');
     }
   }catch(err){
-    alert('접수 중 오류가 발생했습니다. 카카오톡 상담으로 연결됩니다.');
-    window.open(KAKAO_URL,'_blank');
+    alert('접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
   }finally{
     submit.disabled=false;
     submit.textContent='상담 신청하기';
