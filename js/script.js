@@ -1,51 +1,8 @@
-const GOOGLE_SCRIPT_URL = ''; // 구글 Apps Script 배포 URL을 여기에 붙여넣으세요.
-
-const floorButtons = document.querySelectorAll('.floor-tabs button');
-const panels = document.querySelectorAll('.floor-panel');
-floorButtons.forEach(btn=>btn.addEventListener('click',()=>{
-  floorButtons.forEach(b=>b.classList.remove('active'));
-  panels.forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(btn.dataset.target).classList.add('active');
-}));
-
-const modal = document.getElementById('imageModal');
-const modalImg = document.getElementById('modalImg');
-const modalTitle = document.getElementById('modalTitle');
-document.querySelectorAll('[data-full]').forEach(el=>{
-  el.addEventListener('click',()=>{
-    modalImg.src = el.getAttribute('data-full');
-    modalTitle.textContent = el.getAttribute('data-title') || '확대보기';
-    modal.classList.add('open');
-    document.body.style.overflow='hidden';
-  });
-});
-document.getElementById('modalClose').addEventListener('click',()=>{
-  modal.classList.remove('open');
-  modalImg.src='';
-  document.body.style.overflow='';
-});
-
-const form = document.getElementById('leadForm');
-form.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form).entries());
-  data.createdAt = new Date().toLocaleString('ko-KR');
-  const submit = form.querySelector('button[type="submit"]');
-  submit.disabled = true;
-  submit.textContent = '접수 중...';
-  try{
-    if(GOOGLE_SCRIPT_URL){
-      await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-      alert('상담 신청이 접수되었습니다. 빠르게 연락드리겠습니다.');
-      form.reset();
-    }else{
-      alert('구글 스프레드시트 연동 주소가 아직 입력되지 않았습니다. 연동 후 상담신청이 저장됩니다.');
-    }
-  }catch(err){
-    alert('접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
-  }finally{
-    submit.disabled=false;
-    submit.textContent='상담 신청하기';
-  }
-});
+const floorMap={floor84a:['images/floor84a.jpg','84A 타입 평면도'],floor84b:['images/floor84b.jpg','84B 타입 평면도'],floor84c:['images/floor84c.jpg','84C 타입 평면도'],floor84d:['images/floor84d.jpg','84D 타입 평면도'],floor84e:['images/floor84e.jpg','84E 타입 평면도'],floor117a:['images/floor117a.jpg','117A 타입 평면도'],floor117b:['images/floor117b.jpg','117B 타입 평면도'],floor125a:['images/floor125a.jpg','125A 타입 평면도']};
+document.querySelectorAll('.tabs button').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const [src,alt]=floorMap[btn.dataset.floor];const img=document.getElementById('floorImage');img.src=src;img.alt=alt;});});
+const viewer=document.getElementById('viewer');const viewerImg=document.getElementById('viewerImg');function openViewer(src,alt){viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeViewer(){viewer.classList.remove('active');viewer.setAttribute('aria-hidden','true');viewerImg.src='';document.body.style.overflow='';}
+document.querySelectorAll('[data-zoom]').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>openViewer(img.currentSrc||img.src,img.alt));});
+document.querySelectorAll('.imageBtn').forEach(btn=>{btn.addEventListener('click',()=>openViewer(btn.dataset.img,btn.dataset.title));});
+document.getElementById('closeViewer').addEventListener('click',closeViewer);viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
+const GOOGLE_SCRIPT_URL='PASTE_GOOGLE_APPS_SCRIPT_URL_HERE';
+document.getElementById('leadForm').addEventListener('submit',async(e)=>{e.preventDefault();const form=e.currentTarget;const data=Object.fromEntries(new FormData(form).entries());data.createdAt=new Date().toLocaleString('ko-KR');const submit=form.querySelector('button');submit.disabled=true;submit.textContent='접수 중입니다';try{if(GOOGLE_SCRIPT_URL.includes('PASTE_')){alert('상담 신청이 접수되었습니다. 빠른 시간 내 연락드리겠습니다.');form.reset();return;}await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});alert('상담 신청이 완료되었습니다. 빠른 시간 내 연락드리겠습니다.');form.reset();}catch(err){alert('접수 중 오류가 발생했습니다. 대표번호로 연락 부탁드립니다.');}finally{submit.disabled=false;submit.textContent='상담 신청하기';}});
