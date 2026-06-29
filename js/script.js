@@ -1,28 +1,55 @@
 const floorMap={floor84a:['images/floor84a.jpg','84A 타입 평면도'],floor84b:['images/floor84b.jpg','84B 타입 평면도'],floor84c:['images/floor84c.jpg','84C 타입 평면도'],floor84d:['images/floor84d.jpg','84D 타입 평면도'],floor84e:['images/floor84e.jpg','84E 타입 평면도'],floor117a:['images/floor117a.jpg','117A 타입 평면도'],floor117b:['images/floor117b.jpg','117B 타입 평면도'],floor125a:['images/floor125a.jpg','125A 타입 평면도']};
+
 document.querySelectorAll('.tabs button').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const [src,alt]=floorMap[btn.dataset.floor];const img=document.getElementById('floorImage');img.src=src;img.alt=alt;});});
-const viewer=document.getElementById('viewer');const viewerImg=document.getElementById('viewerImg');function openViewer(src,alt){viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeViewer(){viewer.classList.remove('active');viewer.setAttribute('aria-hidden','true');viewerImg.src='';document.body.style.overflow='';}
+
+const viewer=document.getElementById('viewer');
+const viewerImg=document.getElementById('viewerImg');
+function openViewer(src,alt){viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function closeViewer(){viewer.classList.remove('active');viewer.setAttribute('aria-hidden','true');viewerImg.src='';document.body.style.overflow='';}
 document.querySelectorAll('[data-zoom]').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>openViewer(img.currentSrc||img.src,img.alt));});
 document.querySelectorAll('.imageBtn').forEach(btn=>{btn.addEventListener('click',()=>openViewer(btn.dataset.img,btn.dataset.title));});
-document.getElementById('closeViewer').addEventListener('click',closeViewer);viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
+document.getElementById('closeViewer').addEventListener('click',closeViewer);
+viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
+
 const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwrbnYlh5Iij8kS6uiy2dI9M-wvS5caQ-8hmdZgwP8FJ9J5coTN9EQpLBEQI-pzzPiM/exec';
+
+const dateInput=document.querySelector('input[name="visitDate"]');
+if(dateInput){
+  const today=new Date();
+  const yyyy=today.getFullYear();
+  const mm=String(today.getMonth()+1).padStart(2,'0');
+  const dd=String(today.getDate()).padStart(2,'0');
+  dateInput.min=`${yyyy}-${mm}-${dd}`;
+}
+
+const successModal=document.getElementById('successModal');
+const successClose=document.getElementById('successClose');
+function showSuccess(){successModal.classList.add('active');successModal.setAttribute('aria-hidden','false');}
+function hideSuccess(){successModal.classList.remove('active');successModal.setAttribute('aria-hidden','true');}
+if(successClose) successClose.addEventListener('click',hideSuccess);
+if(successModal) successModal.addEventListener('click',e=>{if(e.target===successModal)hideSuccess();});
+
 document.getElementById('leadForm').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const form=e.currentTarget;
   const data=Object.fromEntries(new FormData(form).entries());
-  const visitText=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
-  data.visit=visitText;
+  data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
   data.createdAt=new Date().toLocaleString('ko-KR');
-  const submit=form.querySelector('button');
+  const submit=form.querySelector('button[type="submit"]');
+  const btnText=submit.querySelector('.btnText');
   submit.disabled=true;
-  submit.textContent='접수 중입니다';
+  submit.classList.add('loading');
+  if(btnText) btnText.textContent='접수 중입니다';
   try{
     await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    alert('상담 신청이 완료되었습니다. 빠른 시간 내 연락드리겠습니다.');
     form.reset();
+    showSuccess();
   }catch(err){
-    alert('접수 중 오류가 발생했습니다. 대표번호로 연락 부탁드립니다.');
+    alert('접수 중 오류가 발생했습니다. 대표번호 033-760-5990으로 연락 부탁드립니다.');
   }finally{
     submit.disabled=false;
-    submit.textContent='상담 신청하기';
+    submit.classList.remove('loading');
+    if(btnText) btnText.textContent='상담 신청하기';
   }
 });
