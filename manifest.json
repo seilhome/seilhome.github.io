@@ -1,0 +1,12 @@
+{
+  "name": "강릉 우미 린 더 프리미어",
+  "short_name": "강릉우미린",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "강릉 우미 린 더 프리미어 분양상담 홈페이지",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}

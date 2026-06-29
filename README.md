@@ -1,13 +1,15 @@
-# 강릉 우미 린 더 프리미어 홈페이지
+# 강릉 우미 린 더 프리미어 SEO v6
 
-네이버 서치어드바이저 인증 태그와 SEO 메타태그가 적용된 버전입니다.
+## GitHub 업로드
+압축을 풀고 `index.html`, `css`, `js`, `images`, `sitemap.xml`, `robots.txt`, `rss.xml`, `manifest.json`, `favicon.svg` 전체를 GitHub 저장소에 덮어쓰기 업로드하세요.
 
-업로드 파일:
-- index.html
-- css/
-- js/
-- images/
-- robots.txt
-- sitemap.xml
+## 네이버 서치어드바이저 제출
+소유확인 완료 후:
+- 사이트맵 제출: `sitemap.xml`
+- RSS 제출: `rss.xml`
+- 웹페이지 수집 요청: `https://gn-premier.com/`
 
-업로드 후 네이버 서치어드바이저에서 소유확인을 누르고, sitemap.xml을 제출하세요.
+## 확인 주소
+- https://gn-premier.com/sitemap.xml
+- https://gn-premier.com/robots.txt
+- https://gn-premier.com/rss.xml
