@@ -1,0 +1,77 @@
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents || '{}');
+  const now = new Date();
+
+  const name = data.name || '';
+  const phone = data.phone || '';
+  const type = data.type || '';
+  const consultType = data.consultType || '';
+  const visitDate = data.visitDate || '';
+  const visitTime = data.visitTime || '';
+  const visit = data.visit || [visitDate, visitTime].filter(Boolean).join(' ');
+  const message = data.message || '';
+
+  sheet.appendRow([
+    now,
+    name,
+    phone,
+    type,
+    consultType,
+    visitDate,
+    visitTime,
+    message,
+    '신규',
+    ''
+  ]);
+
+  const subject = '[우미린] 새 상담신청이 접수되었습니다';
+  const textBody =
+    '새 상담신청이 접수되었습니다.\n\n' +
+    '이름: ' + name + '\n' +
+    '연락처: ' + phone + '\n' +
+    '관심평형: ' + type + '\n' +
+    '상담유형: ' + consultType + '\n' +
+    '방문희망: ' + visit + '\n' +
+    '문의내용: ' + message + '\n\n' +
+    '접수시간: ' + now;
+
+  const htmlBody =
+    '<div style="font-family:Arial, sans-serif;max-width:560px;border:1px solid #eee;border-radius:16px;padding:22px">' +
+    '<h2 style="margin:0 0 14px;color:#e76518">새 상담신청 접수</h2>' +
+    '<table style="width:100%;border-collapse:collapse;font-size:15px">' +
+    rowHtml('이름', name) +
+    rowHtml('연락처', '<a href="tel:' + phone + '">' + phone + '</a>') +
+    rowHtml('관심평형', type) +
+    rowHtml('상담유형', consultType) +
+    rowHtml('방문희망', visit) +
+    rowHtml('문의내용', message) +
+    rowHtml('접수시간', now) +
+    '</table>' +
+    '<p style="margin:18px 0 0;color:#777;font-size:13px">강릉 우미 린 더 프리미어 홈페이지 상담신청</p>' +
+    '</div>';
+
+  MailApp.sendEmail({
+    to: 'nseil83@gmail.com',
+    subject: subject,
+    body: textBody,
+    htmlBody: htmlBody
+  });
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function rowHtml(label, value) {
+  return '<tr><th style="text-align:left;width:110px;padding:10px;border-top:1px solid #eee;background:#fafafa;color:#555">' + label + '</th>' +
+         '<td style="padding:10px;border-top:1px solid #eee;color:#111">' + (value || '') + '</td></tr>';
+}
+
+function testMail() {
+  MailApp.sendEmail(
+    'nseil83@gmail.com',
+    '우미린 Gmail 테스트',
+    'Gmail 알림 테스트입니다.'
+  );
+}
