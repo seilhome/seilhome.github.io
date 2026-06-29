@@ -16,6 +16,17 @@ function closeViewer(){viewer.classList.remove('active');viewer.setAttribute('ar
 document.querySelectorAll('[data-zoom]').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>openViewer(img.currentSrc||img.src,img.alt));});
 document.querySelectorAll('.imageBtn').forEach(btn=>{btn.addEventListener('click',()=>openViewer(btn.dataset.img,btn.dataset.title));});
 document.getElementById('closeViewer').addEventListener('click',closeViewer);
+const zoomInBtn=document.getElementById('zoomIn');
+const zoomOutBtn=document.getElementById('zoomOut');
+const zoomResetBtn=document.getElementById('zoomReset');
+function setZoomScale(next){
+  zoomState.scale=clamp(next,1,5);
+  if(zoomState.scale===1){zoomState.x=0;zoomState.y=0;}
+  applyZoom();
+}
+if(zoomInBtn) zoomInBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale+0.6);});
+if(zoomOutBtn) zoomOutBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale-0.6);});
+if(zoomResetBtn) zoomResetBtn.addEventListener('click',e=>{e.stopPropagation();resetZoom();});
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
 

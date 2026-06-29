@@ -116,7 +116,7 @@
           <select name="type" required>
             <option value="">관심 평형 선택</option>
             <option>84㎡ · 34평형</option>
-            <option>117㎡ · 42평형</option>
+            <option>117㎡ · 45평형</option>
             <option>125㎡ · 48평형</option>
             <option>상담 후 결정</option>
           </select>
@@ -169,7 +169,12 @@
 
   <div class="viewer" id="viewer" aria-hidden="true">
     <button class="close" id="closeViewer" aria-label="닫기">×</button>
-    <div class="viewerInner"><img id="viewerImg" src="" alt="확대 이미지" /></div><div class="viewerHint">좌우로 밀거나 손가락으로 확대해서 확인하세요</div>
+    <div class="zoomControls" aria-label="확대 축소 버튼">
+      <button type="button" id="zoomOut" aria-label="축소">−</button>
+      <button type="button" id="zoomIn" aria-label="확대">＋</button>
+      <button type="button" id="zoomReset" aria-label="원래 크기">100%</button>
+    </div>
+    <div class="viewerInner"><img id="viewerImg" src="" alt="확대 이미지" /></div><div class="viewerHint">두 손가락 또는 + 버튼으로 확대해서 확인하세요</div>
   </div>
 
   <div class="successModal" id="successModal" aria-hidden="true">
