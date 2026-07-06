@@ -1,0 +1,200 @@
+/* 분양정보 페이지 및 메인 미리보기 */
+.newsPreview {
+  background: #fffaf4;
+  border-top: 1px solid rgba(210, 135, 58, 0.16);
+  border-bottom: 1px solid rgba(210, 135, 58, 0.16);
+}
+.newsLead {
+  margin: 8px 0 22px;
+  color: #6b625a;
+  line-height: 1.65;
+}
+.miniNewsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.miniNewsCard {
+  display: block;
+  padding: 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.07);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+.miniNewsCard strong {
+  display: block;
+  margin: 9px 0 8px;
+  font-size: 17px;
+}
+.miniNewsCard p {
+  margin: 0;
+  color: #6b625a;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.miniBadge {
+  display: inline-flex;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #f58220;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+.newsMoreWrap { text-align: center; margin-top: 22px; }
+.newsMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+}
+.newsPage { padding-bottom: 80px; }
+.newsHero {
+  padding: 72px 20px 34px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff6ed 0%, #fff 100%);
+}
+.newsHero h1 {
+  margin: 6px 0 12px;
+  font-size: clamp(34px, 8vw, 56px);
+  letter-spacing: -0.04em;
+}
+.newsHero p {
+  margin: 0 auto;
+  max-width: 640px;
+  color: #6b625a;
+  line-height: 1.7;
+}
+.newsHeroBtns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+.newsHeroBtns a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+}
+.newsHeroBtns a:first-child { background: #f58220; }
+.newsFilters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 18px 20px 10px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.newsFilters button {
+  flex: 0 0 auto;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  color: #333;
+  border-radius: 999px;
+  padding: 10px 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.newsFilters button.active {
+  background: #f58220;
+  color: #fff;
+  border-color: #f58220;
+}
+.newsList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1120px;
+  margin: 18px auto 0;
+  padding: 0 20px;
+}
+.newsCard {
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.07);
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+.newsCard a { color: inherit; text-decoration: none; display: block; height: 100%; }
+.newsCard img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+  background: #f3f3f3;
+}
+.newsCardBody { padding: 18px; }
+.newsTag {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff1e3;
+  color: #d86500;
+  font-size: 12px;
+  font-weight: 900;
+}
+.newsCard h2 {
+  margin: 12px 0 8px;
+  font-size: 20px;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+}
+.newsCard p {
+  margin: 0 0 14px;
+  color: #6b625a;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.newsCard em {
+  font-style: normal;
+  color: #f58220;
+  font-weight: 900;
+}
+.newsCard.is-hidden { display: none; }
+.newsCta {
+  max-width: 1080px;
+  margin: 34px auto 0;
+  padding: 30px 22px;
+  border-radius: 24px;
+  background: #222;
+  color: #fff;
+  text-align: center;
+}
+.newsCta h2 { margin: 0 0 8px; }
+.newsCta p { margin: 0 0 18px; color: rgba(255,255,255,.78); line-height: 1.65; }
+.newsCta div { display: flex; justify-content: center; gap: 10px; }
+.newsCta a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #f58220;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+}
+.newsCta a:last-child { background: #fff; color: #222; }
+@media (max-width: 860px) {
+  .miniNewsGrid, .newsList { grid-template-columns: 1fr; }
+  .newsHero { padding-top: 46px; }
+  .newsCard img { height: 190px; }
+  .newsCta { margin-left: 20px; margin-right: 20px; }
+}

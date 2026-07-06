@@ -42,6 +42,7 @@
     gtag('config', 'G-JY8BHGY9N7');
   </script>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/news.css" />
 </head>
 <body>
   <header class="topbar">
@@ -59,12 +60,13 @@
         <div class="heroBtns">
           <a href="#reservation" class="btn primary">모델하우스 방문예약</a>
           <a href="#price" class="btn ghost">분양가 확인</a>
+          <a href="news.html" class="btn ghost">분양정보 보기</a>
         </div>
       </div>
     </section>
 
     <section class="quick">
-      <a href="#premium">프리미엄</a><a href="#price">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a>
+      <a href="#premium">프리미엄</a><a href="#price">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
     </section>
 
     <section class="section intro">
@@ -101,6 +103,31 @@
     </section>
 
     <section id="dongho" class="section important"><p class="eyebrow orange">DONG · HO</p><h2>동호수 배치표</h2><img class="wideImg" src="images/dongho.jpg" alt="동호수 배치표" data-zoom /></section>
+
+    <section id="news-preview" class="section newsPreview">
+      <p class="eyebrow orange">SALES INFO</p>
+      <h2>분양정보</h2>
+      <p class="newsLead">블로그에 정리한 유니트 영상, 평면도, 이벤트, 입지 정보를 한눈에 확인하세요.</p>
+      <div class="miniNewsGrid">
+        <a class="miniNewsCard" href="news.html">
+          <span class="miniBadge">NEW</span>
+          <strong>34평형 84C 타워형 유니트</strong>
+          <p>실제 유니트 영상과 평면도를 함께 확인하세요.</p>
+        </a>
+        <a class="miniNewsCard" href="news.html">
+          <span class="miniBadge">EVENT</span>
+          <strong>계약금 페이백 이벤트</strong>
+          <p>계약금 완납 고객 대상 혜택 내용을 확인하세요.</p>
+        </a>
+        <a class="miniNewsCard" href="news.html">
+          <span class="miniBadge">INFO</span>
+          <strong>100평 스카이라운지</strong>
+          <p>입주민 전용 커뮤니티와 프리미엄 가치를 확인하세요.</p>
+        </a>
+      </div>
+      <div class="newsMoreWrap"><a class="newsMoreBtn" href="news.html">분양정보 전체보기</a></div>
+    </section>
+
 
     <section id="reservation" class="section reservation">
       <p class="eyebrow orange">RESERVATION</p>
@@ -178,6 +205,11 @@
     document.querySelectorAll('a[href="#price"]').forEach(function (el) {
       el.addEventListener('click', function () {
         if (typeof gtag === 'function') gtag('event', 'price_click', {event_category: 'interest', event_label: '분양가 확인'});
+      });
+    });
+    document.querySelectorAll('a[href="news.html"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'news_click', {event_category: 'content', event_label: '분양정보'});
       });
     });
 
