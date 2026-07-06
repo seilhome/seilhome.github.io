@@ -116,8 +116,8 @@
         </a>
         <a class="miniNewsCard" href="news.html">
           <span class="miniBadge">EVENT</span>
-          <strong>계약금 페이백 이벤트</strong>
-          <p>계약금 완납 고객 대상 혜택 내용을 확인하세요.</p>
+          <strong>계약금 완납 고객 특별혜택</strong>
+          <p>계약금 완납 고객 대상 연 10% 이자 지급 혜택을 확인하세요.</p>
         </a>
         <a class="miniNewsCard" href="news.html">
           <span class="miniBadge">INFO</span>
@@ -163,13 +163,13 @@
     <div class="eventDim" data-event-close></div>
     <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
       <button class="eventClose" type="button" aria-label="팝업 닫기" data-event-close>×</button>
-      <p class="eventLabel">계약금 PAYBACK EVENT</p>
-      <h2 id="eventTitle">계약금 페이백 이벤트<br><span>연 10% 이자 혜택</span></h2>
-      <p class="eventText">계약금 완납 후<br><strong>연 10% 이자로 돌려받자!</strong></p>
+      <p class="eventLabel">SPECIAL BENEFIT</p>
+      <h2 id="eventTitle">계약금 완납 고객 특별혜택<br><span>연 10% 이자 혜택</span></h2>
+      <p class="eventText">계약금 완납 고객 대상<br><strong>연 10% 이자 지급</strong></p>
       <div class="eventBenefits">
         <div><strong>01</strong><span>계약금 완납 고객 대상</span></div>
-        <div><strong>02</strong><span>연 10% 이자 적용 혜택</span></div>
-        <div><strong>03</strong><span>자세한 조건은 상담 시 안내</span></div>
+        <div><strong>02</strong><span>연 10% 이자 지급 혜택</span></div>
+        <div><strong>03</strong><span>자세한 내용은 상담을 통해 안내</span></div>
       </div>
       <div class="eventActions">
         <a href="#reservation" class="eventApply" data-event-close>혜택 상담받기</a>
@@ -225,7 +225,7 @@
       popup.classList.add('active');
       popup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('popupOpen');
-      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약금 페이백 이벤트 팝업'});
+      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약금 완납 고객 특별혜택 팝업'});
     }
     function closeEventPopup(){
       if (todayClose && todayClose.checked) {
@@ -248,7 +248,7 @@
 
     var eventCall = document.querySelector('.eventCall');
     if (eventCall) eventCall.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약금 페이백 팝업 전화상담'});
+      if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약금 특별혜택 팝업 전화상담'});
     });
   });
   </script>
