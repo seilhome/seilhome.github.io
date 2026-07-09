@@ -179,6 +179,26 @@
     </div>
   </div>
 
+  <!-- TV 증정 팝업 추가 -->
+  <div class="eventPopup" id="tvPopup" aria-hidden="true">
+    <div class="eventDim" data-tv-close></div>
+    <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="tvEventTitle">
+      <button class="eventClose" type="button" aria-label="팝업 닫기" data-tv-close>×</button>
+      <p class="eventLabel">SPECIAL GIFT</p>
+      <h2 id="tvEventTitle">계약 고객 특별 이벤트<br><span>75인치 TV 증정</span></h2>
+      <p class="eventText">계약 고객 대상<br><strong>선착순 특별 사은품 증정</strong></p>
+      <div class="eventBenefits">
+        <div><strong>01</strong><span>계약 고객 대상 특별 이벤트</span></div>
+        <div><strong>02</strong><span>75인치 TV 증정</span></div>
+        <div><strong>03</strong><span>선착순 진행 · 자세한 내용은 상담 안내</span></div>
+      </div>
+      <div class="eventActions">
+        <a href="tel:010-6383-5879" class="eventCall tvEventCall">상담하기</a>
+      </div>
+      <label class="eventTodayClose"><input type="checkbox" id="tvTodayClose" /> 오늘 하루 보지 않기</label>
+    </div>
+  </div>
+
   <div class="viewer" id="viewer" aria-hidden="true">
     <button class="close" id="closeViewer" aria-label="닫기">×</button>
     <div class="zoomControls" aria-label="확대 축소 버튼"><button type="button" id="zoomOut" aria-label="축소">−</button><button type="button" id="zoomIn" aria-label="확대">＋</button><button type="button" id="zoomReset" aria-label="원래 크기">100%</button></div>
@@ -213,42 +233,81 @@
       });
     });
 
-    // 이벤트 팝업
+    // 이벤트 팝업 2개 순차 노출
     var popup = document.getElementById('eventPopup');
+    var tvPopup = document.getElementById('tvPopup');
     var todayClose = document.getElementById('eventTodayClose');
+    var tvTodayClose = document.getElementById('tvTodayClose');
     var hideKey = 'woomi_event_popup_hide_until';
+    var tvHideKey = 'woomi_tv_popup_hide_until';
     var now = new Date();
     var hideUntil = localStorage.getItem(hideKey);
+    var tvHideUntil = localStorage.getItem(tvHideKey);
 
-    function openEventPopup(){
-      if (!popup) return;
-      popup.classList.add('active');
-      popup.setAttribute('aria-hidden', 'false');
+    function isHiddenToday(value){
+      return value && Number(value) >= now.getTime();
+    }
+    function setHideUntilTomorrow(key){
+      var tomorrow = new Date();
+      tomorrow.setHours(24,0,0,0);
+      localStorage.setItem(key, tomorrow.getTime().toString());
+    }
+    function openPopup(target, label){
+      if (!target) return;
+      target.classList.add('active');
+      target.setAttribute('aria-hidden', 'false');
       document.body.classList.add('popupOpen');
-      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약금 완납 고객 특별혜택 팝업'});
+      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: label});
+    }
+    function closePopup(target){
+      if (!target) return;
+      target.classList.remove('active');
+      target.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('popupOpen');
+    }
+    function openEventPopup(){
+      openPopup(popup, '계약금 완납 고객 특별혜택 팝업');
+    }
+    function openTvPopup(){
+      tvHideUntil = localStorage.getItem(tvHideKey);
+      if (!isHiddenToday(tvHideUntil)) {
+        openPopup(tvPopup, '75인치 TV 증정 팝업');
+      }
     }
     function closeEventPopup(){
       if (todayClose && todayClose.checked) {
-        var tomorrow = new Date();
-        tomorrow.setHours(24,0,0,0);
-        localStorage.setItem(hideKey, tomorrow.getTime().toString());
+        setHideUntilTomorrow(hideKey);
       }
-      popup.classList.remove('active');
-      popup.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('popupOpen');
+      closePopup(popup);
+      setTimeout(openTvPopup, 700);
+    }
+    function closeTvPopup(){
+      if (tvTodayClose && tvTodayClose.checked) {
+        setHideUntilTomorrow(tvHideKey);
+      }
+      closePopup(tvPopup);
     }
 
-    if (!hideUntil || Number(hideUntil) < now.getTime()) {
+    if (!isHiddenToday(hideUntil)) {
       setTimeout(openEventPopup, 700);
+    } else {
+      setTimeout(openTvPopup, 700);
     }
 
     document.querySelectorAll('[data-event-close]').forEach(function(el){
       el.addEventListener('click', closeEventPopup);
     });
+    document.querySelectorAll('[data-tv-close]').forEach(function(el){
+      el.addEventListener('click', closeTvPopup);
+    });
 
     var eventCall = document.querySelector('.eventCall');
     if (eventCall) eventCall.addEventListener('click', function(){
       if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약금 특별혜택 팝업 전화상담'});
+    });
+    var tvEventCall = document.querySelector('.tvEventCall');
+    if (tvEventCall) tvEventCall.addEventListener('click', function(){
+      if (typeof gtag === 'function') gtag('event', 'tv_popup_phone_click', {event_category: 'popup', event_label: '75인치 TV 증정 팝업 상담하기'});
     });
   });
   </script>
