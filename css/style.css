@@ -36,3 +36,23 @@ body.popupOpen{overflow:hidden}
 /* 확대 뷰어 이동감 개선 */
 .viewerInner{display:flex;align-items:center;justify-content:center;overflow:hidden!important;cursor:grab;background:#fff}.viewerInner.dragging{cursor:grabbing}.viewerInner img{flex:0 0 auto;max-width:none!important;max-height:none!important;touch-action:none;transition:none!important;transform-origin:center center!important}.viewerHint{pointer-events:none;white-space:nowrap}.zoomControls{user-select:none}
 @media(max-width:760px){.heroOffers span{font-size:12px}.viewerHint{max-width:calc(100vw - 28px);white-space:normal;text-align:center;line-height:1.35}}
+
+
+/* 2026-07-11 문의 전환 개선 */
+.quickConsult{background:linear-gradient(145deg,#fff8f2,#fff);border-bottom:10px solid #f7f7f7}
+.quickConsultCopy p:not(.eyebrow){margin:-8px 0 22px;color:#555;line-height:1.65;font-size:15px}
+.quickLeadForm{background:#fff;border:1px solid #f0dfd2;border-radius:22px;padding:18px;box-shadow:0 14px 36px rgba(82,42,12,.09)}
+.quickLeadForm button{background:#e76518}
+.trustStrip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.trustStrip span{background:#fff;border:1px solid #eee;border-radius:12px;padding:11px 8px;text-align:center;font-size:13px;font-weight:900;color:#333}
+.reserveIntro{margin:-8px 0 18px;color:#666;line-height:1.6}
+.field em{font-style:normal;color:#999;font-size:12px;font-weight:700;margin-left:4px}
+.optionalFields{border:1px solid #e5e5e5;border-radius:14px;background:#fff;overflow:hidden}
+.optionalFields summary{cursor:pointer;padding:15px 14px;font-weight:900;color:#444;list-style:none}
+.optionalFields summary::-webkit-details-marker{display:none}
+.optionalFields summary:after{content:'＋';float:right;color:#e76518}
+.optionalFields[open] summary:after{content:'−'}
+.optionalFieldsInner{display:grid;gap:12px;padding:0 14px 14px}
+.heroBtns .btn{min-height:48px;display:flex;align-items:center;justify-content:center}
+@media(min-width:760px){.quickConsult{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}.quickConsult .trustStrip{grid-column:1/-1;grid-template-columns:repeat(4,1fr)}.quickLeadForm{padding:24px}}
+@media(max-width:520px){.heroBtns{display:grid;grid-template-columns:1fr 1fr}.heroBtns .primary{grid-column:1/-1}.heroBtns .btn{padding:13px 10px;font-size:14px}.quickConsult{padding-top:42px}.bottomBar a{font-size:14px}}

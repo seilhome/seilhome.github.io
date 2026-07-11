@@ -41,7 +41,7 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260711-2" />
+  <link rel="stylesheet" href="css/style.css?v=20260711-3" />
   <link rel="stylesheet" href="css/news.css" />
 </head>
 <body>
@@ -56,22 +56,41 @@
       <div class="heroText">
         <p class="eyebrow">GANGNEUNG WOOMI LYNN THE PREMIER</p>
         <h1>강릉 우미 린<br>더 프리미어</h1>
-        <p class="sub">강릉의 새로운 프리미엄 주거단지</p>
+        <p class="sub">분양가·잔여 동호수·특별혜택을 빠르게 안내해드립니다.</p>
         <div class="heroOffers" aria-label="주요 분양 혜택">
           <span>방문상담 예약 시 신세계상품권 1만원 증정</span>
           <span>계약금 완납 고객 특별혜택</span>
           <span>772세대 브랜드 대단지</span>
         </div>
         <div class="heroBtns">
-          <a href="#reservation" class="btn primary">모델하우스 방문예약</a>
-          <a href="#price" class="btn ghost">분양가 확인</a>
-          <a href="news.html" class="btn ghost">분양정보 보기</a>
+          <a href="#quick-consult" class="btn primary">분양가·잔여세대 문의</a>
+          <a href="tel:010-6383-5879" class="btn ghost">전화로 바로 상담</a>
+          <a href="#price" class="btn ghost">분양가표 보기</a>
         </div>
       </div>
     </section>
 
     <section class="quick">
       <a href="#premium">프리미엄</a><a href="#price">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
+    </section>
+
+    <section id="quick-consult" class="quickConsult section" aria-labelledby="quickConsultTitle">
+      <div class="quickConsultCopy">
+        <p class="eyebrow orange">QUICK CONSULT</p>
+        <h2 id="quickConsultTitle">분양가와 잔여 동호수,<br>부담 없이 먼저 확인하세요</h2>
+        <p>이름과 연락처만 남기면 담당자가 빠르게 안내해드립니다. 방문예약은 상담 후 결정하셔도 됩니다.</p>
+      </div>
+      <form id="quickLeadForm" class="quickLeadForm">
+        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required /></label>
+        <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" required inputmode="tel" /></label>
+        <input type="hidden" name="consultType" value="간편상담" />
+        <input type="hidden" name="message" value="홈페이지 상단 간편상담 신청" />
+        <label class="agree"><input type="checkbox" required /> 개인정보 수집 및 상담 연락에 동의합니다.</label>
+        <button type="submit"><span class="btnText">분양가·잔여세대 안내받기</span><span class="loadingDot" aria-hidden="true"></span></button>
+      </form>
+      <div class="trustStrip" aria-label="주요 안내 항목">
+        <span>분양가 안내</span><span>잔여 동호수 확인</span><span>특별혜택 상담</span><span>방문예약 선택</span>
+      </div>
     </section>
 
     <section class="section intro">
@@ -150,18 +169,19 @@
 
     <section id="reservation" class="section reservation">
       <p class="eyebrow orange">RESERVATION</p>
-      <div class="reserveHead"><h2>모델하우스 방문예약</h2><span class="todayBadge">오늘 상담 가능</span></div>
+      <div class="reserveHead"><h2>상세 상담신청</h2><span class="todayBadge">오늘 상담 가능</span></div>
+      <p class="reserveIntro">이름과 연락처만 필수입니다. 나머지는 알고 있는 내용만 선택해 주세요.</p>
       <form id="leadForm">
         <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함을 입력해주세요" required /></label>
         <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="연락 가능한 번호" required inputmode="tel" /></label>
-        <label class="field"><span>관심 평형</span><select name="type" required><option value="">관심 평형 선택</option><option>84㎡ · 34평형</option><option>117㎡ · 45평형</option><option>125㎡ · 48평형</option><option>상담 후 결정</option></select></label>
-        <label class="field"><span>상담 유형</span><select name="consultType" required><option value="">상담 유형 선택</option><option>모델하우스 방문상담</option><option>전화상담</option><option>분양가 상담</option><option>평면도 상담</option></select></label>
-        <div class="dateTimeRow"><label class="field"><span>방문 희망 날짜</span><input type="date" name="visitDate" required /></label><label class="field"><span>방문 희망 시간</span><select name="visitTime" required><option value="">시간 선택</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option></select></label></div>
-        <label class="field"><span>문의내용</span><textarea name="message" placeholder="궁금하신 내용을 남겨주세요" rows="4"></textarea></label>
+        <label class="field"><span>관심 평형 <em>선택</em></span><select name="type"><option value="">관심 평형 선택</option><option>84㎡ · 34평형</option><option>117㎡ · 45평형</option><option>125㎡ · 48평형</option><option>상담 후 결정</option></select></label>
+        <label class="field"><span>상담 유형 <em>선택</em></span><select name="consultType"><option value="">상담 유형 선택</option><option>모델하우스 방문상담</option><option>전화상담</option><option>분양가 상담</option><option>평면도 상담</option></select></label>
+        <details class="optionalFields"><summary>방문 희망일과 문의내용 추가하기</summary><div class="optionalFieldsInner"><div class="dateTimeRow"><label class="field"><span>방문 희망 날짜 <em>선택</em></span><input type="date" name="visitDate" /></label><label class="field"><span>방문 희망 시간 <em>선택</em></span><select name="visitTime"><option value="">시간 선택</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option></select></label></div>
+        <label class="field"><span>문의내용 <em>선택</em></span><textarea name="message" placeholder="궁금하신 내용을 남겨주세요" rows="4"></textarea></label></div></details>
         <label class="agree"><input type="checkbox" required /> 개인정보 수집 및 상담 연락에 동의합니다.</label>
-        <button type="submit"><span class="btnText">상담 신청하기</span><span class="loadingDot" aria-hidden="true"></span></button>
+        <button type="submit"><span class="btnText">상담 안내받기</span><span class="loadingDot" aria-hidden="true"></span></button>
       </form>
-      <p class="formNote">접수 후 담당자가 빠른 시간 내 연락드립니다.</p>
+      <p class="formNote">접수 후 담당자가 빠른 시간 내 연락드립니다. 상담만 받아도 괜찮습니다.</p>
     </section>
 
     <section class="section openchat">
@@ -173,8 +193,8 @@
   <footer><strong>강릉 우미 린 더 프리미어</strong><p>대표번호 010-6383-5879</p></footer>
 
   <nav class="bottomBar" aria-label="상담 바로가기">
-    <a href="tel:010-6383-5879" class="call">전화상담</a>
-    <a href="#reservation" class="apply">상담신청</a>
+    <a href="tel:010-6383-5879" class="call">전화로 분양가 문의</a>
+    <a href="#quick-consult" class="apply">간편상담 신청</a>
   </nav>
 
   <!-- 이벤트 팝업 추가 -->
@@ -198,49 +218,6 @@
     </div>
   </div>
 
-  <!-- TV 증정 팝업 추가 -->
-  <div class="eventPopup" id="tvPopup" aria-hidden="true">
-    <div class="eventDim" data-tv-close></div>
-    <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="tvEventTitle">
-      <button class="eventClose" type="button" aria-label="팝업 닫기" data-tv-close>×</button>
-      <p class="eventLabel">SPECIAL GIFT</p>
-      <h2 id="tvEventTitle">계약 고객 특별 이벤트<br><span>75인치 TV 증정</span></h2>
-      <p class="eventText">계약 고객 대상<br><strong>선착순 특별 사은품 증정</strong></p>
-      <div class="eventBenefits">
-        <div><strong>01</strong><span>계약 고객 대상 특별 이벤트</span></div>
-        <div><strong>02</strong><span>75인치 TV 증정</span></div>
-        <div><strong>03</strong><span>선착순 진행 · 자세한 내용은 상담 안내</span></div>
-      </div>
-      <div class="eventActions">
-        <a href="tel:010-6383-5879" class="eventCall tvEventCall">전화상담</a>
-        <a href="#reservation" class="eventApply" data-tv-close>상담신청</a>
-      </div>
-      <label class="eventTodayClose"><input type="checkbox" id="tvTodayClose" /> 오늘 하루 보지 않기</label>
-    </div>
-  </div>
-
-
-  <!-- 방문상담 예약 신세계상품권 1만원 증정 팝업 -->
-  <div class="eventPopup" id="giftPopup" aria-hidden="true">
-    <div class="eventDim" data-gift-close></div>
-    <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="giftEventTitle">
-      <button class="eventClose" type="button" aria-label="팝업 닫기" data-gift-close>×</button>
-      <p class="eventLabel">VISIT RESERVATION GIFT</p>
-      <h2 id="giftEventTitle">방문상담 예약 고객 혜택<br><span>신세계상품권 1만원 증정</span></h2>
-      <p class="eventText">모델하우스 방문상담을 예약하신 고객께<br><strong>신세계상품권 1만원을 증정합니다</strong></p>
-      <div class="eventBenefits">
-        <div><strong>01</strong><span>모델하우스 방문상담 사전예약</span></div>
-        <div><strong>02</strong><span>예약 후 실제 방문 고객 대상</span></div>
-        <div><strong>03</strong><span>증정 조건 및 자세한 내용은 상담 안내</span></div>
-      </div>
-      <div class="eventActions">
-        <a href="tel:010-6383-5879" class="eventCall giftEventCall">전화로 예약</a>
-        <a href="#reservation" class="eventApply giftEventApply" data-gift-close>방문상담 예약</a>
-      </div>
-      <label class="eventTodayClose"><input type="checkbox" id="giftTodayClose" /> 오늘 하루 보지 않기</label>
-    </div>
-  </div>
-
   <div class="viewer" id="viewer" aria-hidden="true">
     <button class="close" id="closeViewer" aria-label="닫기">×</button>
     <div class="zoomControls" aria-label="확대 축소 버튼"><button type="button" id="zoomOut" aria-label="축소">−</button><button type="button" id="zoomIn" aria-label="확대">＋</button><button type="button" id="zoomReset" aria-label="원래 크기">100%</button></div>
@@ -251,7 +228,7 @@
     <div class="successBox"><div class="checkIcon">✓</div><h3>상담 신청이 접수되었습니다</h3><p>담당자가 빠른 시간 내 연락드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
   </div>
 
-  <script src="js/script.js?v=20260711-2"></script>
+  <script src="js/script.js?v=20260711-3"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
@@ -275,111 +252,37 @@
       });
     });
 
-    // 이벤트 팝업 3개 순차 노출
+    // 첫 방문 시 특별혜택 팝업 1개만 노출
     var popup = document.getElementById('eventPopup');
-    var tvPopup = document.getElementById('tvPopup');
     var todayClose = document.getElementById('eventTodayClose');
-    var tvTodayClose = document.getElementById('tvTodayClose');
-    var giftPopup = document.getElementById('giftPopup');
-    var giftTodayClose = document.getElementById('giftTodayClose');
     var hideKey = 'woomi_event_popup_hide_until';
-    var tvHideKey = 'woomi_tv_popup_hide_until';
-    var giftHideKey = 'woomi_gift_popup_hide_until';
-    var now = new Date();
     var hideUntil = localStorage.getItem(hideKey);
-    var tvHideUntil = localStorage.getItem(tvHideKey);
-    var giftHideUntil = localStorage.getItem(giftHideKey);
 
-    function isHiddenToday(value){
-      return value && Number(value) >= now.getTime();
-    }
-    function setHideUntilTomorrow(key){
+    function isHiddenToday(value){ return value && Number(value) >= Date.now(); }
+    function setHideUntilTomorrow(){
       var tomorrow = new Date();
       tomorrow.setHours(24,0,0,0);
-      localStorage.setItem(key, tomorrow.getTime().toString());
-    }
-    function openPopup(target, label){
-      if (!target) return;
-      target.classList.add('active');
-      target.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('popupOpen');
-      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: label});
-    }
-    function closePopup(target){
-      if (!target) return;
-      target.classList.remove('active');
-      target.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('popupOpen');
+      localStorage.setItem(hideKey, tomorrow.getTime().toString());
     }
     function openEventPopup(){
-      openPopup(popup, '계약금 완납 고객 특별혜택 팝업');
-    }
-    function openTvPopup(){
-      tvHideUntil = localStorage.getItem(tvHideKey);
-      if (!isHiddenToday(tvHideUntil)) {
-        openPopup(tvPopup, '75인치 TV 증정 팝업');
-      } else {
-        setTimeout(openGiftPopup, 500);
-      }
-    }
-    function openGiftPopup(){
-      giftHideUntil = localStorage.getItem(giftHideKey);
-      if (!isHiddenToday(giftHideUntil)) {
-        openPopup(giftPopup, '방문상담 예약 신세계상품권 1만원 증정 팝업');
-      }
+      if (!popup) return;
+      popup.classList.add('active');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('popupOpen');
+      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약금 완납 고객 특별혜택 팝업'});
     }
     function closeEventPopup(){
-      if (todayClose && todayClose.checked) {
-        setHideUntilTomorrow(hideKey);
-      }
-      closePopup(popup);
-      setTimeout(openTvPopup, 700);
+      if (todayClose && todayClose.checked) setHideUntilTomorrow();
+      if (!popup) return;
+      popup.classList.remove('active');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('popupOpen');
     }
-    function closeTvPopup(){
-      if (tvTodayClose && tvTodayClose.checked) {
-        setHideUntilTomorrow(tvHideKey);
-      }
-      closePopup(tvPopup);
-      setTimeout(openGiftPopup, 700);
-    }
-    function closeGiftPopup(){
-      if (giftTodayClose && giftTodayClose.checked) {
-        setHideUntilTomorrow(giftHideKey);
-      }
-      closePopup(giftPopup);
-    }
-
-    if (!isHiddenToday(hideUntil)) {
-      setTimeout(openEventPopup, 700);
-    } else {
-      setTimeout(openTvPopup, 700);
-    }
-
-    document.querySelectorAll('[data-event-close]').forEach(function(el){
-      el.addEventListener('click', closeEventPopup);
-    });
-    document.querySelectorAll('[data-tv-close]').forEach(function(el){
-      el.addEventListener('click', closeTvPopup);
-    });
-    document.querySelectorAll('[data-gift-close]').forEach(function(el){
-      el.addEventListener('click', closeGiftPopup);
-    });
-
+    if (!isHiddenToday(hideUntil)) setTimeout(openEventPopup, 900);
+    document.querySelectorAll('[data-event-close]').forEach(function(el){ el.addEventListener('click', closeEventPopup); });
     var eventCall = document.querySelector('.eventCall');
     if (eventCall) eventCall.addEventListener('click', function(){
       if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약금 특별혜택 팝업 전화상담'});
-    });
-    var tvEventCall = document.querySelector('.tvEventCall');
-    if (tvEventCall) tvEventCall.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'tv_popup_phone_click', {event_category: 'popup', event_label: '75인치 TV 증정 팝업 상담하기'});
-    });
-    var giftEventCall = document.querySelector('.giftEventCall');
-    if (giftEventCall) giftEventCall.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'gift_popup_phone_click', {event_category: 'popup', event_label: '신세계상품권 1만원 팝업 전화예약'});
-    });
-    var giftEventApply = document.querySelector('.giftEventApply');
-    if (giftEventApply) giftEventApply.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'gift_popup_reservation_click', {event_category: 'popup', event_label: '신세계상품권 1만원 팝업 방문예약'});
     });
   });
   </script>

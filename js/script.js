@@ -121,27 +121,35 @@ function hideSuccess(){successModal.classList.remove('active');successModal.setA
 if(successClose) successClose.addEventListener('click',hideSuccess);
 if(successModal) successModal.addEventListener('click',e=>{if(e.target===successModal)hideSuccess();});
 
-document.getElementById('leadForm').addEventListener('submit',async(e)=>{
-  e.preventDefault();
-  const form=e.currentTarget;
-  const data=Object.fromEntries(new FormData(form).entries());
-  data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
-  data.createdAt=new Date().toLocaleString('ko-KR');
-  const submit=form.querySelector('button[type="submit"]');
-  const btnText=submit.querySelector('.btnText');
-  submit.disabled=true;
-  submit.classList.add('loading');
-  if(btnText) btnText.textContent='접수 중입니다';
-  try{
-    await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    form.reset();
-    showSuccess();
-    trackEvent('lead_submit_success',{event_category:'lead',event_label:'상담신청 완료',type:data.type||'',visit:data.visit||''});
-  }catch(err){
-    alert('접수 중 오류가 발생했습니다. 대표번호 033-760-5990으로 연락 부탁드립니다.');
-  }finally{
-    submit.disabled=false;
-    submit.classList.remove('loading');
-    if(btnText) btnText.textContent='상담 신청하기';
-  }
-});
+function bindLeadForm(formId){
+  const form=document.getElementById(formId);
+  if(!form) return;
+  form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const data=Object.fromEntries(new FormData(form).entries());
+    data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
+    data.createdAt=new Date().toLocaleString('ko-KR');
+    data.source=formId==='quickLeadForm'?'상단 간편상담':'상세 상담신청';
+    const submit=form.querySelector('button[type="submit"]');
+    const btnText=submit.querySelector('.btnText');
+    const originalText=btnText?btnText.textContent:'';
+    submit.disabled=true;
+    submit.classList.add('loading');
+    if(btnText) btnText.textContent='접수 중입니다';
+    try{
+      await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      form.reset();
+      showSuccess();
+      trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
+    }catch(err){
+      alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
+    }finally{
+      submit.disabled=false;
+      submit.classList.remove('loading');
+      if(btnText) btnText.textContent=originalText;
+    }
+  });
+}
+bindLeadForm('leadForm');
+bindLeadForm('quickLeadForm');
+
