@@ -1,0 +1,25 @@
+업로드 방법
+
+1. index.html은 기존 index.html에 덮어쓰기
+2. news.html은 루트 폴더에 새로 업로드
+3. css/news.css는 css 폴더 안에 업로드
+4. js/news.js는 js 폴더 안에 업로드
+
+수정해야 할 부분
+
+news.html 안에서 아래 주소를 실제 네이버 블로그 주소로 바꾸세요.
+- https://blog.naver.com/여기에_84C_블로그주소
+- https://blog.naver.com/여기에_페이백_블로그주소
+- https://blog.naver.com/여기에_스카이라운지_블로그주소
+- https://blog.naver.com/여기에_투자가치_블로그주소
+
+새 블로그 글 추가 방법
+
+news.html에서 <article class="newsCard" ...>부터 </article>까지 한 덩어리를 복사해서 붙여넣고,
+카테고리, 이미지, 제목, 설명, 블로그 주소만 바꾸면 됩니다.
+
+카테고리 값
+- unit: 유니트
+- event: 이벤트
+- premium: 프리미엄
+- value: 투자가치
