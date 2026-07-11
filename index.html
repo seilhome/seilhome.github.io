@@ -41,7 +41,7 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=20260711-2" />
   <link rel="stylesheet" href="css/news.css" />
 </head>
 <body>
@@ -57,6 +57,11 @@
         <p class="eyebrow">GANGNEUNG WOOMI LYNN THE PREMIER</p>
         <h1>강릉 우미 린<br>더 프리미어</h1>
         <p class="sub">강릉의 새로운 프리미엄 주거단지</p>
+        <div class="heroOffers" aria-label="주요 분양 혜택">
+          <span>방문상담 예약 시 신세계상품권 1만원 증정</span>
+          <span>계약금 완납 고객 특별혜택</span>
+          <span>772세대 브랜드 대단지</span>
+        </div>
         <div class="heroBtns">
           <a href="#reservation" class="btn primary">모델하우스 방문예약</a>
           <a href="#price" class="btn ghost">분양가 확인</a>
@@ -92,12 +97,21 @@
 
     <section id="location" class="section"><p class="eyebrow orange">LOCATION</p><h2>입지환경</h2><img class="fullImg" src="images/location.jpg" alt="입지환경 지도" data-zoom /></section>
     <section id="siteplan" class="section"><p class="eyebrow orange">SITE PLAN</p><h2>단지배치도</h2><img class="fullImg" src="images/siteplan.jpg" alt="단지배치도" data-zoom /></section>
-    <section id="price" class="section important"><p class="eyebrow orange">PRICE</p><h2>공급가격</h2>
-<h3>공급대상 및 공급금액 (1/2)</h3>
-<img class="wideImg" src="images/price_top.jpg" alt="공급금액 상단" data-zoom />
-<h3 style="margin-top:24px;">공급금액 및 납부일정 (2/2)</h3>
-<img class="wideImg" src="images/price_bottom.jpg" alt="공급금액 하단" data-zoom />
-</section>
+    <section id="price" class="section important">
+      <p class="eyebrow orange">PRICE</p>
+      <h2>공급가격</h2>
+      <p class="sectionGuide">이미지를 클릭하면 크게 볼 수 있습니다. 확대 후 마우스나 손가락으로 자유롭게 이동하세요.</p>
+      <div class="priceStack">
+        <figure>
+          <figcaption>공급대상 및 공급금액 · 상단</figcaption>
+          <img class="wideImg" src="images/price-top.jpg" alt="공급대상 및 공급금액 상단" data-zoom />
+        </figure>
+        <figure>
+          <figcaption>공급금액 및 납부일정 · 하단</figcaption>
+          <img class="wideImg" src="images/price-bottom.jpg" alt="공급금액 및 납부일정 하단" data-zoom />
+        </figure>
+      </div>
+    </section>
 
     <section id="floor" class="section">
       <p class="eyebrow orange">UNIT PLAN</p><h2>평면도</h2>
@@ -230,14 +244,14 @@
   <div class="viewer" id="viewer" aria-hidden="true">
     <button class="close" id="closeViewer" aria-label="닫기">×</button>
     <div class="zoomControls" aria-label="확대 축소 버튼"><button type="button" id="zoomOut" aria-label="축소">−</button><button type="button" id="zoomIn" aria-label="확대">＋</button><button type="button" id="zoomReset" aria-label="원래 크기">100%</button></div>
-    <div class="viewerInner"><img id="viewerImg" src="" alt="확대 이미지" /></div><div class="viewerHint">두 손가락 또는 + 버튼으로 확대해서 확인하세요</div>
+    <div class="viewerInner"><img id="viewerImg" src="" alt="확대 이미지" /></div><div class="viewerHint">확대 후 이미지를 끌어 원하는 위치로 자유롭게 이동하세요</div>
   </div>
 
   <div class="successModal" id="successModal" aria-hidden="true">
     <div class="successBox"><div class="checkIcon">✓</div><h3>상담 신청이 접수되었습니다</h3><p>담당자가 빠른 시간 내 연락드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
   </div>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=20260711-2"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {

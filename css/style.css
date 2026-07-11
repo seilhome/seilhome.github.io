@@ -28,3 +28,11 @@ body.popupOpen{overflow:hidden}
   .eventBox h2{font-size:25px}
   .eventText{font-size:15px}
 }
+
+
+/* 2026-07-11 전환형 첫 화면 및 분양가 2분할 */
+.heroOffers{display:grid;gap:8px;margin:0 0 18px;max-width:560px}.heroOffers span{display:block;width:max-content;max-width:100%;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:#1b1b1b;font-size:13px;font-weight:900;line-height:1.25;box-shadow:0 5px 18px rgba(0,0,0,.15)}.heroOffers span:first-child{background:#e76518;color:#fff}.sectionGuide{margin:-10px 0 20px;color:#666;font-size:14px;line-height:1.55}.priceStack{display:grid;gap:24px}.priceStack figure{margin:0}.priceStack figcaption{margin:0 0 10px;font-size:15px;font-weight:900;color:#333}.priceStack .wideImg{cursor:zoom-in}
+@media(min-width:760px){.heroOffers{grid-template-columns:max-content max-content}.heroOffers span:first-child{grid-column:1/-1}.priceStack{gap:36px}.priceStack figcaption{font-size:17px}}
+/* 확대 뷰어 이동감 개선 */
+.viewerInner{display:flex;align-items:center;justify-content:center;overflow:hidden!important;cursor:grab;background:#fff}.viewerInner.dragging{cursor:grabbing}.viewerInner img{flex:0 0 auto;max-width:none!important;max-height:none!important;touch-action:none;transition:none!important;transform-origin:center center!important}.viewerHint{pointer-events:none;white-space:nowrap}.zoomControls{user-select:none}
+@media(max-width:760px){.heroOffers span{font-size:12px}.viewerHint{max-width:calc(100vw - 28px);white-space:normal;text-align:center;line-height:1.35}}

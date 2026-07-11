@@ -5,10 +5,10 @@ document.querySelectorAll('.tabs button').forEach(btn=>{btn.addEventListener('cl
 const viewer=document.getElementById('viewer');
 const viewerInner=document.querySelector('.viewerInner');
 const viewerImg=document.getElementById('viewerImg');
-let zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0};
-function applyZoom(){viewerImg.style.transform=`translate(${zoomState.x}px, ${zoomState.y}px) scale(${zoomState.scale})`;}
-function resetZoom(){zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0};applyZoom();if(viewerInner){viewerInner.scrollLeft=0;viewerInner.scrollTop=0;}}
+let zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null};
 function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
+function applyZoom(){viewerImg.style.transform=`translate3d(${zoomState.x}px, ${zoomState.y}px, 0) scale(${zoomState.scale})`;}
+function resetZoom(){zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null};applyZoom();viewerInner?.classList.remove('dragging');}
 function touchDistance(touches){const dx=touches[0].clientX-touches[1].clientX;const dy=touches[0].clientY-touches[1].clientY;return Math.hypot(dx,dy);}
 function touchMid(touches){return {x:(touches[0].clientX+touches[1].clientX)/2,y:(touches[0].clientY+touches[1].clientY)/2};}
 function openViewer(src,alt){resetZoom();viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
@@ -19,65 +19,74 @@ document.getElementById('closeViewer').addEventListener('click',closeViewer);
 const zoomInBtn=document.getElementById('zoomIn');
 const zoomOutBtn=document.getElementById('zoomOut');
 const zoomResetBtn=document.getElementById('zoomReset');
-function setZoomScale(next){
-  zoomState.scale=clamp(next,1,5);
-  if(zoomState.scale===1){zoomState.x=0;zoomState.y=0;}
+function setZoomScale(next,focusX,focusY){
+  const old=zoomState.scale;
+  const target=clamp(next,1,8);
+  if(typeof focusX==='number'&&typeof focusY==='number'&&old>0){
+    const rect=viewerInner.getBoundingClientRect();
+    const cx=focusX-(rect.left+rect.width/2);
+    const cy=focusY-(rect.top+rect.height/2);
+    const ratio=target/old;
+    zoomState.x=cx-(cx-zoomState.x)*ratio;
+    zoomState.y=cy-(cy-zoomState.y)*ratio;
+  }
+  zoomState.scale=target;
+  if(target===1){zoomState.x=0;zoomState.y=0;}
   applyZoom();
 }
-if(zoomInBtn) zoomInBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale+0.6);});
-if(zoomOutBtn) zoomOutBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale-0.6);});
+if(zoomInBtn) zoomInBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale+0.75);});
+if(zoomOutBtn) zoomOutBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale-0.75);});
 if(zoomResetBtn) zoomResetBtn.addEventListener('click',e=>{e.stopPropagation();resetZoom();});
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
 
 if(viewerInner){
+  // PC: 마우스로 이미지를 잡아 끌면 넉넉하게 이동
+  viewerInner.addEventListener('pointerdown',e=>{
+    if(!viewer.classList.contains('active')||e.pointerType==='touch'||e.button!==0) return;
+    zoomState.isDragging=true; zoomState.pointerId=e.pointerId;
+    zoomState.startX=e.clientX-zoomState.x; zoomState.startY=e.clientY-zoomState.y;
+    viewerInner.setPointerCapture?.(e.pointerId); viewerInner.classList.add('dragging'); e.preventDefault();
+  });
+  viewerInner.addEventListener('pointermove',e=>{
+    if(!zoomState.isDragging||zoomState.pointerId!==e.pointerId) return;
+    const moveBoost=1.35;
+    zoomState.x+=(e.clientX-(zoomState.startX+zoomState.x))*moveBoost;
+    zoomState.y+=(e.clientY-(zoomState.startY+zoomState.y))*moveBoost;
+    zoomState.startX=e.clientX-zoomState.x; zoomState.startY=e.clientY-zoomState.y;
+    applyZoom(); e.preventDefault();
+  });
+  const endDrag=e=>{if(zoomState.pointerId===e.pointerId){zoomState.isDragging=false;zoomState.pointerId=null;viewerInner.classList.remove('dragging');}};
+  viewerInner.addEventListener('pointerup',endDrag); viewerInner.addEventListener('pointercancel',endDrag);
+
+  // 모바일: 한 손가락 이동, 두 손가락 확대/이동
   viewerInner.addEventListener('touchstart',e=>{
     if(!viewer.classList.contains('active')) return;
     if(e.touches.length===1){
       const now=Date.now();
-      if(now-zoomState.lastTap<280){
-        zoomState.scale=zoomState.scale>1?1:2.2; zoomState.x=0; zoomState.y=0; applyZoom(); e.preventDefault();
-      }
-      zoomState.lastTap=now;
-      zoomState.startX=e.touches[0].clientX-zoomState.x;
-      zoomState.startY=e.touches[0].clientY-zoomState.y;
-    }
-    if(e.touches.length===2){
-      zoomState.startDist=touchDistance(e.touches);
-      zoomState.startScale=zoomState.scale;
-      const mid=touchMid(e.touches);
-      zoomState.startMidX=mid.x;
-      zoomState.startMidY=mid.y;
-      e.preventDefault();
+      if(now-zoomState.lastTap<280){setZoomScale(zoomState.scale>1?1:2.5,e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}
+      zoomState.lastTap=now; zoomState.startX=e.touches[0].clientX-zoomState.x; zoomState.startY=e.touches[0].clientY-zoomState.y;
+    }else if(e.touches.length===2){
+      zoomState.startDist=touchDistance(e.touches); zoomState.startScale=zoomState.scale;
+      const mid=touchMid(e.touches); zoomState.startMidX=mid.x; zoomState.startMidY=mid.y; e.preventDefault();
     }
   },{passive:false});
   viewerInner.addEventListener('touchmove',e=>{
     if(!viewer.classList.contains('active')) return;
     if(e.touches.length===2){
-      const dist=touchDistance(e.touches);
-      const mid=touchMid(e.touches);
-      const nextScale=clamp(zoomState.startScale*(dist/zoomState.startDist),1,5);
-      zoomState.x += (mid.x-zoomState.startMidX)*0.35;
-      zoomState.y += (mid.y-zoomState.startMidY)*0.35;
+      const dist=touchDistance(e.touches),mid=touchMid(e.touches);
+      zoomState.scale=clamp(zoomState.startScale*(dist/zoomState.startDist),1,8);
+      zoomState.x+=(mid.x-zoomState.startMidX)*1.15; zoomState.y+=(mid.y-zoomState.startMidY)*1.15;
       zoomState.startMidX=mid.x; zoomState.startMidY=mid.y;
-      zoomState.scale=nextScale;
-      if(zoomState.scale===1){zoomState.x=0;zoomState.y=0;}
-      applyZoom();
-      e.preventDefault();
-    }else if(e.touches.length===1 && zoomState.scale>1){
-      zoomState.x=e.touches[0].clientX-zoomState.startX;
-      zoomState.y=e.touches[0].clientY-zoomState.startY;
-      applyZoom();
-      e.preventDefault();
+      if(zoomState.scale===1){zoomState.x=0;zoomState.y=0;} applyZoom(); e.preventDefault();
+    }else if(e.touches.length===1){
+      zoomState.x=e.touches[0].clientX-zoomState.startX; zoomState.y=e.touches[0].clientY-zoomState.startY;
+      applyZoom(); e.preventDefault();
     }
   },{passive:false});
   viewerInner.addEventListener('wheel',e=>{
-    if(!viewer.classList.contains('active')) return;
-    e.preventDefault();
-    const delta=e.deltaY<0?0.18:-0.18;
-    zoomState.scale=clamp(zoomState.scale+delta,1,5);
-    if(zoomState.scale===1){zoomState.x=0;zoomState.y=0;}
-    applyZoom();
+    if(!viewer.classList.contains('active')) return; e.preventDefault();
+    setZoomScale(zoomState.scale+(e.deltaY<0?0.35:-0.35),e.clientX,e.clientY);
   },{passive:false});
 }
 
