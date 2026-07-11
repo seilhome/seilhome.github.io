@@ -201,14 +201,14 @@
   </div>
 
 
-  <!-- 방문상담 예약 신세계상품권 증정 팝업 -->
+  <!-- 방문상담 예약 신세계상품권 1만원 증정 팝업 -->
   <div class="eventPopup" id="giftPopup" aria-hidden="true">
     <div class="eventDim" data-gift-close></div>
     <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="giftEventTitle">
       <button class="eventClose" type="button" aria-label="팝업 닫기" data-gift-close>×</button>
       <p class="eventLabel">VISIT RESERVATION GIFT</p>
-      <h2 id="giftEventTitle">방문상담 예약 고객 혜택<br><span>신세계상품권 증정</span></h2>
-      <p class="eventText">모델하우스 방문상담을 예약하신 고객께<br><strong>신세계상품권을 증정합니다</strong></p>
+      <h2 id="giftEventTitle">방문상담 예약 고객 혜택<br><span>신세계상품권 1만원 증정</span></h2>
+      <p class="eventText">모델하우스 방문상담을 예약하신 고객께<br><strong>신세계상품권 1만원을 증정합니다</strong></p>
       <div class="eventBenefits">
         <div><strong>01</strong><span>모델하우스 방문상담 사전예약</span></div>
         <div><strong>02</strong><span>예약 후 실제 방문 고객 대상</span></div>
@@ -306,7 +306,7 @@
     function openGiftPopup(){
       giftHideUntil = localStorage.getItem(giftHideKey);
       if (!isHiddenToday(giftHideUntil)) {
-        openPopup(giftPopup, '방문상담 예약 신세계상품권 증정 팝업');
+        openPopup(giftPopup, '방문상담 예약 신세계상품권 1만원 증정 팝업');
       }
     }
     function closeEventPopup(){
@@ -356,11 +356,11 @@
     });
     var giftEventCall = document.querySelector('.giftEventCall');
     if (giftEventCall) giftEventCall.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'gift_popup_phone_click', {event_category: 'popup', event_label: '신세계상품권 팝업 전화예약'});
+      if (typeof gtag === 'function') gtag('event', 'gift_popup_phone_click', {event_category: 'popup', event_label: '신세계상품권 1만원 팝업 전화예약'});
     });
     var giftEventApply = document.querySelector('.giftEventApply');
     if (giftEventApply) giftEventApply.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'gift_popup_reservation_click', {event_category: 'popup', event_label: '신세계상품권 팝업 방문예약'});
+      if (typeof gtag === 'function') gtag('event', 'gift_popup_reservation_click', {event_category: 'popup', event_label: '신세계상품권 1만원 팝업 방문예약'});
     });
   });
   </script>
