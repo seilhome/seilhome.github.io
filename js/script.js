@@ -96,13 +96,6 @@ function trackEvent(eventName, params){
     gtag('event', eventName, params || {});
   }
 }
-document.querySelectorAll('a[href^="tel:"]').forEach(link=>{
-  link.addEventListener('click',()=>trackEvent('phone_click',{event_category:'lead',event_label:'전화상담'}));
-});
-document.querySelectorAll('a[href="#reservation"], .apply').forEach(link=>{
-  link.addEventListener('click',()=>trackEvent('reservation_click',{event_category:'lead',event_label:'상담신청 버튼'}));
-});
-
 const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwrbnYlh5Iij8kS6uiy2dI9M-wvS5caQ-8hmdZgwP8FJ9J5coTN9EQpLBEQI-pzzPiM/exec';
 
 const dateInput=document.querySelector('input[name="visitDate"]');
@@ -130,6 +123,9 @@ function bindLeadForm(formId){
     data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
     data.createdAt=new Date().toLocaleString('ko-KR');
     data.source=formId==='quickLeadForm'?'상단 간편상담':'상세 상담신청';
+    if(typeof window.getMarketingAttribution==='function'){
+      Object.assign(data,window.getMarketingAttribution());
+    }
     const submit=form.querySelector('button[type="submit"]');
     const btnText=submit.querySelector('.btnText');
     const originalText=btnText?btnText.textContent:'';
@@ -140,7 +136,8 @@ function bindLeadForm(formId){
       await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       form.reset();
       showSuccess();
-      trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
+      trackEvent('generate_lead',{event_category:'lead',event_label:data.source,form_id:formId,type:data.type||'',visit:data.visit||'',value:1,currency:'KRW'});
+      trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,form_id:formId,type:data.type||'',visit:data.visit||''});
     }catch(err){
       alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
     }finally{
@@ -153,3 +150,118 @@ function bindLeadForm(formId){
 bindLeadForm('leadForm');
 bindLeadForm('quickLeadForm');
 
+
+/* =========================================================
+   GA4 전환 추적 + 광고 유입 정보 보존 (2026-07-12)
+   ========================================================= */
+(function initMarketingTracking(){
+  const STORAGE_KEY='woomi_marketing_attribution';
+  const urlParams=new URLSearchParams(window.location.search);
+  const trackedKeys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','n_media','n_query','n_rank','n_ad_group','n_ad','n_keyword'];
+
+  function getAttribution(){
+    let saved={};
+    try{ saved=JSON.parse(sessionStorage.getItem(STORAGE_KEY)||'{}'); }catch(e){}
+    trackedKeys.forEach(key=>{
+      const value=urlParams.get(key);
+      if(value) saved[key]=value;
+    });
+    if(!saved.landing_page) saved.landing_page=window.location.pathname+window.location.search;
+    if(!saved.referrer) saved.referrer=document.referrer||'';
+    saved.last_page=window.location.pathname;
+    try{ sessionStorage.setItem(STORAGE_KEY,JSON.stringify(saved)); }catch(e){}
+    return saved;
+  }
+
+  const attribution=getAttribution();
+
+  function sendEvent(name, params={}){
+    const payload={
+      page_path:window.location.pathname,
+      page_location:window.location.href,
+      ...params
+    };
+    if(typeof window.gtag==='function') window.gtag('event',name,payload);
+  }
+  window.trackEvent=sendEvent;
+
+  function labelFor(el){
+    return (el.dataset.trackLabel||el.getAttribute('aria-label')||el.textContent||'').trim().replace(/\s+/g,' ').slice(0,100);
+  }
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('phone_click',{
+      event_category:'lead',
+      link_text:labelFor(el),
+      phone_number:(el.getAttribute('href')||'').replace('tel:',''),
+      placement:el.closest('.eventPopup')?'popup':el.closest('.bottomBar')?'bottom_bar':el.closest('.hero')?'hero':'page'
+    }));
+  });
+
+  document.querySelectorAll('a[href*="open.kakao.com"]').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('kakao_click',{
+      event_category:'lead',
+      link_text:labelFor(el),
+      outbound:true
+    }));
+  });
+
+  document.querySelectorAll('a[href="#quick-consult"], a[href="#reservation"], .apply').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('consult_click',{
+      event_category:'lead',
+      link_text:labelFor(el),
+      target_section:(el.getAttribute('href')||'').replace('#','')
+    }));
+  });
+
+  document.querySelectorAll('a[href="#price"]').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('price_click',{event_category:'interest',link_text:labelFor(el)}));
+  });
+
+  document.querySelectorAll('a[href="news.html"]').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('news_click',{event_category:'content',link_text:labelFor(el)}));
+  });
+
+  document.querySelectorAll('[data-zoom], .imageBtn').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('image_zoom',{event_category:'content',image_name:el.getAttribute('alt')||el.dataset.title||''}));
+  });
+
+  document.querySelectorAll('.tabs button').forEach(el=>{
+    el.addEventListener('click',()=>sendEvent('floorplan_select',{event_category:'interest',floor_type:el.textContent.trim()}));
+  });
+
+  ['quickLeadForm','leadForm'].forEach(formId=>{
+    const form=document.getElementById(formId);
+    if(!form) return;
+    let started=false;
+    form.addEventListener('focusin',()=>{
+      if(started) return;
+      started=true;
+      sendEvent('form_start',{event_category:'lead',form_id:formId,form_name:formId==='quickLeadForm'?'상단 간편상담':'상세 상담신청'});
+    });
+    form.addEventListener('submit',()=>sendEvent('form_submit_attempt',{event_category:'lead',form_id:formId}));
+  });
+
+  // 특별혜택 팝업
+  const popup=document.getElementById('eventPopup');
+  const todayClose=document.getElementById('eventTodayClose');
+  const hideKey='woomi_event_popup_hide_until';
+  function isHiddenToday(value){ return value && Number(value)>=Date.now(); }
+  function setHideUntilTomorrow(){ const d=new Date(); d.setHours(24,0,0,0); localStorage.setItem(hideKey,String(d.getTime())); }
+  function openPopup(){
+    if(!popup) return;
+    popup.classList.add('active'); popup.setAttribute('aria-hidden','false'); document.body.classList.add('popupOpen');
+    sendEvent('event_popup_view',{event_category:'popup',popup_name:'계약금 완납 고객 특별혜택'});
+  }
+  function closePopup(){
+    if(todayClose&&todayClose.checked) setHideUntilTomorrow();
+    if(!popup) return;
+    popup.classList.remove('active'); popup.setAttribute('aria-hidden','true'); document.body.classList.remove('popupOpen');
+    sendEvent('event_popup_close',{event_category:'popup',hide_today:Boolean(todayClose&&todayClose.checked)});
+  }
+  if(popup&&!isHiddenToday(localStorage.getItem(hideKey))) setTimeout(openPopup,900);
+  document.querySelectorAll('[data-event-close]').forEach(el=>el.addEventListener('click',closePopup));
+
+  // 상담 폼 전송 데이터에 최초 광고 유입 정보를 함께 저장
+  window.getMarketingAttribution=function(){ return {...attribution}; };
+})();
