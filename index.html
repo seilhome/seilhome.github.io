@@ -41,8 +41,18 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260712-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260711-3" />
   <link rel="stylesheet" href="css/news.css" />
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xl435psnof");
+  </script>
+
 </head>
 <body>
   <header class="topbar">
@@ -228,6 +238,63 @@
     <div class="successBox"><div class="checkIcon">✓</div><h3>상담 신청이 접수되었습니다</h3><p>담당자가 빠른 시간 내 연락드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
   </div>
 
-  <script src="js/script.js?v=20260712-1"></script>
+  <script src="js/script.js?v=20260711-3"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'phone_click', {event_category: 'contact', event_label: '전화상담'});
+      });
+    });
+    document.querySelectorAll('a[href="#reservation"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'reservation_click', {event_category: 'lead', event_label: '모델하우스 방문예약'});
+      });
+    });
+    document.querySelectorAll('a[href="#price"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'price_click', {event_category: 'interest', event_label: '분양가 확인'});
+      });
+    });
+    document.querySelectorAll('a[href="news.html"]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'news_click', {event_category: 'content', event_label: '분양정보'});
+      });
+    });
+
+    // 첫 방문 시 특별혜택 팝업 1개만 노출
+    var popup = document.getElementById('eventPopup');
+    var todayClose = document.getElementById('eventTodayClose');
+    var hideKey = 'woomi_event_popup_hide_until';
+    var hideUntil = localStorage.getItem(hideKey);
+
+    function isHiddenToday(value){ return value && Number(value) >= Date.now(); }
+    function setHideUntilTomorrow(){
+      var tomorrow = new Date();
+      tomorrow.setHours(24,0,0,0);
+      localStorage.setItem(hideKey, tomorrow.getTime().toString());
+    }
+    function openEventPopup(){
+      if (!popup) return;
+      popup.classList.add('active');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('popupOpen');
+      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약금 완납 고객 특별혜택 팝업'});
+    }
+    function closeEventPopup(){
+      if (todayClose && todayClose.checked) setHideUntilTomorrow();
+      if (!popup) return;
+      popup.classList.remove('active');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('popupOpen');
+    }
+    if (!isHiddenToday(hideUntil)) setTimeout(openEventPopup, 900);
+    document.querySelectorAll('[data-event-close]').forEach(function(el){ el.addEventListener('click', closeEventPopup); });
+    var eventCall = document.querySelector('.eventCall');
+    if (eventCall) eventCall.addEventListener('click', function(){
+      if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약금 특별혜택 팝업 전화상담'});
+    });
+  });
+  </script>
 </body>
 </html>
