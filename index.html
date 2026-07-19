@@ -41,7 +41,7 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260714-2" />
+  <link rel="stylesheet" href="css/style.css?v=20260719-3" />
   <link rel="stylesheet" href="css/news.css" />
 
   <!-- Microsoft Clarity -->
@@ -57,7 +57,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="상단으로 이동"><img src="images/logo.jpg" alt="Lynn 강릉 우미 린 더 프리미어" /></a>
-    <a class="top-call" href="tel:010-6383-5879">계약 가능 동·호수 확인</a>
+    <button class="top-call modalTrigger" type="button" data-lead-modal="donghoLeadModal">계약 가능 동·호수 확인</button>
   </header>
 
   <main id="top">
@@ -66,7 +66,7 @@
       <div class="heroText">
         <p class="eyebrow">GANGNEUNG WOOMI LYNN THE PREMIER</p>
         <h1>강릉 우미 린<br>더 프리미어</h1>
-        <p class="sub">방문상담 예약부터 분양가·잔여 동호수까지 담당자가 직접 안내해드립니다.</p>
+        <p class="sub">현재 계약 가능한 동·호수와 분양가표를 담당자가 직접 안내해드립니다.</p>
         <div class="heroGift" aria-label="방문예약 혜택">
           <span class="giftIcon" aria-hidden="true">🎁</span>
           <div><small>모델하우스 방문상담 예약 혜택</small><strong>신세계상품권 증정</strong></div>
@@ -76,17 +76,16 @@
           <span>34평 · 45평 · 48평 상담</span>
           <span>772세대 브랜드 대단지</span>
         </div>
-        <p class="heroMicro">이름과 연락처만 남기면 30초 만에 방문상담 예약이 가능합니다.</p>
-        <div class="heroBtns">
-          <a href="#quick-consult" class="btn primary">현재 계약 가능 동·호수 확인</a>
-          <a href="tel:010-6383-5879" class="btn ghost">실시간 분양문의</a>
-          <a href="#price" class="btn ghost">분양가 확인하기</a>
+        <p class="heroMicro">이름과 연락처만 남겨주시면 필요한 정보만 빠르게 안내해드립니다.</p>
+        <div class="heroBtns heroBtnsFocused">
+          <button type="button" class="btn primary modalTrigger" data-lead-modal="donghoLeadModal">현재 계약 가능 동·호수 확인</button>
+          <button type="button" class="btn ghost modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
         </div>
       </div>
     </section>
 
     <section class="quick">
-      <a href="#premium">프리미엄</a><a href="#price">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
+      <a href="#premium">프리미엄</a><button type="button" class="modalTrigger" data-lead-modal="priceLeadModal">분양가</button><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
     </section>
 
     <section id="quick-consult" class="quickConsult section" aria-labelledby="quickConsultTitle">
@@ -123,7 +122,7 @@
       </div>
       <div class="advisorActions">
         <a href="tel:010-6383-5879" class="advisorCall">실시간 분양문의</a>
-        <a href="#quick-consult" class="advisorReserve">잔여세대 확인</a>
+        <button type="button" class="advisorReserve modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
       </div>
     </section>
 
@@ -151,23 +150,15 @@
     <section id="siteplan" class="section"><p class="eyebrow orange">SITE PLAN</p><h2>단지배치도</h2><img class="fullImg" src="images/siteplan.jpg" alt="단지배치도" data-zoom /></section>
     <section id="price" class="section important priceSection">
       <p class="eyebrow orange">PRICE</p>
-      <h2>공급가격</h2>
-      <p class="priceLead">분양가 확인 후 현재 계약 가능한 동·호수와 특별혜택 적용 여부도 함께 확인해보세요.</p>
-      <details class="priceDetails">
-        <summary>분양가표 펼쳐보기</summary>
-        <p class="sectionGuide">이미지를 클릭하면 크게 볼 수 있습니다. 확대 후 마우스나 손가락으로 자유롭게 이동하세요.</p>
-        <div class="priceStack">
-        <figure>
-          <figcaption>공급대상 및 공급금액 · 상단</figcaption>
-          <img class="wideImg" src="images/price-top.jpg" alt="공급대상 및 공급금액 상단" data-zoom />
-        </figure>
-        <figure>
-          <figcaption>공급금액 및 납부일정 · 하단</figcaption>
-          <img class="wideImg" src="images/price-bottom.jpg" alt="공급금액 및 납부일정 하단" data-zoom />
-        </figure>
+      <h2>분양가표 전송받기</h2>
+      <div class="priceRequestCard">
+        <div class="priceRequestIcon" aria-hidden="true">₩</div>
+        <div>
+          <strong>분양가표와 계약 가능 동·호수를 함께 안내해드립니다.</strong>
+          <p>전송받을 이름과 연락처를 남겨주시면 담당자가 확인 후 필요한 내용만 연락처로 안내해드립니다.</p>
         </div>
-      </details>
-      <a class="priceConsultBtn" href="#quick-consult">현재 계약 가능 동·호수 확인하기</a>
+        <button type="button" class="priceConsultBtn modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
+      </div>
     </section>
 
     <section id="floor" class="section">
@@ -178,7 +169,18 @@
       <div class="floorPanel"><img id="floorImage" src="images/floor84a.jpg" alt="84A 타입 평면도" data-zoom /></div>
     </section>
 
-    <section id="dongho" class="section important"><p class="eyebrow orange">DONG · HO</p><h2>동호수 배치표</h2><img class="wideImg" src="images/dongho.jpg" alt="동호수 배치표" data-zoom /></section>
+    <section id="dongho" class="section important donghoRequestSection">
+      <p class="eyebrow orange">DONG · HO</p>
+      <h2>현재 계약 가능 동·호수 확인</h2>
+      <div class="donghoRequestCard">
+        <div class="donghoRequestVisual" aria-hidden="true">棟</div>
+        <div>
+          <strong>동·호수 현황은 실시간으로 달라질 수 있습니다.</strong>
+          <p>이름과 연락처를 남겨주시면 현재 계약 가능한 동·호수와 선택 가능한 평형을 확인해 안내해드립니다.</p>
+        </div>
+        <button type="button" class="donghoRequestBtn modalTrigger" data-lead-modal="donghoLeadModal">계약 가능 동·호수 안내받기</button>
+      </div>
+    </section>
 
     <section id="news-preview" class="section newsPreview">
       <p class="eyebrow orange">SALES INFO</p>
@@ -222,17 +224,17 @@
       <p class="formNote">접수 후 담당자가 방문 일정을 확인해 연락드립니다. 부담 없이 예약해 주세요.</p>
     </section>
 
-    <section class="section openchat">
-      <h2>카카오톡 상담</h2><p>카카오톡 오픈채팅으로도 상담 가능합니다.</p>
-      <a href="https://open.kakao.com/o/s4kktZri" target="_blank" rel="noopener">오픈채팅 바로가기</a>
+    <section class="section openchat compactOpenchat">
+      <div><strong>카카오톡 상담</strong><span>오픈채팅으로 간편하게 문의하세요.</span></div>
+      <a href="https://open.kakao.com/o/s4kktZri" target="_blank" rel="noopener">채팅하기</a>
     </section>
   </main>
 
   <footer><strong>강릉 우미 린 더 프리미어</strong><p>대표번호 010-6383-5879</p></footer>
 
   <nav class="bottomBar" aria-label="상담 바로가기">
-    <a href="tel:010-6383-5879" class="call">실시간 분양문의</a>
-    <a href="#quick-consult" class="apply">잔여세대 확인</a>
+    <a href="tel:010-6383-5879" class="call">전화상담</a>
+    <button type="button" class="apply modalTrigger" data-lead-modal="priceLeadModal">분양가표 받기</button>
   </nav>
 
   <!-- 이벤트 팝업 추가 -->
@@ -257,6 +259,46 @@
     </div>
   </div>
 
+
+  <!-- 우측 상단 동·호수 상담신청 -->
+  <div class="leadModal" id="donghoLeadModal" aria-hidden="true">
+    <div class="leadModalDim" data-lead-modal-close></div>
+    <div class="leadModalBox" role="dialog" aria-modal="true" aria-labelledby="donghoLeadTitle">
+      <button type="button" class="leadModalClose" aria-label="닫기" data-lead-modal-close>×</button>
+      <p class="eyebrow orange">AVAILABLE UNIT</p>
+      <h2 id="donghoLeadTitle">계약 가능 동·호수 확인</h2>
+      <p class="leadModalText">이름과 연락처를 남겨주시면 현재 계약 가능한 동·호수를 안내해드립니다.</p>
+      <form id="donghoLeadForm" class="modalLeadForm">
+        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required></label>
+        <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
+        <input type="hidden" name="consultType" value="계약 가능 동·호수 문의">
+        <input type="hidden" name="message" value="우측 상단 버튼을 통한 계약 가능 동·호수 문의">
+        <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
+        <button type="submit"><span class="btnText">상담 신청하기</span><span class="loadingDot" aria-hidden="true"></span></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 분양가표 전송 신청 -->
+  <div class="leadModal" id="priceLeadModal" aria-hidden="true">
+    <div class="leadModalDim" data-lead-modal-close></div>
+    <div class="leadModalBox" role="dialog" aria-modal="true" aria-labelledby="priceLeadTitle">
+      <button type="button" class="leadModalClose" aria-label="닫기" data-lead-modal-close>×</button>
+      <p class="eyebrow orange">PRICE LIST</p>
+      <h2 id="priceLeadTitle">분양가표 전송받기</h2>
+      <p class="leadModalText">분양가표와 현재 계약 가능한 동·호수를 함께 안내해드립니다. 전송받을 이름과 연락처를 입력해주세요.</p>
+      <form id="priceLeadForm" class="modalLeadForm">
+        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required></label>
+        <label class="field"><span>전송받을 연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
+        <input type="hidden" name="consultType" value="분양가표 전송 요청">
+        <input type="hidden" name="message" value="홈페이지 분양가표 전송 요청">
+        <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
+        <button type="submit"><span class="btnText">분양가표 전송 요청하기</span><span class="loadingDot" aria-hidden="true"></span></button>
+      </form>
+      <p class="leadModalNote">접수 후 담당자가 확인하여 연락처로 안내해드립니다.</p>
+    </div>
+  </div>
+
   <div class="viewer" id="viewer" aria-hidden="true">
     <button class="close" id="closeViewer" aria-label="닫기">×</button>
     <div class="zoomControls" aria-label="확대 축소 버튼"><button type="button" id="zoomOut" aria-label="축소">−</button><button type="button" id="zoomIn" aria-label="확대">＋</button><button type="button" id="zoomReset" aria-label="원래 크기">100%</button></div>
@@ -264,10 +306,10 @@
   </div>
 
   <div class="successModal" id="successModal" aria-hidden="true">
-    <div class="successBox"><div class="checkIcon">✓</div><h3>상담 신청이 접수되었습니다</h3><p>담당자가 빠른 시간 내 연락드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
+    <div class="successBox"><div class="checkIcon">✓</div><h3>신청이 정상 접수되었습니다</h3><p>입력하신 연락처를 확인한 뒤 담당자가 안내드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
   </div>
 
-  <script src="js/script.js?v=20260714-2"></script>
+  <script src="js/script.js?v=20260719b-1"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {

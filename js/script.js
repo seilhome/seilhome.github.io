@@ -129,7 +129,8 @@ function bindLeadForm(formId){
     const data=Object.fromEntries(new FormData(form).entries());
     data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
     data.createdAt=new Date().toLocaleString('ko-KR');
-    data.source=formId==='quickLeadForm'?'상단 간편상담':'상세 상담신청';
+    const sourceMap={quickLeadForm:'상단 간편상담',leadForm:'상세 상담신청',donghoLeadForm:'우측 상단 동호수 상담',priceLeadForm:'분양가표 전송 요청'};
+    data.source=sourceMap[formId]||'홈페이지 상담신청';
     const submit=form.querySelector('button[type="submit"]');
     const btnText=submit.querySelector('.btnText');
     const originalText=btnText?btnText.textContent:'';
@@ -139,6 +140,8 @@ function bindLeadForm(formId){
     try{
       await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       form.reset();
+      document.querySelectorAll('.leadModal.active').forEach(modal=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true');});
+      document.body.classList.remove('popupOpen');
       showSuccess();
       trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
     }catch(err){
@@ -152,4 +155,31 @@ function bindLeadForm(formId){
 }
 bindLeadForm('leadForm');
 bindLeadForm('quickLeadForm');
+bindLeadForm('donghoLeadForm');
+bindLeadForm('priceLeadForm');
+
+// 상담신청 모달
+document.querySelectorAll('[data-lead-modal]').forEach(trigger=>{
+  trigger.addEventListener('click',()=>{
+    const modal=document.getElementById(trigger.dataset.leadModal);
+    if(!modal) return;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('popupOpen');
+    setTimeout(()=>modal.querySelector('input[name="name"]')?.focus(),100);
+    trackEvent('lead_modal_open',{event_category:'lead',event_label:trigger.dataset.leadModal});
+  });
+});
+document.querySelectorAll('[data-lead-modal-close]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const modal=el.closest('.leadModal');
+    if(!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('popupOpen');
+  });
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.leadModal.active').forEach(modal=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('popupOpen');});
+});
 

@@ -73,3 +73,77 @@ body.popupOpen{overflow:hidden}
 .quickConsultCopy strong{color:#d95910}.quickLeadForm button{font-size:15px}.bottomBar .apply{background:#e76518;color:#fff}
 @media(min-width:760px){.heroText{bottom:64px}.heroGift{padding:16px 18px}.heroGift strong{font-size:25px}.heroMicro{font-size:14px}.conversionHighlights{grid-template-columns:repeat(4,1fr);max-width:1060px;margin:0 auto;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8}.highlightItem{min-height:142px}.highlightItem strong{font-size:25px}.highlightItem span{font-size:14px}.advisorCard{grid-template-columns:1fr auto;align-items:center;border-radius:26px;margin-top:54px;margin-bottom:54px}.advisorActions{min-width:330px}}
 @media(max-width:520px){.hero{min-height:690px}.hero>img{height:690px}.hero h1{font-size:36px}.sub{font-size:16px;margin-bottom:15px}.heroGift strong{font-size:18px}.heroOffers{gap:6px;margin-bottom:10px}.heroOffers span{padding:7px 10px}.heroBtns{grid-template-columns:1fr 1fr}.heroBtns .primary{grid-column:1/-1}.heroBtns .btn{font-size:13px}.advisorActions{grid-template-columns:1fr}.priceConsultBtn{font-size:14px}}
+
+
+/* 2026-07-19 상담신청 모달 및 하단 오픈채팅 축소 */
+button.top-call{border:0;cursor:pointer;font-family:inherit}
+.quick button{border:0;background:#fff;text-align:center;padding:14px 4px;font-size:13px;font-weight:900;color:#333;font-family:inherit;cursor:pointer}
+button.btn{border:0;cursor:pointer;font-family:inherit}
+.leadModal{position:fixed;inset:0;z-index:350;display:none;align-items:center;justify-content:center;padding:18px}
+.leadModal.active{display:flex}
+.leadModalDim{position:absolute;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(5px)}
+.leadModalBox{position:relative;width:min(420px,100%);background:#fff;border-radius:24px;padding:30px 22px 22px;box-shadow:0 24px 70px rgba(0,0,0,.32)}
+.leadModalClose{position:absolute;right:13px;top:13px;width:38px;height:38px;border:1px solid #eee;border-radius:50%;background:#fff;font-size:27px;line-height:1;cursor:pointer}
+.leadModalBox h2{margin:0 0 10px;font-size:27px;letter-spacing:-.05em}
+.leadModalText{margin:0 0 19px;color:#666;line-height:1.6;font-size:15px}
+.modalLeadForm{display:grid;gap:12px}
+.modalLeadForm button{background:#e76518}
+.leadModalNote{margin:13px 0 0;text-align:center;color:#777;font-size:12px;line-height:1.5}
+.priceRequestCard{border:1px solid #eee;border-radius:22px;padding:22px;background:linear-gradient(145deg,#fff8f2,#fff);box-shadow:0 12px 32px rgba(82,42,12,.07)}
+.priceRequestIcon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:15px;background:#e76518;color:#fff;font-size:25px;font-weight:900}
+.priceRequestCard strong{display:block;font-size:18px;line-height:1.45;letter-spacing:-.03em}
+.priceRequestCard p{margin:9px 0 0;color:#666;line-height:1.65;font-size:14px}
+.priceRequestCard .priceConsultBtn{width:100%;border:0;cursor:pointer;font-family:inherit;font-size:16px}
+.compactOpenchat{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:22px!important;padding-bottom:22px!important;text-align:left;background:#fff}
+.compactOpenchat div{min-width:0}.compactOpenchat strong{display:block;margin-bottom:3px;font-size:15px}.compactOpenchat span{display:block;color:#777;font-size:12px;line-height:1.4}
+.compactOpenchat a{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 15px;font-size:13px;white-space:nowrap}
+@media(min-width:760px){.compactOpenchat{max-width:1060px;margin:0 auto;border-top:1px solid #eee}.leadModalBox{padding:34px 28px 26px}}
+@media(max-width:420px){.top-call{font-size:12px;padding:9px 11px}.compactOpenchat span{max-width:190px}.compactOpenchat a{padding:9px 13px}}
+
+/* 2026-07-19 전환 동선 최종 정리 */
+.heroBtnsFocused{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:10px;max-width:620px}
+.heroBtnsFocused .primary{grid-column:auto}
+.heroBtnsFocused button{width:100%}
+.advisorActions button{border:0;font-family:inherit;cursor:pointer;font-size:inherit}
+.donghoRequestCard{display:grid;gap:16px;border:1px solid #e8e8e8;border-radius:22px;padding:22px;background:linear-gradient(145deg,#fff,#fff8f2);box-shadow:0 12px 32px rgba(82,42,12,.07)}
+.donghoRequestVisual{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:#171717;color:#fff;font-size:25px;font-weight:1000}
+.donghoRequestCard strong{display:block;font-size:18px;line-height:1.45;letter-spacing:-.03em}
+.donghoRequestCard p{margin:8px 0 0;color:#666;font-size:14px;line-height:1.65}
+.donghoRequestBtn{min-height:54px;border:0;border-radius:16px;background:#e76518;color:#fff;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer}
+.bottomBar button{border:0;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer}
+@media(min-width:760px){
+  .donghoRequestCard{grid-template-columns:auto 1fr auto;align-items:center;padding:26px}
+  .donghoRequestBtn{min-width:240px;padding:0 24px}
+}
+@media(max-width:520px){
+  .heroBtnsFocused{grid-template-columns:1fr}
+  .heroBtnsFocused .primary{grid-column:auto}
+  .heroBtnsFocused .btn{font-size:14px;min-height:50px}
+  .bottomBar button{font-size:14px}
+}
+.bottomBar button.apply{display:flex;align-items:center;justify-content:center;width:100%;border-radius:14px;padding:15px 8px;color:#fff}
+
+/* 2026-07-19 advisor CTA alignment fix */
+.advisorActions a,
+.advisorActions button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  border:0;
+  outline:0;
+  box-shadow:none;
+  border-radius:15px;
+  padding:0 18px;
+  font-family:inherit;
+  font-size:inherit;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.advisorReserve{
+  background:#e76518;
+  color:#fff;
+}
