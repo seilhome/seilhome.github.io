@@ -106,13 +106,12 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 .heroBtnsFocused button{width:100%}
 .advisorActions button{border:0;font-family:inherit;cursor:pointer;font-size:inherit}
 .donghoRequestCard{display:grid;gap:16px;border:1px solid #e8e8e8;border-radius:22px;padding:22px;background:linear-gradient(145deg,#fff,#fff8f2);box-shadow:0 12px 32px rgba(82,42,12,.07)}
-.donghoRequestVisual{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:#171717;color:#fff;font-size:25px;font-weight:1000}
 .donghoRequestCard strong{display:block;font-size:18px;line-height:1.45;letter-spacing:-.03em}
 .donghoRequestCard p{margin:8px 0 0;color:#666;font-size:14px;line-height:1.65}
 .donghoRequestBtn{min-height:54px;border:0;border-radius:16px;background:#e76518;color:#fff;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer}
 .bottomBar button{border:0;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer}
 @media(min-width:760px){
-  .donghoRequestCard{grid-template-columns:auto 1fr auto;align-items:center;padding:26px}
+  .donghoRequestCard{grid-template-columns:1fr auto;align-items:center;padding:26px}
   .donghoRequestBtn{min-width:240px;padding:0 24px}
 }
 @media(max-width:520px){
@@ -122,28 +121,3 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   .bottomBar button{font-size:14px}
 }
 .bottomBar button.apply{display:flex;align-items:center;justify-content:center;width:100%;border-radius:14px;padding:15px 8px;color:#fff}
-
-/* 2026-07-19 advisor CTA alignment fix */
-.advisorActions a,
-.advisorActions button{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:52px;
-  border:0;
-  outline:0;
-  box-shadow:none;
-  border-radius:15px;
-  padding:0 18px;
-  font-family:inherit;
-  font-size:inherit;
-  font-weight:900;
-  line-height:1.2;
-  cursor:pointer;
-  appearance:none;
-  -webkit-appearance:none;
-}
-.advisorReserve{
-  background:#e76518;
-  color:#fff;
-}
