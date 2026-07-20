@@ -79,13 +79,13 @@
         <p class="heroMicro">이름과 연락처만 남겨주시면 필요한 정보만 빠르게 안내해드립니다.</p>
         <div class="heroBtns heroBtnsFocused">
           <button type="button" class="btn primary modalTrigger" data-lead-modal="donghoLeadModal">현재 계약 가능 동·호수 확인</button>
-          <button type="button" class="btn ghost modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
+          <a href="#price" class="btn ghost priceLink">분양가표 문의하기</a>
         </div>
       </div>
     </section>
 
     <section class="quick">
-      <a href="#premium">프리미엄</a><button type="button" class="modalTrigger" data-lead-modal="priceLeadModal">분양가</button><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
+      <a href="#premium">프리미엄</a><a href="#price" class="priceLink">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="news.html">분양정보</a>
     </section>
 
     <section id="quick-consult" class="quickConsult section" aria-labelledby="quickConsultTitle">
@@ -122,7 +122,7 @@
       </div>
       <div class="advisorActions">
         <a href="tel:010-6383-5879" class="advisorCall">실시간 분양문의</a>
-        <button type="button" class="advisorReserve modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
+        <a href="#price" class="advisorReserve priceLink">분양가표 문의하기</a>
       </div>
     </section>
 
@@ -157,7 +157,19 @@
           <strong>분양가표와 계약 가능 동·호수를 함께 안내해드립니다.</strong>
           <p>전송받을 이름과 연락처를 남겨주시면 담당자가 확인 후 필요한 내용만 연락처로 안내해드립니다.</p>
         </div>
-        <button type="button" class="priceConsultBtn modalTrigger" data-lead-modal="priceLeadModal">분양가표 전송받기</button>
+        <div id="priceForm" class="inlinePriceForm" tabindex="-1">
+          <h3>분양가표 문의하기</h3>
+          <p>아래에 이름과 연락처를 입력해 주세요.</p>
+          <form id="priceLeadForm" class="modalLeadForm">
+            <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required></label>
+            <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
+            <input type="hidden" name="consultType" value="분양가표 전송 요청">
+            <input type="hidden" name="message" value="홈페이지 분양가표 전송 요청">
+            <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
+            <button type="submit"><span class="btnText">분양가표 문의하기</span><span class="loadingDot" aria-hidden="true"></span></button>
+          </form>
+          <p class="leadModalNote">접수 후 담당자가 연락처로 안내해드립니다.</p>
+        </div>
       </div>
     </section>
 
@@ -233,7 +245,7 @@
 
   <nav class="bottomBar" aria-label="상담 바로가기">
     <a href="tel:010-6383-5879" class="call">전화상담</a>
-    <button type="button" class="apply modalTrigger" data-lead-modal="priceLeadModal">분양가표 받기</button>
+    <a href="#price" class="apply priceLink">분양가표 문의</a>
   </nav>
 
   <!-- 이벤트 팝업 추가 -->
@@ -275,26 +287,6 @@
         <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
         <button type="submit"><span class="btnText">상담 신청하기</span><span class="loadingDot" aria-hidden="true"></span></button>
       </form>
-    </div>
-  </div>
-
-  <!-- 분양가표 전송 신청 -->
-  <div class="leadModal" id="priceLeadModal" aria-hidden="true">
-    <div class="leadModalDim" data-lead-modal-close></div>
-    <div class="leadModalBox" role="dialog" aria-modal="true" aria-labelledby="priceLeadTitle">
-      <button type="button" class="leadModalClose" aria-label="닫기" data-lead-modal-close>×</button>
-      <p class="eyebrow orange">PRICE LIST</p>
-      <h2 id="priceLeadTitle">분양가표 전송받기</h2>
-      <p class="leadModalText">분양가표와 현재 계약 가능한 동·호수를 함께 안내해드립니다. 전송받을 이름과 연락처를 입력해주세요.</p>
-      <form id="priceLeadForm" class="modalLeadForm">
-        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required></label>
-        <label class="field"><span>전송받을 연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
-        <input type="hidden" name="consultType" value="분양가표 전송 요청">
-        <input type="hidden" name="message" value="홈페이지 분양가표 전송 요청">
-        <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
-        <button type="submit"><span class="btnText">분양가표 전송 요청하기</span><span class="loadingDot" aria-hidden="true"></span></button>
-      </form>
-      <p class="leadModalNote">접수 후 담당자가 확인하여 연락처로 안내해드립니다.</p>
     </div>
   </div>
 

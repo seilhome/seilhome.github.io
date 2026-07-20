@@ -183,3 +183,17 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape') document.querySelectorAll('.leadModal.active').forEach(modal=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('popupOpen');});
 });
 
+
+// 분양가 버튼: 팝업 대신 페이지 안의 문의 폼으로 이동
+ document.querySelectorAll('.priceLink').forEach(link=>{
+  link.addEventListener('click',()=>{
+    setTimeout(()=>{
+      const formBox=document.getElementById('priceForm');
+      if(formBox){
+        formBox.focus({preventScroll:true});
+        formBox.querySelector('input[name="name"]')?.focus({preventScroll:true});
+      }
+    },450);
+    trackEvent('price_inquiry_click',{event_category:'interest',event_label:'분양가표 인라인 문의'});
+  });
+});

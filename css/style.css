@@ -121,3 +121,12 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   .bottomBar button{font-size:14px}
 }
 .bottomBar button.apply{display:flex;align-items:center;justify-content:center;width:100%;border-radius:14px;padding:15px 8px;color:#fff}
+
+/* 2026-07-20 분양가 문의 인라인 폼 */
+.inlinePriceForm{margin-top:20px;padding-top:20px;border-top:1px solid #eadfd5;scroll-margin-top:90px}
+.inlinePriceForm h3{margin:0 0 6px;font-size:21px;letter-spacing:-.04em}
+.inlinePriceForm>p{margin:0 0 15px;color:#666;font-size:14px}
+.inlinePriceForm .modalLeadForm{gap:11px}
+.inlinePriceForm .leadModalNote{margin-top:12px}
+.priceLink{cursor:pointer}
+@media(min-width:760px){.inlinePriceForm .modalLeadForm{grid-template-columns:1fr 1fr}.inlinePriceForm .modalLeadForm .agree,.inlinePriceForm .modalLeadForm button{grid-column:1/-1}}
