@@ -9,11 +9,13 @@ let zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startM
 function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
 function constrainPan(){
   if(!viewerInner||!viewerImg) return;
-  if(zoomState.scale<=1){zoomState.x=0;zoomState.y=0;return;}
   const scaledW=viewerImg.offsetWidth*zoomState.scale;
   const scaledH=viewerImg.offsetHeight*zoomState.scale;
-  const maxX=Math.max(0,(scaledW-viewerInner.clientWidth)/2+24);
-  const maxY=Math.max(0,(scaledH-viewerInner.clientHeight)/2+48);
+  const viewportW=viewerInner.clientWidth;
+  const viewportH=viewerInner.clientHeight;
+  const minVisible=Math.min(120, Math.max(60, Math.min(scaledW,scaledH)*0.22));
+  const maxX=Math.max(0,(scaledW+viewportW)/2-minVisible);
+  const maxY=Math.max(0,(scaledH+viewportH)/2-minVisible);
   zoomState.x=clamp(zoomState.x,-maxX,maxX);
   zoomState.y=clamp(zoomState.y,-maxY,maxY);
 }
@@ -44,7 +46,7 @@ const zoomResetBtn=document.getElementById('zoomReset');
 function setZoomScale(next,focusX,focusY){
   const old=zoomState.scale;
   const target=clamp(next,0.25,8);
-  if(typeof focusX==='number'&&typeof focusY==='number'&&old>0&&target>1){
+  if(typeof focusX==='number'&&typeof focusY==='number'&&old>0){
     const rect=viewerInner.getBoundingClientRect();
     const cx=focusX-(rect.left+rect.width/2);
     const cy=focusY-(rect.top+rect.height/2);
@@ -53,7 +55,6 @@ function setZoomScale(next,focusX,focusY){
     zoomState.y=cy-(cy-zoomState.y)*ratio;
   }
   zoomState.scale=target;
-  if(target<=1){zoomState.x=0;zoomState.y=0;}
   applyZoom();
 }
 if(zoomInBtn) zoomInBtn.addEventListener('click',e=>{e.stopPropagation();setZoomScale(zoomState.scale+0.25);});
@@ -90,7 +91,7 @@ if(viewerInner){
       zoomState.pointerId=remaining[0];
       zoomState.startX=remaining[1].x-zoomState.x;
       zoomState.startY=remaining[1].y-zoomState.y;
-      zoomState.isDragging=zoomState.scale>1;
+      zoomState.isDragging=true;
     }else if(activePointers.size===0){
       zoomState.isDragging=false;
       zoomState.pointerId=null;
@@ -109,7 +110,7 @@ if(viewerInner){
       zoomState.pointerId=e.pointerId;
       zoomState.startX=e.clientX-zoomState.x;
       zoomState.startY=e.clientY-zoomState.y;
-      zoomState.isDragging=zoomState.scale>1;
+      zoomState.isDragging=true;
       if(zoomState.isDragging) viewerInner.classList.add('dragging');
     }else if(activePointers.size===2){
       pinchStartDistance=pointerDistance();
@@ -133,22 +134,18 @@ if(viewerInner){
       const center=pointerCenter();
       const nextScale=clamp(pinchStartScale*(distance/Math.max(1,pinchStartDistance)),0.25,8);
       zoomState.scale=nextScale;
-      if(nextScale>1){
-        const rect=viewerInner.getBoundingClientRect();
-        const localStartX=pinchCenterX-(rect.left+rect.width/2);
-        const localStartY=pinchCenterY-(rect.top+rect.height/2);
-        const ratio=nextScale/pinchStartScale;
-        zoomState.x=localStartX-(localStartX-pinchStartX)*ratio+(center.x-pinchCenterX);
-        zoomState.y=localStartY-(localStartY-pinchStartY)*ratio+(center.y-pinchCenterY);
-      }else{
-        zoomState.x=0;zoomState.y=0;
-      }
+      const rect=viewerInner.getBoundingClientRect();
+      const localStartX=pinchCenterX-(rect.left+rect.width/2);
+      const localStartY=pinchCenterY-(rect.top+rect.height/2);
+      const ratio=nextScale/pinchStartScale;
+      zoomState.x=localStartX-(localStartX-pinchStartX)*ratio+(center.x-pinchCenterX);
+      zoomState.y=localStartY-(localStartY-pinchStartY)*ratio+(center.y-pinchCenterY);
       applyZoom();
       e.preventDefault();
       return;
     }
 
-    if(activePointers.size===1&&zoomState.scale>1&&zoomState.pointerId===e.pointerId){
+    if(activePointers.size===1&&zoomState.pointerId===e.pointerId){
       zoomState.isDragging=true;
       viewerInner.classList.add('dragging');
       zoomState.x=e.clientX-zoomState.startX;
