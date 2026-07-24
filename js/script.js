@@ -64,55 +64,116 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
 window.addEventListener('resize',applyZoom);
 
 if(viewerInner){
-  viewerInner.addEventListener('pointerdown',e=>{
-    if(!viewer.classList.contains('active')||e.pointerType==='touch'||e.button!==0||zoomState.scale<=1) return;
-    zoomState.isDragging=true;zoomState.pointerId=e.pointerId;
-    zoomState.startX=e.clientX-zoomState.x;zoomState.startY=e.clientY-zoomState.y;
-    viewerInner.setPointerCapture?.(e.pointerId);viewerInner.classList.add('dragging');e.preventDefault();
-  });
-  viewerInner.addEventListener('pointermove',e=>{
-    if(!zoomState.isDragging||zoomState.pointerId!==e.pointerId) return;
-    zoomState.x=e.clientX-zoomState.startX;
-    zoomState.y=e.clientY-zoomState.startY;
-    applyZoom();e.preventDefault();
-  });
-  const endDrag=e=>{if(zoomState.pointerId===e.pointerId){zoomState.isDragging=false;zoomState.pointerId=null;viewerInner.classList.remove('dragging');applyZoom();}};
-  viewerInner.addEventListener('pointerup',endDrag);viewerInner.addEventListener('pointercancel',endDrag);
+  const activePointers=new Map();
+  let pinchStartDistance=0;
+  let pinchStartScale=1;
+  let pinchStartX=0;
+  let pinchStartY=0;
+  let pinchCenterX=0;
+  let pinchCenterY=0;
 
-  viewerInner.addEventListener('touchstart',e=>{
-    if(!viewer.classList.contains('active')) return;
-    if(e.touches.length===1){
-      const now=Date.now();
-      if(now-zoomState.lastTap<280){setZoomScale(zoomState.scale>1?1:2.5,e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}
-      zoomState.lastTap=now;zoomState.startX=e.touches[0].clientX-zoomState.x;zoomState.startY=e.touches[0].clientY-zoomState.y;
-    }else if(e.touches.length===2){
-      zoomState.startDist=touchDistance(e.touches);zoomState.startScale=zoomState.scale;
-      const mid=touchMid(e.touches);zoomState.startMidX=mid.x;zoomState.startMidY=mid.y;e.preventDefault();
+  function pointerDistance(){
+    const pts=[...activePointers.values()];
+    if(pts.length<2) return 0;
+    return Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);
+  }
+  function pointerCenter(){
+    const pts=[...activePointers.values()];
+    if(pts.length<2) return {x:0,y:0};
+    return {x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2};
+  }
+  function finishPointer(e){
+    activePointers.delete(e.pointerId);
+    try{viewerInner.releasePointerCapture?.(e.pointerId);}catch(_){ }
+    if(activePointers.size===1){
+      const remaining=[...activePointers.entries()][0];
+      zoomState.pointerId=remaining[0];
+      zoomState.startX=remaining[1].x-zoomState.x;
+      zoomState.startY=remaining[1].y-zoomState.y;
+      zoomState.isDragging=zoomState.scale>1;
+    }else if(activePointers.size===0){
+      zoomState.isDragging=false;
+      zoomState.pointerId=null;
+      viewerInner.classList.remove('dragging');
+      applyZoom();
     }
-  },{passive:false});
-  viewerInner.addEventListener('touchmove',e=>{
+  }
+
+  viewerInner.addEventListener('pointerdown',e=>{
     if(!viewer.classList.contains('active')) return;
-    if(e.touches.length===2){
-      const dist=touchDistance(e.touches),mid=touchMid(e.touches);
-      const nextScale=clamp(zoomState.startScale*(dist/zoomState.startDist),0.25,8);
+    if(e.pointerType==='mouse'&&e.button!==0) return;
+    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    viewerInner.setPointerCapture?.(e.pointerId);
+
+    if(activePointers.size===1){
+      zoomState.pointerId=e.pointerId;
+      zoomState.startX=e.clientX-zoomState.x;
+      zoomState.startY=e.clientY-zoomState.y;
+      zoomState.isDragging=zoomState.scale>1;
+      if(zoomState.isDragging) viewerInner.classList.add('dragging');
+    }else if(activePointers.size===2){
+      pinchStartDistance=pointerDistance();
+      pinchStartScale=zoomState.scale;
+      pinchStartX=zoomState.x;
+      pinchStartY=zoomState.y;
+      const c=pointerCenter();
+      pinchCenterX=c.x;
+      pinchCenterY=c.y;
+      zoomState.isDragging=false;
+    }
+    e.preventDefault();
+  });
+
+  viewerInner.addEventListener('pointermove',e=>{
+    if(!activePointers.has(e.pointerId)) return;
+    activePointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+    if(activePointers.size===2){
+      const distance=pointerDistance();
+      const center=pointerCenter();
+      const nextScale=clamp(pinchStartScale*(distance/Math.max(1,pinchStartDistance)),0.25,8);
       zoomState.scale=nextScale;
       if(nextScale>1){
-        zoomState.x+=mid.x-zoomState.startMidX;zoomState.y+=mid.y-zoomState.startMidY;
-      }else{zoomState.x=0;zoomState.y=0;}
-      zoomState.startMidX=mid.x;zoomState.startMidY=mid.y;
-      applyZoom();e.preventDefault();
-    }else if(e.touches.length===1&&zoomState.scale>1){
-      zoomState.x=e.touches[0].clientX-zoomState.startX;
-      zoomState.y=e.touches[0].clientY-zoomState.startY;
-      applyZoom();e.preventDefault();
+        const rect=viewerInner.getBoundingClientRect();
+        const localStartX=pinchCenterX-(rect.left+rect.width/2);
+        const localStartY=pinchCenterY-(rect.top+rect.height/2);
+        const ratio=nextScale/pinchStartScale;
+        zoomState.x=localStartX-(localStartX-pinchStartX)*ratio+(center.x-pinchCenterX);
+        zoomState.y=localStartY-(localStartY-pinchStartY)*ratio+(center.y-pinchCenterY);
+      }else{
+        zoomState.x=0;zoomState.y=0;
+      }
+      applyZoom();
+      e.preventDefault();
+      return;
     }
-  },{passive:false});
+
+    if(activePointers.size===1&&zoomState.scale>1&&zoomState.pointerId===e.pointerId){
+      zoomState.isDragging=true;
+      viewerInner.classList.add('dragging');
+      zoomState.x=e.clientX-zoomState.startX;
+      zoomState.y=e.clientY-zoomState.startY;
+      applyZoom();
+      e.preventDefault();
+    }
+  });
+
+  viewerInner.addEventListener('pointerup',finishPointer);
+  viewerInner.addEventListener('pointercancel',finishPointer);
+  viewerInner.addEventListener('lostpointercapture',e=>{if(activePointers.has(e.pointerId))finishPointer(e);});
+
+  viewerInner.addEventListener('dblclick',e=>{
+    if(e.pointerType==='touch') return;
+    setZoomScale(zoomState.scale>1?1:2.5,e.clientX,e.clientY);
+    e.preventDefault();
+  });
+
   viewerInner.addEventListener('wheel',e=>{
-    if(!viewer.classList.contains('active')) return;e.preventDefault();
+    if(!viewer.classList.contains('active')) return;
+    e.preventDefault();
     setZoomScale(zoomState.scale+(e.deltaY<0?0.15:-0.15),e.clientX,e.clientY);
   },{passive:false});
 }
-
 
 function trackEvent(eventName, params){
   if (typeof gtag === 'function') {
