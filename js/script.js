@@ -5,13 +5,35 @@ document.querySelectorAll('.tabs button').forEach(btn=>{btn.addEventListener('cl
 const viewer=document.getElementById('viewer');
 const viewerInner=document.querySelector('.viewerInner');
 const viewerImg=document.getElementById('viewerImg');
-let zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null};
+let zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null,raf:null};
 function clamp(v,min,max){return Math.max(min,Math.min(max,v));}
-function applyZoom(){viewerImg.style.transform=`translate3d(${zoomState.x}px, ${zoomState.y}px, 0) scale(${zoomState.scale})`;if(zoomResetBtn)zoomResetBtn.textContent=`${Math.round(zoomState.scale*100)}%`;}
-function resetZoom(){zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null};applyZoom();viewerInner?.classList.remove('dragging');}
+function constrainPan(){
+  if(!viewerInner||!viewerImg) return;
+  if(zoomState.scale<=1){zoomState.x=0;zoomState.y=0;return;}
+  const scaledW=viewerImg.offsetWidth*zoomState.scale;
+  const scaledH=viewerImg.offsetHeight*zoomState.scale;
+  const maxX=Math.max(0,(scaledW-viewerInner.clientWidth)/2+24);
+  const maxY=Math.max(0,(scaledH-viewerInner.clientHeight)/2+48);
+  zoomState.x=clamp(zoomState.x,-maxX,maxX);
+  zoomState.y=clamp(zoomState.y,-maxY,maxY);
+}
+function renderZoom(){
+  constrainPan();
+  viewerImg.style.transform=`translate3d(${zoomState.x}px, ${zoomState.y}px, 0) scale(${zoomState.scale})`;
+  if(zoomResetBtn) zoomResetBtn.textContent=`${Math.round(zoomState.scale*100)}%`;
+}
+function applyZoom(){
+  if(zoomState.raf) cancelAnimationFrame(zoomState.raf);
+  zoomState.raf=requestAnimationFrame(()=>{zoomState.raf=null;renderZoom();});
+}
+function resetZoom(){
+  if(zoomState.raf) cancelAnimationFrame(zoomState.raf);
+  zoomState={scale:1,x:0,y:0,startX:0,startY:0,startScale:1,startDist:0,startMidX:0,startMidY:0,lastTap:0,isDragging:false,pointerId:null,raf:null};
+  renderZoom();viewerInner?.classList.remove('dragging');
+}
 function touchDistance(touches){const dx=touches[0].clientX-touches[1].clientX;const dy=touches[0].clientY-touches[1].clientY;return Math.hypot(dx,dy);}
 function touchMid(touches){return {x:(touches[0].clientX+touches[1].clientX)/2,y:(touches[0].clientY+touches[1].clientY)/2};}
-function openViewer(src,alt){resetZoom();viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function openViewer(src,alt){resetZoom();viewerImg.src=src;viewerImg.alt=alt||'확대 이미지';viewer.classList.add('active');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';viewerImg.onload=()=>{resetZoom();};}
 function closeViewer(){viewer.classList.remove('active');viewer.setAttribute('aria-hidden','true');viewerImg.src='';document.body.style.overflow='';resetZoom();}
 document.querySelectorAll('[data-zoom]').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>openViewer(img.currentSrc||img.src,img.alt));});
 document.querySelectorAll('.imageBtn').forEach(btn=>{btn.addEventListener('click',()=>openViewer(btn.dataset.img,btn.dataset.title));});
@@ -22,7 +44,7 @@ const zoomResetBtn=document.getElementById('zoomReset');
 function setZoomScale(next,focusX,focusY){
   const old=zoomState.scale;
   const target=clamp(next,0.25,8);
-  if(typeof focusX==='number'&&typeof focusY==='number'&&old>0){
+  if(typeof focusX==='number'&&typeof focusY==='number'&&old>0&&target>1){
     const rect=viewerInner.getBoundingClientRect();
     const cx=focusX-(rect.left+rect.width/2);
     const cy=focusY-(rect.top+rect.height/2);
@@ -39,55 +61,54 @@ if(zoomOutBtn) zoomOutBtn.addEventListener('click',e=>{e.stopPropagation();setZo
 if(zoomResetBtn) zoomResetBtn.addEventListener('click',e=>{e.stopPropagation();resetZoom();});
 viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer();});
+window.addEventListener('resize',applyZoom);
 
 if(viewerInner){
-  // PC: 마우스로 이미지를 잡아 끌면 넉넉하게 이동
   viewerInner.addEventListener('pointerdown',e=>{
-    if(!viewer.classList.contains('active')||e.pointerType==='touch'||e.button!==0) return;
-    zoomState.isDragging=true; zoomState.pointerId=e.pointerId;
-    zoomState.startX=e.clientX-zoomState.x; zoomState.startY=e.clientY-zoomState.y;
-    viewerInner.setPointerCapture?.(e.pointerId); viewerInner.classList.add('dragging'); e.preventDefault();
+    if(!viewer.classList.contains('active')||e.pointerType==='touch'||e.button!==0||zoomState.scale<=1) return;
+    zoomState.isDragging=true;zoomState.pointerId=e.pointerId;
+    zoomState.startX=e.clientX-zoomState.x;zoomState.startY=e.clientY-zoomState.y;
+    viewerInner.setPointerCapture?.(e.pointerId);viewerInner.classList.add('dragging');e.preventDefault();
   });
   viewerInner.addEventListener('pointermove',e=>{
     if(!zoomState.isDragging||zoomState.pointerId!==e.pointerId) return;
-    const moveBoost=1.35;
-    zoomState.x+=(e.clientX-(zoomState.startX+zoomState.x))*moveBoost;
-    zoomState.y+=(e.clientY-(zoomState.startY+zoomState.y))*moveBoost;
-    zoomState.startX=e.clientX-zoomState.x; zoomState.startY=e.clientY-zoomState.y;
-    applyZoom(); e.preventDefault();
+    zoomState.x=e.clientX-zoomState.startX;
+    zoomState.y=e.clientY-zoomState.startY;
+    applyZoom();e.preventDefault();
   });
-  const endDrag=e=>{if(zoomState.pointerId===e.pointerId){zoomState.isDragging=false;zoomState.pointerId=null;viewerInner.classList.remove('dragging');}};
-  viewerInner.addEventListener('pointerup',endDrag); viewerInner.addEventListener('pointercancel',endDrag);
+  const endDrag=e=>{if(zoomState.pointerId===e.pointerId){zoomState.isDragging=false;zoomState.pointerId=null;viewerInner.classList.remove('dragging');applyZoom();}};
+  viewerInner.addEventListener('pointerup',endDrag);viewerInner.addEventListener('pointercancel',endDrag);
 
-  // 모바일: 한 손가락 이동, 두 손가락 확대/이동
   viewerInner.addEventListener('touchstart',e=>{
     if(!viewer.classList.contains('active')) return;
     if(e.touches.length===1){
       const now=Date.now();
       if(now-zoomState.lastTap<280){setZoomScale(zoomState.scale>1?1:2.5,e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}
-      zoomState.lastTap=now; zoomState.startX=e.touches[0].clientX-zoomState.x; zoomState.startY=e.touches[0].clientY-zoomState.y;
+      zoomState.lastTap=now;zoomState.startX=e.touches[0].clientX-zoomState.x;zoomState.startY=e.touches[0].clientY-zoomState.y;
     }else if(e.touches.length===2){
-      zoomState.startDist=touchDistance(e.touches); zoomState.startScale=zoomState.scale;
-      const mid=touchMid(e.touches); zoomState.startMidX=mid.x; zoomState.startMidY=mid.y; e.preventDefault();
+      zoomState.startDist=touchDistance(e.touches);zoomState.startScale=zoomState.scale;
+      const mid=touchMid(e.touches);zoomState.startMidX=mid.x;zoomState.startMidY=mid.y;e.preventDefault();
     }
   },{passive:false});
   viewerInner.addEventListener('touchmove',e=>{
     if(!viewer.classList.contains('active')) return;
     if(e.touches.length===2){
       const dist=touchDistance(e.touches),mid=touchMid(e.touches);
-      zoomState.scale=clamp(zoomState.startScale*(dist/zoomState.startDist),0.25,8);
-      zoomState.x+=(mid.x-zoomState.startMidX)*1.15; zoomState.y+=(mid.y-zoomState.startMidY)*1.15;
-      zoomState.startMidX=mid.x; zoomState.startMidY=mid.y;
-      if(zoomState.scale<=1){zoomState.x=0;zoomState.y=0;} applyZoom(); e.preventDefault();
-    }else if(e.touches.length===1){
-      if(zoomState.scale>1){
-        zoomState.x=e.touches[0].clientX-zoomState.startX; zoomState.y=e.touches[0].clientY-zoomState.startY;
-        applyZoom(); e.preventDefault();
-      }
+      const nextScale=clamp(zoomState.startScale*(dist/zoomState.startDist),0.25,8);
+      zoomState.scale=nextScale;
+      if(nextScale>1){
+        zoomState.x+=mid.x-zoomState.startMidX;zoomState.y+=mid.y-zoomState.startMidY;
+      }else{zoomState.x=0;zoomState.y=0;}
+      zoomState.startMidX=mid.x;zoomState.startMidY=mid.y;
+      applyZoom();e.preventDefault();
+    }else if(e.touches.length===1&&zoomState.scale>1){
+      zoomState.x=e.touches[0].clientX-zoomState.startX;
+      zoomState.y=e.touches[0].clientY-zoomState.startY;
+      applyZoom();e.preventDefault();
     }
   },{passive:false});
   viewerInner.addEventListener('wheel',e=>{
-    if(!viewer.classList.contains('active')) return; e.preventDefault();
+    if(!viewer.classList.contains('active')) return;e.preventDefault();
     setZoomScale(zoomState.scale+(e.deltaY<0?0.15:-0.15),e.clientX,e.clientY);
   },{passive:false});
 }
