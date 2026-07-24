@@ -116,7 +116,18 @@ if(dateInput){
 
 const successModal=document.getElementById('successModal');
 const successClose=document.getElementById('successClose');
-function showSuccess(){successModal.classList.add('active');successModal.setAttribute('aria-hidden','false');}
+function showSuccess(source){
+  const title=successModal?.querySelector('h3');
+  const desc=successModal?.querySelector('p');
+  if(source==='견본주택 주소 문자 요청'){
+    if(title) title.textContent='주소 안내 요청이 접수되었습니다';
+    if(desc) desc.textContent='입력하신 연락처로 견본주택 주소와 주차 위치를 안내해드리겠습니다.';
+  }else{
+    if(title) title.textContent='신청이 정상 접수되었습니다';
+    if(desc) desc.textContent='입력하신 연락처를 확인한 뒤 담당자가 안내드리겠습니다.';
+  }
+  successModal.classList.add('active');successModal.setAttribute('aria-hidden','false');
+}
 function hideSuccess(){successModal.classList.remove('active');successModal.setAttribute('aria-hidden','true');}
 if(successClose) successClose.addEventListener('click',hideSuccess);
 if(successModal) successModal.addEventListener('click',e=>{if(e.target===successModal)hideSuccess();});
@@ -129,7 +140,7 @@ function bindLeadForm(formId){
     const data=Object.fromEntries(new FormData(form).entries());
     data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
     data.createdAt=new Date().toLocaleString('ko-KR');
-    const sourceMap={quickLeadForm:'상단 간편상담',leadForm:'상세 상담신청',donghoLeadForm:'우측 상단 동호수 상담',priceLeadForm:'분양가표 전송 요청'};
+    const sourceMap={quickLeadForm:'상단 간편상담',leadForm:'상세 상담신청',donghoLeadForm:'우측 상단 동호수 상담',priceLeadForm:'분양가표 전송 요청',addressSmsForm:'견본주택 주소 문자 요청'};
     data.source=sourceMap[formId]||'홈페이지 상담신청';
     const submit=form.querySelector('button[type="submit"]');
     const btnText=submit.querySelector('.btnText');
@@ -142,7 +153,7 @@ function bindLeadForm(formId){
       form.reset();
       document.querySelectorAll('.leadModal.active').forEach(modal=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true');});
       document.body.classList.remove('popupOpen');
-      showSuccess();
+      showSuccess(data.source);
       trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
     }catch(err){
       alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
@@ -157,6 +168,7 @@ bindLeadForm('leadForm');
 bindLeadForm('quickLeadForm');
 bindLeadForm('donghoLeadForm');
 bindLeadForm('priceLeadForm');
+bindLeadForm('addressSmsForm');
 
 // 상담신청 모달
 document.querySelectorAll('[data-lead-modal]').forEach(trigger=>{
