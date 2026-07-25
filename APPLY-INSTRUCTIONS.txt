@@ -1,0 +1,8 @@
+적용 순서
+1) 이 압축파일의 모든 파일을 GitHub 저장소 루트에 덮어쓰기 업로드합니다.
+2) Google Apps Script의 PRICE_PAGE_URL을 아래 주소로 변경합니다.
+   https://gn-premier.com/price-info-a7f4.html
+3) Apps Script 저장 후 배포 관리에서 새 버전으로 다시 배포합니다.
+4) 실제 홈페이지에서 분양가표 문자 신청을 테스트합니다.
+
+주의: SOLAPI API Key와 Secret은 홈페이지 파일에 넣지 마세요.

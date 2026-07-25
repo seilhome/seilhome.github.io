@@ -203,6 +203,9 @@ function showSuccess(source){
   if(source==='견본주택 주소 문자 요청'){
     if(title) title.textContent='주소 안내 요청이 접수되었습니다';
     if(desc) desc.textContent='입력하신 연락처로 견본주택 주소와 주차 위치를 안내해드리겠습니다.';
+  }else if(source==='분양가표 전송 요청'){
+    if(title) title.textContent='분양가표 문자를 전송했습니다';
+    if(desc) desc.textContent='입력하신 휴대폰에서 문자 메시지를 확인해 주세요. 도착까지 잠시 걸릴 수 있습니다.';
   }else{
     if(title) title.textContent='신청이 정상 접수되었습니다';
     if(desc) desc.textContent='입력하신 연락처를 확인한 뒤 담당자가 안내드리겠습니다.';
