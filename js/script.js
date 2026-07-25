@@ -184,7 +184,7 @@ document.querySelectorAll('a[href="#reservation"], .apply').forEach(link=>{
   link.addEventListener('click',()=>trackEvent('reservation_click',{event_category:'lead',event_label:'상담신청 버튼'}));
 });
 
-const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbzWUtWxPdSuqQvPQd-hcEifU9_hld5jzJpiPh7dTqsq7-LCwvS5HcPRcVielcL9u0KD/exec';
+const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbxYqhkvH2eukcBeTNOMWkDoNFfEoEE6gi8nTnmnU_b4pAWcxVzXyREayWSswOREyTif/exec';
 
 const dateInput=document.querySelector('input[name="visitDate"]');
 if(dateInput){
