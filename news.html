@@ -29,8 +29,8 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/news.css" />
+  <link rel="stylesheet" href="css/style.css?v=20260728-premium-1" />
+  <link rel="stylesheet" href="css/news.css?v=20260728-premium-1" />
 
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
@@ -42,7 +42,7 @@
   </script>
 
 </head>
-<body>
+<body class="luxuryTheme">
   <header class="topbar">
     <a class="brand" href="index.html#top" aria-label="메인으로 이동"><img src="images/logo.jpg" alt="Lynn 강릉 우미 린 더 프리미어" /></a>
     <a class="top-call" href="tel:033-900-0342">전화상담</a>
@@ -159,5 +159,14 @@
   </nav>
 
   <script src="js/news.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var targets=document.querySelectorAll('.newsCard, .newsCta');
+    targets.forEach(function(el){el.classList.add('revealLuxury');});
+    if(!('IntersectionObserver' in window)){targets.forEach(function(el){el.classList.add('isVisible');});return;}
+    var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('isVisible');observer.unobserve(entry.target);}});},{threshold:.08});
+    targets.forEach(function(el){observer.observe(el);});
+  });
+  </script>
 </body>
 </html>

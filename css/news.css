@@ -198,3 +198,39 @@
   .newsCard img { height: 190px; }
   .newsCta { margin-left: 20px; margin-right: 20px; }
 }
+
+/* 2026-07-28 PREMIUM NEWS RENEWAL */
+body.luxuryTheme .newsPage{background:#f7f4ee}
+body.luxuryTheme .newsHero{position:relative;overflow:hidden;padding:112px 20px 82px;background:linear-gradient(135deg,#20221f,#111210);color:#fff}
+body.luxuryTheme .newsHero:before{content:"";position:absolute;inset:16px;border:1px solid rgba(255,255,255,.18);pointer-events:none}
+body.luxuryTheme .newsHero:after{content:"WOOMI LYNN";position:absolute;right:-12px;bottom:-22px;color:rgba(255,255,255,.035);font-family:Georgia,serif;font-size:clamp(74px,13vw,170px);letter-spacing:.04em;white-space:nowrap}
+body.luxuryTheme .newsHero>*{position:relative;z-index:1}
+body.luxuryTheme .newsHero .eyebrow{color:#d5bd91;letter-spacing:.28em}
+body.luxuryTheme .newsHero h1{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-weight:500;font-size:clamp(44px,8vw,72px)}
+body.luxuryTheme .newsHero p{color:rgba(255,255,255,.67)}
+body.luxuryTheme .newsHeroBtns a{border-radius:2px;background:transparent;border:1px solid rgba(255,255,255,.5)}
+body.luxuryTheme .newsHeroBtns a:first-child{background:#b9965b;color:#171816;border-color:#b9965b}
+body.luxuryTheme .newsFilters{padding-top:30px}
+body.luxuryTheme .newsFilters button{border-radius:2px;background:transparent;border-color:#cfc5b5;color:#5a544b}
+body.luxuryTheme .newsFilters button.active{background:#171816;color:#fff;border-color:#171816}
+body.luxuryTheme .newsList{gap:24px;margin-top:24px}
+body.luxuryTheme .newsCard{border-radius:2px;border:0;border-top:2px solid #b9965b;box-shadow:0 18px 55px rgba(35,30,22,.095);transition:.3s ease}
+body.luxuryTheme .newsCard:hover{transform:translateY(-7px);box-shadow:0 28px 70px rgba(35,30,22,.16)}
+body.luxuryTheme .newsCard img{height:230px;filter:saturate(.88)}
+body.luxuryTheme .newsCardBody{padding:23px}
+body.luxuryTheme .newsTag{border-radius:2px;background:#eee7da;color:#72572e}
+body.luxuryTheme .newsCard h2{font-family:"Noto Serif KR","Nanum Myeongjo",Batang,serif;font-size:22px;font-weight:600}
+body.luxuryTheme .newsCard em{color:#8e6f3d}
+body.luxuryTheme .newsCta{border-radius:2px;background:#20221f;padding:42px 24px}
+body.luxuryTheme .newsCta h2{font-family:"Noto Serif KR",Batang,serif;font-weight:500;font-size:32px}
+body.luxuryTheme .newsCta a{border-radius:2px;background:#b9965b;color:#171816}
+body.luxuryTheme .newsCta a:last-child{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+
+/* 2026-07-28 PRETENDARD TYPOGRAPHY REFINEMENT */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+html,body,button,input,select,textarea{font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important}
+body.luxuryTheme .newsHero h1,
+body.luxuryTheme .newsCard h2,
+body.luxuryTheme .newsCta h2{font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-weight:700;letter-spacing:-.055em}
+body.luxuryTheme .newsHero h1{line-height:1.08}
+body.luxuryTheme .newsCard h2{line-height:1.38}

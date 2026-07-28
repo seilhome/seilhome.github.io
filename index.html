@@ -41,7 +41,7 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260724-contact-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260728-premium-1" />
   <link rel="stylesheet" href="css/news.css" />
 
   <!-- Microsoft Clarity -->
@@ -54,7 +54,7 @@
   </script>
 
 </head>
-<body>
+<body class="luxuryTheme">
   <header class="topbar">
     <a class="brand" href="#top" aria-label="상단으로 이동"><img src="images/logo.jpg" alt="Lynn 강릉 우미 린 더 프리미어" /></a>
     <button class="top-call modalTrigger" type="button" data-lead-modal="donghoLeadModal">계약 가능 동·호수 확인</button>
@@ -245,7 +245,7 @@
       </div>
 
       <figure class="contactMapImageWrap">
-        <img src="images/오시는길.jpg" alt="강릉 우미 린 더 프리미어 분양현장 및 견본주택 오시는 길 안내도" class="contactMapImage" data-zoom />
+        <img src="images/directions.jpg" alt="강릉 우미 린 더 프리미어 분양현장 및 견본주택 오시는 길 안내도" class="contactMapImage" data-zoom />
         <figcaption>안내도를 누르면 크게 확대해서 볼 수 있습니다.</figcaption>
       </figure>
 
@@ -343,6 +343,15 @@
   </div>
 
   <script src="js/script.js?v=20260719b-1"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var targets=document.querySelectorAll('.section, .conversionHighlights, .advisorCard');
+    targets.forEach(function(el){el.classList.add('revealLuxury');});
+    if(!('IntersectionObserver' in window)){targets.forEach(function(el){el.classList.add('isVisible');});return;}
+    var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('isVisible');observer.unobserve(entry.target);}});},{threshold:.08,rootMargin:'0px 0px -45px 0px'});
+    targets.forEach(function(el){observer.observe(el);});
+  });
+  </script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
