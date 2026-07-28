@@ -294,28 +294,59 @@ document.addEventListener('keydown',e=>{
   });
 });
 
-// V2 숫자 카운트 애니메이션
+// V2 숫자 카운트 애니메이션 (모바일·PC 공통 안정화)
 (()=>{
   const numbers=[...document.querySelectorAll('.countUp')];
   if(!numbers.length) return;
-  const reduce=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  const reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const format=n=>Number(n).toLocaleString('ko-KR');
+
   const run=el=>{
+    if(el.dataset.played==='1') return;
+    el.dataset.played='1';
     const target=Number(el.dataset.count||0);
     if(reduce){el.textContent=format(target);return;}
-    const start=performance.now(), duration=1300;
+
+    const start=performance.now();
+    const duration=1300;
     const frame=now=>{
       const p=Math.min(1,(now-start)/duration);
       const eased=1-Math.pow(1-p,3);
       el.textContent=format(Math.round(target*eased));
       if(p<1) requestAnimationFrame(frame);
+      else el.textContent=format(target);
     };
     requestAnimationFrame(frame);
   };
-  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
-    if(entry.isIntersecting&&!entry.target.dataset.played){
-      entry.target.dataset.played='1';run(entry.target);io.unobserve(entry.target);
-    }
-  }),{threshold:.55});
-  numbers.forEach(el=>io.observe(el));
+
+  const runAll=()=>numbers.forEach(run);
+
+  // 구형 브라우저 또는 IntersectionObserver 차단 환경에서도 숫자가 보이도록 처리
+  if(!('IntersectionObserver' in window)){
+    runAll();
+    return;
+  }
+
+  const statsSection=document.querySelector('.projectStats') || numbers[0].closest('section') || numbers[0].parentElement;
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        runAll();
+        io.disconnect();
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+
+  io.observe(statsSection);
+
+  // PC에서 섹션이 이미 화면 안에 있거나 관찰 이벤트가 늦어지는 경우를 위한 보조 실행
+  const checkVisible=()=>{
+    if(numbers.every(el=>el.dataset.played==='1')) return;
+    const rect=statsSection.getBoundingClientRect();
+    if(rect.top < window.innerHeight && rect.bottom > 0) runAll();
+  };
+  window.addEventListener('load',checkVisible,{once:true});
+  window.addEventListener('scroll',checkVisible,{passive:true,once:true});
+  setTimeout(checkVisible,900);
 })();

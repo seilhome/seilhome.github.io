@@ -646,3 +646,15 @@ body.luxuryTheme .projectStats .statItem strong small {
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
 }
+
+
+.heroGift{
+  text-align:center;
+  font-family:var(--font-primary);
+  font-weight:700;
+  font-size:20px;
+  color:#D4AF37;
+  margin:18px 0 14px;
+  letter-spacing:-0.3px;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+}
