@@ -320,7 +320,7 @@ document.addEventListener('keydown',e=>{
     requestAnimationFrame(frame);
   };
 
-  const runAll=()=>numbers.forEach(run);
+  const runAll=()=>numbers.forEach((el,i)=>setTimeout(()=>run(el),i*150));
 
   // 구형 브라우저 또는 IntersectionObserver 차단 환경에서도 숫자가 보이도록 처리
   if(!('IntersectionObserver' in window)){
