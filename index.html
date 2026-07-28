@@ -41,7 +41,7 @@
     gtag('js', new Date());
     gtag('config', 'G-JY8BHGY9N7');
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260728-premium-1" />
+  <link rel="stylesheet" href="css/style.css?v=20260728-v2-video" />
   <link rel="stylesheet" href="css/news.css" />
 
   <!-- Microsoft Clarity -->
@@ -61,31 +61,32 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <img src="images/hero.jpg" alt="강릉 우미 린 더 프리미어 조감도" />
+    <section class="hero videoHero" aria-label="스카이라운지 전망 영상">
+      <video class="heroVideo" autoplay muted loop playsinline preload="metadata" poster="images/skylounge-hero-poster.jpg" aria-hidden="true">
+        <source src="videos/skylounge-hero.mp4" type="video/mp4" />
+      </video>
       <div class="heroText">
-        <p class="eyebrow">GANGNEUNG WOOMI LYNN THE PREMIER</p>
+        <p class="eyebrow">21F SKY LOUNGE VIEW</p>
         <h1>강릉 우미 린<br>더 프리미어</h1>
-        <p class="sub">현재 계약 가능한 동·호수와 분양가표를 담당자가 직접 안내해드립니다.</p>
-        <div class="heroGift" aria-label="방문예약 혜택">
-          <span class="giftIcon" aria-hidden="true">🎁</span>
-          <div><small>모델하우스 방문상담 예약 혜택</small><strong>신세계상품권 증정</strong></div>
-        </div>
-        <div class="heroOffers" aria-label="주요 분양 안내">
-          <span>계약금 완납 고객 특별혜택 진행 중</span>
-          <span>34평 · 45평 · 48평 상담</span>
-          <span>772세대 브랜드 대단지</span>
-        </div>
-        <p class="heroMicro">이름과 연락처만 남겨주시면 필요한 정보만 빠르게 안내해드립니다.</p>
+        <p class="sub">강릉의 하늘과 바다를 품은 새로운 프리미엄 라이프</p>
         <div class="heroBtns heroBtnsFocused">
-          <button type="button" class="btn primary modalTrigger" data-lead-modal="donghoLeadModal">현재 계약 가능 동·호수 확인</button>
+          <button type="button" class="btn primary modalTrigger" data-lead-modal="donghoLeadModal">계약 가능 동·호수 확인</button>
           <a href="#price" class="btn ghost priceLink">분양가표 문의하기</a>
         </div>
+        <p class="heroMicro">담당자가 현재 계약 가능한 동·호수와 분양조건을 직접 안내해드립니다.</p>
       </div>
+      <a class="scrollGuide" href="#project-stats" aria-label="아래 정보 보기"><span>SCROLL</span><i></i></a>
     </section>
 
     <section class="quick">
       <a href="#premium">프리미엄</a><a href="#price" class="priceLink">분양가</a><a href="#floor">평면도</a><a href="#dongho">동호수</a><a href="#contact-map">오시는길</a><a href="news.html">분양정보</a>
+    </section>
+
+    <section id="project-stats" class="projectStats" aria-label="사업 핵심 정보">
+      <div class="statItem"><strong><span class="countUp" data-count="772">0</span><small>세대</small></strong><p>우미린 브랜드 대단지</p></div>
+      <div class="statItem"><strong><span class="countUp" data-count="13000">0</span><small>평</small></strong><p>넓고 여유로운 대지면적</p></div>
+      <div class="statItem"><strong><span class="countUp" data-count="100">0</span><small>평</small></strong><p>입주민 전용 스카이라운지</p></div>
+      <div class="statItem"><strong><span class="countUp" data-count="2029">0</span><small>년</small></strong><p>4월 입주 예정</p></div>
     </section>
 
     <section id="quick-consult" class="quickConsult section" aria-labelledby="quickConsultTitle">
@@ -378,14 +379,16 @@
     // 첫 방문 시 특별혜택 팝업 1개만 노출
     var popup = document.getElementById('eventPopup');
     var todayClose = document.getElementById('eventTodayClose');
-    var hideKey = 'woomi_event_popup_hide_until';
-    var hideUntil = localStorage.getItem(hideKey);
+    // 팝업 버전을 변경해 이전 테스트에서 저장된 '오늘 하루 보지 않기' 값과 충돌하지 않도록 함
+    var hideKey = 'woomi_event_popup_hide_until_v2';
+    var hideUntil = null;
+    try { hideUntil = window.localStorage.getItem(hideKey); } catch (e) { hideUntil = null; }
 
     function isHiddenToday(value){ return value && Number(value) >= Date.now(); }
     function setHideUntilTomorrow(){
       var tomorrow = new Date();
       tomorrow.setHours(24,0,0,0);
-      localStorage.setItem(hideKey, tomorrow.getTime().toString());
+      try { window.localStorage.setItem(hideKey, tomorrow.getTime().toString()); } catch (e) {}
     }
     function openEventPopup(){
       if (!popup) return;
@@ -401,7 +404,9 @@
       popup.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('popupOpen');
     }
-    if (!isHiddenToday(hideUntil)) setTimeout(openEventPopup, 900);
+    if (!isHiddenToday(hideUntil)) {
+      setTimeout(openEventPopup, 700);
+    }
     document.querySelectorAll('[data-event-close]').forEach(function(el){ el.addEventListener('click', closeEventPopup); });
     var eventCall = document.querySelector('.eventCall');
     if (eventCall) eventCall.addEventListener('click', function(){

@@ -293,3 +293,29 @@ document.addEventListener('keydown',e=>{
     trackEvent('price_inquiry_click',{event_category:'interest',event_label:'분양가표 인라인 문의'});
   });
 });
+
+// V2 숫자 카운트 애니메이션
+(()=>{
+  const numbers=[...document.querySelectorAll('.countUp')];
+  if(!numbers.length) return;
+  const reduce=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const format=n=>Number(n).toLocaleString('ko-KR');
+  const run=el=>{
+    const target=Number(el.dataset.count||0);
+    if(reduce){el.textContent=format(target);return;}
+    const start=performance.now(), duration=1300;
+    const frame=now=>{
+      const p=Math.min(1,(now-start)/duration);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=format(Math.round(target*eased));
+      if(p<1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  };
+  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting&&!entry.target.dataset.played){
+      entry.target.dataset.played='1';run(entry.target);io.unobserve(entry.target);
+    }
+  }),{threshold:.55});
+  numbers.forEach(el=>io.observe(el));
+})();
