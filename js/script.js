@@ -221,6 +221,12 @@ function getTrackingInfo(){
 }
 
 const initialTrackingInfo=getTrackingInfo();
+if (typeof clarity==='function') {
+  if(initialTrackingInfo.utm_source) clarity('set','utm_source',initialTrackingInfo.utm_source);
+  if(initialTrackingInfo.utm_medium) clarity('set','utm_medium',initialTrackingInfo.utm_medium);
+  if(initialTrackingInfo.utm_campaign) clarity('set','utm_campaign',initialTrackingInfo.utm_campaign);
+}
+
 
 const dateInput=document.querySelector('input[name="visitDate"]');
 if(dateInput){
@@ -294,6 +300,7 @@ function bindLeadForm(formId){
           clarity('event','consult_request');
         }
         clarity('event','lead_submit_success');
+      if(typeof clarity==='function'){ clarity('set','consult_type', data.source||''); }
       }
     }catch(err){
       alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
