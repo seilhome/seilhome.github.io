@@ -226,6 +226,13 @@ function bindLeadForm(formId){
     data.createdAt=new Date().toLocaleString('ko-KR');
     const sourceMap={quickLeadForm:'상단 간편상담',leadForm:'상세 상담신청',donghoLeadForm:'우측 상단 동호수 상담',priceLeadForm:'분양가표 전송 요청',addressSmsForm:'견본주택 주소 문자 요청'};
     data.source=sourceMap[formId]||'홈페이지 상담신청';
+    const params=new URLSearchParams(window.location.search);
+    data.utm_source=params.get('utm_source')||'';
+    data.utm_medium=params.get('utm_medium')||'';
+    data.utm_campaign=params.get('utm_campaign')||'';
+    data.landingUrl=window.location.href;
+    data.referrer=document.referrer||'';
+
     const submit=form.querySelector('button[type="submit"]');
     const btnText=submit.querySelector('.btnText');
     const originalText=btnText?btnText.textContent:'';
