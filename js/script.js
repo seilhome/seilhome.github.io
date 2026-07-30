@@ -186,6 +186,42 @@ document.querySelectorAll('a[href="#reservation"], .apply').forEach(link=>{
 
 const GOOGLE_SCRIPT_URL='https://script.google.com/macros/s/AKfycbxYqhkvH2eukcBeTNOMWkDoNFfEoEE6gi8nTnmnU_b4pAWcxVzXyREayWSswOREyTif/exec';
 
+
+// 광고 유입정보를 최초 방문 기준으로 저장합니다.
+const TRACKING_STORAGE_KEY='seilhome_tracking_v1';
+
+function getTrackingInfo(){
+  let saved={};
+  try{
+    saved=JSON.parse(sessionStorage.getItem(TRACKING_STORAGE_KEY)||'{}');
+  }catch(_){
+    saved={};
+  }
+
+  const params=new URLSearchParams(window.location.search);
+  const currentUtm={
+    utm_source:params.get('utm_source')||'',
+    utm_medium:params.get('utm_medium')||'',
+    utm_campaign:params.get('utm_campaign')||''
+  };
+
+  const tracking={
+    utm_source:saved.utm_source||currentUtm.utm_source,
+    utm_medium:saved.utm_medium||currentUtm.utm_medium,
+    utm_campaign:saved.utm_campaign||currentUtm.utm_campaign,
+    landingUrl:saved.landingUrl||window.location.href,
+    referrer:saved.referrer||document.referrer||''
+  };
+
+  try{
+    sessionStorage.setItem(TRACKING_STORAGE_KEY,JSON.stringify(tracking));
+  }catch(_){ }
+
+  return tracking;
+}
+
+const initialTrackingInfo=getTrackingInfo();
+
 const dateInput=document.querySelector('input[name="visitDate"]');
 if(dateInput){
   const today=new Date();
@@ -224,15 +260,17 @@ function bindLeadForm(formId){
     const data=Object.fromEntries(new FormData(form).entries());
     data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
     data.createdAt=new Date().toLocaleString('ko-KR');
+
+    // 네이버·당근·블로그 등 최초 광고 유입정보를 상담 데이터와 함께 전송합니다.
+    const trackingInfo=getTrackingInfo();
+    data.utm_source=trackingInfo.utm_source;
+    data.utm_medium=trackingInfo.utm_medium;
+    data.utm_campaign=trackingInfo.utm_campaign;
+    data.landingUrl=trackingInfo.landingUrl;
+    data.referrer=trackingInfo.referrer;
+
     const sourceMap={quickLeadForm:'상단 간편상담',leadForm:'상세 상담신청',donghoLeadForm:'우측 상단 동호수 상담',priceLeadForm:'분양가표 전송 요청',addressSmsForm:'견본주택 주소 문자 요청'};
     data.source=sourceMap[formId]||'홈페이지 상담신청';
-    const params=new URLSearchParams(window.location.search);
-    data.utm_source=params.get('utm_source')||'';
-    data.utm_medium=params.get('utm_medium')||'';
-    data.utm_campaign=params.get('utm_campaign')||'';
-    data.landingUrl=window.location.href;
-    data.referrer=document.referrer||'';
-
     const submit=form.querySelector('button[type="submit"]');
     const btnText=submit.querySelector('.btnText');
     const originalText=btnText?btnText.textContent:'';
