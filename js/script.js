@@ -284,6 +284,17 @@ function bindLeadForm(formId){
       document.body.classList.remove('popupOpen');
       showSuccess(data.source);
       trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
+      if (typeof clarity === 'function') {
+        const formType=(data.consultType||'');
+        if(formType.includes('분양가표')){
+          clarity('event','price_request');
+        }else if(formType.includes('주소')){
+          clarity('event','address_request');
+        }else{
+          clarity('event','consult_request');
+        }
+        clarity('event','lead_submit_success');
+      }
     }catch(err){
       alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
     }finally{
