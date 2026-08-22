@@ -302,18 +302,20 @@
     <div class="eventDim" data-event-close></div>
     <div class="eventBox" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
       <button class="eventClose" type="button" aria-label="팝업 닫기" data-event-close>×</button>
-      <p class="eventLabel">SPECIAL CONTRACT</p>
-      <h2 id="eventTitle">1,000만원대로 계약 가능한<br><span>강릉 신축 브랜드 아파트</span></h2>
-      <p class="eventText"><strong>34평 기준 · 계약금 5%</strong><br>초기 부담은 낮추고 특별혜택까지</p>
-      <div class="eventBenefits">
-        <div><strong>01</strong><span>34평 기준 계약 시작</span></div>
-        <div><strong>02</strong><span>계약금 5% 적용</span></div>
-        <div><strong>03</strong><span>계약금 완납 시 연 10% 이자지원</span></div>
+      <p class="eventLabel">LIMITED CONTRACT BENEFIT</p>
+      <div class="eventHot">지금 확인해야 할 계약 혜택</div>
+      <h2 id="eventTitle">강릉 우미 린 더 프리미어<br><span>계약 부담은 낮추고 혜택은 크게</span></h2>
+      <p class="eventText eventLead"><strong>현재 계약 조건을 한눈에 확인하세요.</strong></p>
+      <div class="eventBenefits eventBenefitsImpact">
+        <div><strong>5%</strong><span><b>계약금 5%</b><small>계약 시 500만원부터 시작</small></span></div>
+        <div><strong>60%</strong><span><b>중도금 60% 전액 무이자</b><small>입주 전 중도금 이자 부담 완화</small></span></div>
+        <div class="eventBenefitHero"><strong>10%</strong><span><b>계약금 완납 시 연 10% 이자지원</b><small>입주 시 지급 · 세부조건 상담</small></span></div>
       </div>
-      <p class="eventText" style="font-size:12px; margin-top:10px;">※ 34평 기준이며 동·호수 및 계약 조건에 따라 금액은 달라질 수 있습니다.</p>
+      <div class="eventGift">🎁 <b>방문상담 예약 고객 상품권 증정</b></div>
+      <p class="eventText eventFine">※ 동·호수 및 계약 시점에 따라 세부 조건이 달라질 수 있습니다.</p>
       <div class="eventActions">
-        <a href="tel:033-900-0342" class="eventCall">실시간 문의</a>
-        <a href="#quick-consult" class="eventApply" data-event-close>동·호수 확인</a>
+        <a href="#price" class="eventCall priceLink" data-event-close>분양가 확인</a>
+        <a href="#quick-consult" class="eventApply" data-event-close>계약 가능 동·호수</a>
       </div>
       <label class="eventTodayClose"><input type="checkbox" id="eventTodayClose" /> 오늘 하루 보지 않기</label>
     </div>
@@ -386,7 +388,7 @@
     var popup = document.getElementById('eventPopup');
     var todayClose = document.getElementById('eventTodayClose');
     // 팝업 버전을 변경해 이전 테스트에서 저장된 '오늘 하루 보지 않기' 값과 충돌하지 않도록 함
-    var hideKey = 'woomi_event_popup_hide_until_v2';
+    var hideKey = 'woomi_event_popup_hide_until_v3';
     var hideUntil = null;
     try { hideUntil = window.localStorage.getItem(hideKey); } catch (e) { hideUntil = null; }
 
@@ -401,7 +403,7 @@
       popup.classList.add('active');
       popup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('popupOpen');
-      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '1000만원대 계약 시작 팝업'});
+      if (typeof gtag === 'function') gtag('event', 'event_popup_view', {event_category: 'popup', event_label: '계약혜택 임팩트 팝업'});
     }
     function closeEventPopup(){
       if (todayClose && todayClose.checked) setHideUntilTomorrow();
@@ -416,7 +418,7 @@
     document.querySelectorAll('[data-event-close]').forEach(function(el){ el.addEventListener('click', closeEventPopup); });
     var eventCall = document.querySelector('.eventCall');
     if (eventCall) eventCall.addEventListener('click', function(){
-      if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '1000만원대 계약 팝업 실시간 문의'});
+      if (typeof gtag === 'function') gtag('event', 'event_popup_phone_click', {event_category: 'popup', event_label: '계약혜택 임팩트 팝업 문의'});
     });
   });
   </script>

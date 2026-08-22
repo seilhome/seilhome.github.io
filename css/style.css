@@ -668,3 +668,43 @@ body.luxuryTheme .projectStats .statItem strong small {
   .heroKeyBenefits{display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:13px}
   .heroKeyBenefits span{min-height:31px;padding:7px 10px;font-size:12px}
 }
+
+
+/* ===== 2026-08-22 HIGH IMPACT CONTRACT POPUP ===== */
+body.luxuryTheme .eventDim{background:rgba(8,10,9,.72);backdrop-filter:blur(8px)}
+body.luxuryTheme .eventBox{
+  width:min(455px,100%);border-radius:22px;padding:29px 24px 20px;color:#171914;
+  background:linear-gradient(180deg,#fff 0%,#fffaf0 100%);border:2px solid #b9975b;
+  box-shadow:0 30px 100px rgba(0,0,0,.46),0 0 0 6px rgba(185,151,91,.12);overflow:hidden
+}
+body.luxuryTheme .eventBox:after{height:8px;background:linear-gradient(90deg,#7b5b25,#e2c477,#9a7131)}
+body.luxuryTheme .eventLabel{margin:3px 0 10px;padding:0;border:0;background:transparent;color:#8a672c;font-size:10px;font-weight:900;letter-spacing:.18em}
+body.luxuryTheme .eventHot{display:inline-block;margin:0 0 10px;padding:7px 11px;border-radius:8px;background:#171914;color:#fff;font-size:13px;font-weight:900;letter-spacing:-.02em}
+body.luxuryTheme .eventBox h2{margin:0 0 9px;color:#171914;font-size:30px;font-weight:900;line-height:1.18;letter-spacing:-.055em}
+body.luxuryTheme .eventBox h2 span{display:inline-block;margin-top:4px;color:#a4772e;font-size:.78em}
+body.luxuryTheme .eventLead{margin:0 0 14px!important;color:#555!important;font-size:14px!important}
+body.luxuryTheme .eventBenefitsImpact{display:grid;gap:8px}
+body.luxuryTheme .eventBenefitsImpact div{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid #e8ddc9;border-radius:13px;background:#fff;box-shadow:0 5px 14px rgba(92,70,30,.05)}
+body.luxuryTheme .eventBenefitsImpact strong{flex:0 0 54px;width:54px;height:42px;border-radius:10px;background:#22251f;color:#fff;font-size:17px;font-weight:950;display:flex;align-items:center;justify-content:center}
+body.luxuryTheme .eventBenefitsImpact span{display:flex;flex-direction:column;gap:2px;color:#24251f;line-height:1.2}
+body.luxuryTheme .eventBenefitsImpact span b{font-size:15px;font-weight:900;letter-spacing:-.025em}
+body.luxuryTheme .eventBenefitsImpact span small{font-size:11px;color:#777268;font-weight:600}
+body.luxuryTheme .eventBenefitsImpact .eventBenefitHero{border:2px solid #b9975b;background:linear-gradient(100deg,#fff9eb,#fff)}
+body.luxuryTheme .eventBenefitsImpact .eventBenefitHero strong{background:#b07b25;color:#fff}
+body.luxuryTheme .eventGift{margin:11px 0 7px;padding:11px 12px;border-radius:12px;background:#fff0d1;color:#68460d;text-align:center;font-size:14px;font-weight:800;border:1px dashed #c99d52}
+body.luxuryTheme .eventFine{margin:6px 0 12px!important;color:#8a847a!important;font-size:10px!important;line-height:1.4}
+body.luxuryTheme .eventActions{gap:8px}
+body.luxuryTheme .eventActions a{padding:14px 8px;border-radius:12px;font-size:14px;font-weight:900}
+body.luxuryTheme .eventCall{background:#fff;border:1px solid #292b26;color:#20221e}
+body.luxuryTheme .eventApply{background:#171914;color:#fff;box-shadow:0 8px 18px rgba(23,25,20,.18)}
+body.luxuryTheme .eventTodayClose{margin-top:10px;color:#817b71;font-size:11px}
+@media(max-width:759px){
+ body.luxuryTheme .eventPopup{padding:13px}
+ body.luxuryTheme .eventBox{padding:25px 16px 16px;border-radius:19px}
+ body.luxuryTheme .eventBox h2{font-size:25px}
+ body.luxuryTheme .eventBenefitsImpact div{padding:9px 10px;gap:9px}
+ body.luxuryTheme .eventBenefitsImpact strong{flex-basis:49px;width:49px;height:38px;font-size:15px}
+ body.luxuryTheme .eventBenefitsImpact span b{font-size:14px}
+ body.luxuryTheme .eventBenefitsImpact span small{font-size:10px}
+ body.luxuryTheme .eventGift{font-size:13px;padding:9px}
+}
