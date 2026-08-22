@@ -303,7 +303,7 @@ function bindLeadForm(formId){
       if(typeof clarity==='function'){ clarity('set','consult_type', data.source||''); }
       }
     }catch(err){
-      alert('접수 중 오류가 발생했습니다. 010-6383-5879로 연락 부탁드립니다.');
+      alert('접수 중 오류가 발생했습니다. 033-900-0342로 연락 부탁드립니다.');
     }finally{
       submit.disabled=false;
       submit.classList.remove('loading');

@@ -1,0 +1,6 @@
+BC카드 LMS 발송용 추적 링크
+
+https://gn-premier.com/?utm_source=bc_card&utm_medium=lms&utm_campaign=20260826_bc_lms
+
+현재 홈페이지는 최초 유입 기준으로 utm_source / utm_medium / utm_campaign 값을 저장해 상담신청 데이터와 함께 전송하도록 구성되어 있습니다.
+따라서 위 링크를 LMS에 사용하면 스프레드시트에서 BC카드 LMS 유입 문의를 구분할 수 있습니다.
