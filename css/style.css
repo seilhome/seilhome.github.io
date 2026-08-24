@@ -720,3 +720,11 @@ body.luxuryTheme .eventTodayClose{margin-top:10px;color:#817b71;font-size:11px}
 .modalCountBadge{margin-top:-3px}
 @media(min-width:760px){.quickLeadForm .preferenceGrid{grid-template-columns:repeat(3,1fr)}.quickLeadForm .leadCountBadge{grid-column:1/-1}}
 @media(max-width:520px){.leadCountBadge{padding:10px 11px}.leadCountBadge strong{font-size:14px}.preferenceLeadForm select{min-height:44px}}
+
+/* 2026-08-24: aerial rendering hero + skylounge video near dongho section */
+body.luxuryTheme .imageHero .heroAerialImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:saturate(.94) contrast(1.02) brightness(.94);transform:scale(1.005)}
+body.luxuryTheme .imageHero:after{background:linear-gradient(90deg,rgba(13,18,19,.56) 0%,rgba(13,18,19,.27) 44%,rgba(13,18,19,.04) 76%),linear-gradient(0deg,rgba(7,10,11,.48),transparent 56%)}
+.skyloungeVideoSection{padding-top:48px!important;padding-bottom:58px!important}
+.skyloungeVideoFrame{overflow:hidden;border-radius:22px;background:#111;box-shadow:0 18px 44px rgba(0,0,0,.14)}
+.skyloungeVideoFrame video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#111}
+@media(max-width:760px){body.luxuryTheme .imageHero .heroAerialImage{object-position:55% center}.skyloungeVideoSection{padding-top:38px!important;padding-bottom:44px!important}.skyloungeVideoFrame{border-radius:16px}}
