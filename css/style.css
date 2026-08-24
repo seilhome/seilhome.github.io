@@ -708,3 +708,15 @@ body.luxuryTheme .eventTodayClose{margin-top:10px;color:#817b71;font-size:11px}
  body.luxuryTheme .eventBenefitsImpact span small{font-size:10px}
  body.luxuryTheme .eventGift{font-size:13px;padding:9px}
 }
+
+/* 2026-08-24 상담 폼 선택항목 + 누적 상담접수 표시 */
+.leadCountBadge{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 13px;padding:11px 13px;border:1px solid #ead7c3;background:linear-gradient(135deg,#fff8ef,#fff);color:#3c342d;font-size:14px;line-height:1.35}
+.leadCountBadge strong{font-size:15px;color:#c65316}
+.leadCountBadge small{width:100%;padding-left:25px;color:#8a8178;font-size:11px}
+.preferenceGrid{display:grid;gap:10px}
+.preferenceLeadForm .field em{font-style:normal;font-size:11px;color:#9a8f82;font-weight:500;margin-left:5px}
+.preferenceLeadForm select{width:100%;min-height:46px;border:1px solid #d8d0c4;background:#fff;color:#282b28;padding:0 12px;font-size:14px;border-radius:3px}
+.preferenceLeadForm select:focus{outline:none;border-color:#b89354;box-shadow:0 0 0 2px rgba(184,147,84,.11)}
+.modalCountBadge{margin-top:-3px}
+@media(min-width:760px){.quickLeadForm .preferenceGrid{grid-template-columns:repeat(3,1fr)}.quickLeadForm .leadCountBadge{grid-column:1/-1}}
+@media(max-width:520px){.leadCountBadge{padding:10px 11px}.leadCountBadge strong{font-size:14px}.preferenceLeadForm select{min-height:44px}}

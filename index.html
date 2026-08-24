@@ -101,9 +101,15 @@
         <h2 id="quickConsultTitle">현재 계약 가능 동·호수 확인</h2>
         <p><strong>현재 계약 가능한 동·호수와 특별혜택을 안내해드립니다.</strong><br>이름과 연락처만 남겨주세요. 담당자가 필요한 내용만 빠르게 안내드립니다.</p>
       </div>
-      <form id="quickLeadForm" class="quickLeadForm">
-        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required /></label>
-        <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" required inputmode="tel" /></label>
+      <form id="quickLeadForm" class="quickLeadForm preferenceLeadForm">
+        <div class="leadCountBadge" data-lead-count-wrap>🔥 <strong>현재 누적 <span data-lead-count>90</span>건+ 상담접수</strong><small>분양가·동호수 문의 누적 기준</small></div>
+        <label class="field"><span>이름 <em>필수</em></span><input type="text" name="name" placeholder="성함" required /></label>
+        <label class="field"><span>연락처 <em>필수</em></span><input type="tel" name="phone" placeholder="010-0000-0000" required inputmode="tel" /></label>
+        <div class="preferenceGrid">
+          <label class="field"><span>희망 평형 <em>선택</em></span><select name="interestSize" data-size-select><option value="">아직 모르겠어요</option><option value="34평형">34평형 · 84㎡</option><option value="45평형">45평형 · 117㎡</option><option value="48평형">48평형 · 125㎡</option></select></label>
+          <label class="field"><span>희망 타입 <em>선택</em></span><select name="interestType" data-type-select><option value="">평형 선택 후 확인</option></select></label>
+          <label class="field"><span>희망 층 <em>선택</em></span><select name="preferredFloor"><option value="">상관없음 / 상담 후 결정</option><option value="저층">저층</option><option value="중층">중층</option><option value="고층">고층</option></select></label>
+        </div>
         <input type="hidden" name="consultType" value="계약 가능 동·호수 문의" />
         <input type="hidden" name="message" value="홈페이지 상단 계약 가능 동·호수 문의" />
         <label class="agree"><input type="checkbox" required /> 개인정보 수집 및 상담 연락에 동의합니다.</label>
@@ -329,10 +335,14 @@
       <button type="button" class="leadModalClose" aria-label="닫기" data-lead-modal-close>×</button>
       <p class="eyebrow orange">AVAILABLE UNIT</p>
       <h2 id="donghoLeadTitle">계약 가능 동·호수 확인</h2>
-      <p class="leadModalText">이름과 연락처를 남겨주시면 현재 계약 가능한 동·호수를 안내해드립니다.</p>
-      <form id="donghoLeadForm" class="modalLeadForm">
-        <label class="field"><span>이름</span><input type="text" name="name" placeholder="성함" required></label>
-        <label class="field"><span>연락처</span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
+      <p class="leadModalText">이름과 연락처만 필수입니다. 원하시면 평형·타입·희망층도 선택해 주세요.</p>
+      <form id="donghoLeadForm" class="modalLeadForm preferenceLeadForm">
+        <div class="leadCountBadge modalCountBadge" data-lead-count-wrap>🔥 <strong>현재 누적 <span data-lead-count>90</span>건+ 상담접수</strong><small>분양가·동호수 문의 누적 기준</small></div>
+        <label class="field"><span>이름 <em>필수</em></span><input type="text" name="name" placeholder="성함" required></label>
+        <label class="field"><span>연락처 <em>필수</em></span><input type="tel" name="phone" placeholder="010-0000-0000" inputmode="tel" required></label>
+        <label class="field"><span>희망 평형 <em>선택</em></span><select name="interestSize" data-size-select><option value="">아직 모르겠어요</option><option value="34평형">34평형 · 84㎡</option><option value="45평형">45평형 · 117㎡</option><option value="48평형">48평형 · 125㎡</option></select></label>
+        <label class="field"><span>희망 타입 <em>선택</em></span><select name="interestType" data-type-select><option value="">평형 선택 후 확인</option></select></label>
+        <label class="field"><span>희망 층 <em>선택</em></span><select name="preferredFloor"><option value="">상관없음 / 상담 후 결정</option><option value="저층">저층</option><option value="중층">중층</option><option value="고층">고층</option></select></label>
         <input type="hidden" name="consultType" value="계약 가능 동·호수 문의">
         <input type="hidden" name="message" value="우측 상단 버튼을 통한 계약 가능 동·호수 문의">
         <label class="agree"><input type="checkbox" required> 개인정보 수집 및 상담 연락에 동의합니다.</label>
@@ -351,7 +361,7 @@
     <div class="successBox"><div class="checkIcon">✓</div><h3>신청이 정상 접수되었습니다</h3><p>입력하신 연락처를 확인한 뒤 담당자가 안내드리겠습니다.</p><button type="button" id="successClose">확인</button></div>
   </div>
 
-  <script src="js/script.js?v=20260728-pc-count-fix"></script>
+  <script src="js/script.js?v=20260824-preference-count"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function(){
     var targets=document.querySelectorAll('.section, .conversionHighlights, .advisorCard');

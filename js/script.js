@@ -228,6 +228,54 @@ if (typeof clarity==='function') {
 }
 
 
+
+// 계약 가능 동·호수 문의 선택항목
+const TYPE_OPTIONS={
+  '34평형':['84A','84B','84C','84D','84E'],
+  '45평형':['117A','117B'],
+  '48평형':['125A']
+};
+function initPreferenceForms(){
+  document.querySelectorAll('.preferenceLeadForm').forEach(form=>{
+    const size=form.querySelector('[data-size-select]');
+    const type=form.querySelector('[data-type-select]');
+    if(!size||!type) return;
+    const refresh=()=>{
+      const selected=type.value;
+      const opts=TYPE_OPTIONS[size.value]||[];
+      type.innerHTML='';
+      const first=document.createElement('option');
+      first.value='';
+      first.textContent=opts.length?'타입 선택 (선택사항)':'평형 선택 후 확인';
+      type.appendChild(first);
+      opts.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;type.appendChild(o);});
+      if(opts.includes(selected)) type.value=selected;
+    };
+    size.addEventListener('change',refresh);
+    refresh();
+  });
+}
+initPreferenceForms();
+
+// 홈페이지 상담접수 누적 표시. 기본값은 현재 실제 누적 약 90건 기준.
+// GAS에 action=leadCount 응답 기능이 추가되면 자동으로 실제 전체 누적값을 불러옵니다.
+const LEAD_COUNT_BASELINE=90;
+let displayedLeadCount=LEAD_COUNT_BASELINE;
+function renderLeadCount(value){
+  displayedLeadCount=Math.max(LEAD_COUNT_BASELINE,Number(value)||LEAD_COUNT_BASELINE);
+  document.querySelectorAll('[data-lead-count]').forEach(el=>{el.textContent=displayedLeadCount.toLocaleString('ko-KR');});
+}
+renderLeadCount(LEAD_COUNT_BASELINE);
+async function refreshLeadCount(){
+  try{
+    const res=await fetch(GOOGLE_SCRIPT_URL+'?action=leadCount',{method:'GET',cache:'no-store'});
+    if(!res.ok) return;
+    const json=await res.json();
+    if(json&&Number(json.count)>=LEAD_COUNT_BASELINE) renderLeadCount(Number(json.count));
+  }catch(_){ }
+}
+refreshLeadCount();
+
 const dateInput=document.querySelector('input[name="visitDate"]');
 if(dateInput){
   const today=new Date();
@@ -267,6 +315,17 @@ function bindLeadForm(formId){
     data.visit=[data.visitDate||'',data.visitTime||''].filter(Boolean).join(' ');
     data.createdAt=new Date().toLocaleString('ko-KR');
 
+    // 선택한 평형/타입/희망층은 기존 Apps Script와도 호환되도록 문의내용에 함께 기록합니다.
+    if(form.classList.contains('preferenceLeadForm')){
+      const pref=[];
+      if(data.interestSize) pref.push('희망평형: '+data.interestSize);
+      if(data.interestType) pref.push('희망타입: '+data.interestType);
+      if(data.preferredFloor) pref.push('희망층: '+data.preferredFloor);
+      if(data.interestType) data.type=data.interestType;
+      else if(data.interestSize) data.type=data.interestSize;
+      if(pref.length) data.message=(data.message?data.message+' | ':'')+pref.join(' | ');
+    }
+
     // 네이버·당근·블로그 등 최초 광고 유입정보를 상담 데이터와 함께 전송합니다.
     const trackingInfo=getTrackingInfo();
     data.utm_source=trackingInfo.utm_source;
@@ -289,6 +348,8 @@ function bindLeadForm(formId){
       document.querySelectorAll('.leadModal.active').forEach(modal=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true');});
       document.body.classList.remove('popupOpen');
       showSuccess(data.source);
+      renderLeadCount(displayedLeadCount+1);
+      setTimeout(refreshLeadCount,1200);
       trackEvent('lead_submit_success',{event_category:'lead',event_label:data.source,type:data.type||'',visit:data.visit||''});
       if (typeof clarity === 'function') {
         const formType=(data.consultType||'');
