@@ -257,9 +257,9 @@ function initPreferenceForms(){
 }
 initPreferenceForms();
 
-// 홈페이지 상담접수 누적 표시. 기본값은 현재 실제 누적 약 90건 기준.
+// 홈페이지 상담접수 누적 표시. 기본값은 현재 실제 누적 95건 기준.
 // GAS에 action=leadCount 응답 기능이 추가되면 자동으로 실제 전체 누적값을 불러옵니다.
-const LEAD_COUNT_BASELINE=90;
+const LEAD_COUNT_BASELINE=95;
 let displayedLeadCount=LEAD_COUNT_BASELINE;
 function renderLeadCount(value){
   displayedLeadCount=Math.max(LEAD_COUNT_BASELINE,Number(value)||LEAD_COUNT_BASELINE);
@@ -275,6 +275,8 @@ async function refreshLeadCount(){
   }catch(_){ }
 }
 refreshLeadCount();
+// 다른 방문자의 신규 접수도 반영할 수 있도록 60초마다 서버 누적 건수를 다시 확인합니다.
+setInterval(refreshLeadCount,60000);
 
 const dateInput=document.querySelector('input[name="visitDate"]');
 if(dateInput){
