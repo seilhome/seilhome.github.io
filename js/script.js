@@ -388,7 +388,7 @@ document.querySelectorAll('[data-lead-modal]').forEach(trigger=>{
     modal.classList.add('active');
     modal.setAttribute('aria-hidden','false');
     document.body.classList.add('popupOpen');
-    setTimeout(()=>modal.querySelector('input[name="name"]')?.focus(),100);
+    if(window.innerWidth>=760){ setTimeout(()=>modal.querySelector('input[name="name"]')?.focus(),100); }
     trackEvent('lead_modal_open',{event_category:'lead',event_label:trigger.dataset.leadModal});
   });
 });

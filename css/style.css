@@ -816,3 +816,72 @@ body.luxuryTheme .imageHero:after{background:linear-gradient(90deg,rgba(13,18,19
   }
   .mobileLeadBubble [data-lead-count]{color:#d9b36c !important;font-size:16px !important;font-weight:900 !important}
 }
+
+/* 2026-08-26 lead bubble v3: PC/local preview에서도 확인 가능하도록 항상 표시 */
+.mobileLeadBubble{
+  display:flex !important;
+  position:fixed !important;
+  left:50% !important;
+  bottom:92px !important;
+  z-index:99999 !important;
+  transform:translateX(-50%) !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+  width:max-content !important;
+  max-width:calc(100vw - 28px) !important;
+  padding:11px 16px !important;
+  border:1px solid rgba(255,255,255,.15) !important;
+  border-radius:999px !important;
+  background:#171816 !important;
+  color:#fff !important;
+  box-shadow:0 8px 26px rgba(0,0,0,.26) !important;
+  font-size:13px !important;
+  line-height:1.15 !important;
+  white-space:nowrap !important;
+}
+.mobileLeadBubble:after{
+  content:"" !important;
+  position:absolute !important;
+  left:50% !important;
+  bottom:-6px !important;
+  width:12px !important;
+  height:12px !important;
+  background:#171816 !important;
+  transform:translateX(-50%) rotate(45deg) !important;
+}
+.mobileLeadBubble [data-lead-count]{
+  color:#d9b36c !important;
+  font-size:16px !important;
+  font-weight:900 !important;
+}
+
+/* 2026-08-26 mobile consultation modal scroll fix */
+@media (max-width: 759px){
+  .leadModal{
+    align-items:flex-start !important;
+    justify-content:center !important;
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom)) !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+  .leadModalBox{
+    width:100% !important;
+    max-height:calc(100dvh - 20px) !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    padding-bottom:38px !important;
+    margin:auto 0;
+  }
+  .leadModalBox form{
+    padding-bottom:24px;
+  }
+  .leadModalBox form button[type="submit"]{
+    margin-bottom:8px;
+  }
+  body.popupOpen .mobileLeadBubble,
+  body.popupOpen .bottomBar{
+    display:none !important;
+  }
+}
