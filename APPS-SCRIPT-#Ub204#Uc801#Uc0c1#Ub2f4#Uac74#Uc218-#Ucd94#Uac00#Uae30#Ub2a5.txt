@@ -1,6 +1,6 @@
 [누적 상담접수 숫자를 모든 방문자에게 실시간 동기화하려면]
 
-홈페이지는 현재 95건을 기본값으로 표시하며, 상담이 접수되면 해당 화면에서는 +1 됩니다.
+홈페이지는 현재 90건을 기본값으로 표시하며, 상담이 접수되면 해당 화면에서는 +1 됩니다.
 모든 방문자에게 스프레드시트의 실제 누적 건수를 자동 표시하려면 Apps Script에 아래 doGet 함수를 추가한 뒤 웹앱을 새 버전으로 배포하세요.
 
 function doGet(e) {
@@ -9,7 +9,7 @@ function doGet(e) {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     const lastRow = sheet.getLastRow();
     // 1행이 헤더라면 실제 데이터 건수 = lastRow - 1
-    const count = Math.max(95, lastRow - 1);
+    const count = Math.max(90, lastRow - 1);
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success', count: count }))
       .setMimeType(ContentService.MimeType.JSON);

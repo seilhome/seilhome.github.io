@@ -885,3 +885,22 @@ body.luxuryTheme .imageHero:after{background:linear-gradient(90deg,rgba(13,18,19
     display:none !important;
   }
 }
+
+/* 2026-09-03 문의폼 간소화: 상단은 연락처 입력 대신 정보 선택형으로 구성 */
+.consultGuide{display:grid;gap:28px}
+.consultGuideCopy{max-width:760px}
+.consultGuideCopy p{line-height:1.75}
+.consultChoiceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.consultChoice{appearance:none;-webkit-appearance:none;width:100%;box-sizing:border-box;text-align:left;text-decoration:none;color:inherit;background:#fff;border:1px solid rgba(27,35,48,.13);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:9px;min-height:190px;cursor:pointer;box-shadow:0 8px 24px rgba(28,39,55,.06);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;font:inherit}
+.consultChoice:hover,.consultChoice:focus-visible{transform:translateY(-2px);box-shadow:0 14px 30px rgba(28,39,55,.10);border-color:rgba(214,126,42,.45);outline:none}
+.consultChoiceNo{font-size:12px;letter-spacing:.12em;color:#c8752c;font-weight:800}
+.consultChoice strong{font-size:20px;line-height:1.35;color:#1d2631}
+.consultChoice p{margin:0;color:#68717c;line-height:1.6;font-size:14px;flex:1}
+.consultChoice b{font-size:14px;color:#b8611f}
+.consultChoiceButton{border:1px solid rgba(27,35,48,.13)}
+@media (max-width:760px){
+  .consultChoiceGrid{grid-template-columns:1fr;gap:11px}
+  .consultChoice{min-height:auto;padding:20px}
+  .consultChoice strong{font-size:18px}
+  .consultGuideCopy p br{display:none}
+}
