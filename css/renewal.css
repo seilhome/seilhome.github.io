@@ -35,3 +35,68 @@ dialog{border:0;border-radius:20px;padding:0;color:var(--text);box-shadow:0 24px
 @media(max-width:370px){.wrap{width:calc(100% - 32px)}.hero h1{font-size:37px}.hero-actions .btn{font-size:12px}.hero-tags{gap:5px}.hero-tags span{font-size:10px;padding-inline:6px}.benefit-item{padding-left:10px}.benefit-item strong{font-size:21px}.benefit-title{font-size:12px}.benefit-title small{font-size:9px}.gallery-type-tabs .pill-tab{padding-inline:11px;font-size:11px}.gallery-thumb span{font-size:9px}.form-row{grid-template-columns:minmax(0,1fr)}.form-card{padding:22px 17px}.mobile-bar-inner{grid-template-columns:45px minmax(0,1fr) minmax(0,1fr)}.mobile-bar .btn{font-size:11px}.dialog-inner{padding-inline:20px}.hero-photo>img{aspect-ratio:1.25}}
 .image-tools{display:flex;gap:8px;align-items:center;margin-bottom:14px;padding-inline:4px}.image-tools button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:7px 12px;min-width:40px;font-size:14px}.image-tools span{font-size:10px;color:var(--muted);margin-left:4px}.image-stage{overflow:auto;max-height:calc(100dvh - 210px);overscroll-behavior:contain}.image-dialog .image-stage img{max-width:none;max-height:none;height:auto;margin:auto}.advisor-steps{list-style:none;padding:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Larger mobile type: keep descriptions, forms and calls to action readable. */
+@media(max-width:800px){
+  :root{--muted:#56624f;--accent:#876239}
+  body{font-size:1.125rem;line-height:1.8}
+  .eyebrow,.dialog-eyebrow,.hero-photo-top,.path-number,.value-list .value-number,.step-number{font-size:.875rem}
+  .fine,.hero-note,.benefit-note,.benefit-title small,.hero-tags span,
+  .photo-label,.expand-label,.gallery-caption,.gallery-thumb span,
+  .gallery-type-tabs .pill-tab,.value-image figcaption,.plan-help,
+  .plan-specs dt,.advisor-tag,.advisor-phone small,.field span em,
+  .form-note,.project-details dt,.site-footer,.footer-note,.image-tools span,
+  .image-dialog figcaption{font-size:.875rem;line-height:1.75}
+  .hero-kicker,.text-link,.btn-small,.header-cta .btn,.photo-label strong,
+  .benefit-title,.benefit-item small,.benefit-item strong span,.path-card small,
+  .pill-tab,.value-links button,.plan-tabs button,.plan-summary h3 small,
+  .visit-band p,.advisor-steps p,.form-intro,.field,.optional-fields summary,
+  .agree,.form-error,.project-details dd,.video-details summary,.news-inner p,
+  .dialog-lead,.dialog-modes button,.image-tools button{font-size:1rem;line-height:1.75}
+  .hero-lead,.section-head p,.gallery-story>p,.feature-list li,
+  .value-list p,.plan-summary>p,.advisor-copy>p,.advisor-steps strong,
+  .faq-list summary,.faq-list details p,.location-copy p,.path-card strong,
+  .plan-specs dd{font-size:1.125rem;line-height:1.8}
+  .btn,.hero-actions .btn,.location-actions .btn{font-size:1.0625rem;min-height:56px;line-height:1.55;padding:14px 12px}
+  .header-cta .btn{min-height:46px;padding:9px 12px}
+  .hero-tags{gap:8px}.hero-tags span{padding:6px 9px}
+  .hero-note,.form-note,.plan-help,.optional-fields summary,.agree,.visit-band p{color:var(--muted)}
+  .hero-lead{color:#52614c}.benefit-note{color:#536048}
+  .photo-label{max-width:calc(100% - 82px)}
+  .benefit-title{display:block}.benefit-title small{margin-top:5px}
+  .benefit-item{padding-left:12px}.benefit-item strong{font-size:1.625rem;line-height:1.5}
+  .benefit-item strong span{display:inline-block}
+  .path-card{padding:20px 18px}.path-number{margin-top:5px}
+  .gallery-thumbs{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .gallery-thumb span{padding:8px 3px}.gallery-caption{flex-wrap:wrap}
+  .gallery-type-tabs .pill-tab{padding:12px 15px;font-size:1rem}
+  .gallery-story .fine{font-size:.875rem}
+  .plan-summary{padding:24px 20px}.plan-tabs button{padding:12px 2px}
+  .plan-specs{gap:12px}.advisor-phone{flex-wrap:wrap}
+  .form-row{grid-template-columns:minmax(0,1fr)}
+  .lead-form{gap:18px}.field{gap:8px}
+  .field input,.field select,.field textarea{font-size:1.125rem;min-height:54px;line-height:1.6}
+  .agree{gap:10px}.agree small{font-size:inherit}.agree input{width:22px;height:22px;flex-basis:22px;margin-top:3px}
+  .dialog-inner h2{font-size:1.75rem;padding-right:28px}
+  .dialog-close{width:42px;height:42px}.dialog-modes{gap:4px;padding:4px}
+  .dialog-modes button{padding:12px 2px}.dialog-lead{margin-bottom:24px}
+  .image-tools{flex-wrap:wrap}.image-tools span{margin-left:0}
+  .image-tools button{min-height:44px}
+  .mobile-bar-inner{grid-template-columns:64px minmax(0,1.2fr) minmax(0,1fr);gap:7px}
+  .bar-call{font-size:.875rem;line-height:1.5;min-height:56px;gap:3px}
+  .mobile-bar .btn{font-size:1rem;min-height:56px;line-height:1.5;padding:10px 5px}
+  .site-footer{padding-bottom:145px}
+}
+@media(max-width:370px){
+  .brand img{width:80px}
+  .hero-actions,.location-actions{grid-template-columns:minmax(0,1fr)}
+  .benefit-inner{grid-template-columns:minmax(0,1fr);gap:14px}
+  .benefit-title{margin-bottom:0}
+  .benefit-item,.benefit-item:nth-child(2){border-left:0;border-top:1px solid var(--line);padding:14px 0 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .benefit-item small{margin:0}.benefit-item strong{font-size:1.625rem}
+  .gallery-type-tabs{display:grid;grid-template-columns:minmax(0,1fr)}
+  .gallery-type-tabs .pill-tab{font-size:1rem}
+  .mobile-bar-inner{grid-template-columns:60px minmax(0,1.2fr) minmax(0,1fr);gap:5px}
+  .mobile-bar .btn{font-size:.9375rem}
+  .dialog-inner{padding-inline:18px}.dialog-modes button{font-size:1rem}
+}
