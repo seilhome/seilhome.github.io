@@ -904,3 +904,93 @@ body.luxuryTheme .imageHero:after{background:linear-gradient(90deg,rgba(13,18,19
   .consultChoice strong{font-size:18px}
   .consultGuideCopy p br{display:none}
 }
+
+/* 2026-09-18: fit mobile content and controls to the viewport. */
+@media (max-width:760px){
+  /* Grid items must be allowed to shrink below their intrinsic content width. */
+  body.luxuryTheme .giftEventSection{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .giftEventSection > *,
+  .addressSmsBox > *,
+  .consultGuide > *,
+  .imageStack > *,
+  .infoGrid > *,
+  .priceRequestCard > *,
+  .donghoRequestCard > *,
+  .dateTimeRow > *,
+  form > *,
+  .field,
+  .fieldLabel{
+    min-width:0;
+  }
+  .addressSmsBox{
+    grid-template-columns:minmax(0,1fr);
+  }
+  input,select,textarea{
+    min-width:0;
+    max-width:100%;
+  }
+  .giftEventVisual img,
+  .giftEventCta,
+  .consultChoice{
+    max-width:100%;
+  }
+}
+@media (max-width:759px){
+  .projectStats,
+  body.luxuryTheme .conversionHighlights{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .statItem,
+  .highlightItem{
+    min-width:0;
+    overflow-wrap:anywhere;
+  }
+  body.luxuryTheme .topbar{
+    gap:8px;
+  }
+  body.luxuryTheme .topbar .brand{
+    min-width:0;
+    flex:0 1 auto;
+  }
+  body.luxuryTheme .topbar .brand img{
+    width:134px;
+    height:auto;
+    max-width:100%;
+    max-height:29px;
+    object-fit:contain;
+  }
+  body.luxuryTheme .top-call{
+    flex:0 0 auto;
+  }
+  /* Show every navigation item and floor-plan option without horizontal scrolling. */
+  body.luxuryTheme .quick{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    overflow:visible;
+  }
+  body.luxuryTheme .quick a,
+  body.luxuryTheme .quick button{
+    min-width:0;
+    padding:12px 4px;
+    overflow-wrap:anywhere;
+  }
+  .tabs{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    overflow:visible;
+  }
+  .tabs button{
+    min-width:0;
+    padding:11px 4px;
+  }
+  .dateTimeRow{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width:420px){
+  .dateTimeRow{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
