@@ -1,6 +1,6 @@
 /* Gangneung Lynn — consultation and visit renewal, 2026-09-18 */
-@font-face{font-family:'Lynn Sans';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/lynn-sans-regular.woff') format('woff')}
-@font-face{font-family:'Lynn Sans';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/lynn-sans-bold.woff') format('woff')}
+@font-face{font-family:'Lynn Sans';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/lynn-sans-regular.woff?v=20260919-r5') format('woff')}
+@font-face{font-family:'Lynn Sans';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/lynn-sans-bold.woff?v=20260919-r5') format('woff')}
 :root{--ink:#213b32;--text:#27362f;--muted:#70796f;--paper:#f8f7f2;--white:#fff;--line:#dce2d8;--accent:#ae8554;--green:#255b43;--soft:#eef2e9;--radius:20px;--shadow:0 16px 50px rgba(26,48,34,.08)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:110px}
@@ -104,3 +104,49 @@ dialog{border:0;border-radius:20px;padding:0;color:var(--text);box-shadow:0 24px
   .mobile-bar .btn{font-size:.9375rem}
   .dialog-inner{padding-inline:18px}.dialog-modes button{font-size:.9375rem}
 }
+
+/* Expanded project, district, complex and community information. */
+.section-directory{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding-block:8px 16px}
+.section-directory a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:54px;padding:12px 8px;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:15px;font-weight:700;text-align:center}
+.section-directory a:hover{border-color:var(--green);background:var(--soft)}.section-directory a span{color:var(--accent);font-size:12px;font-weight:400}
+.overview-section{background:#fff;border-block:1px solid var(--line)}
+.overview-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center}
+.detail-image{position:relative;display:block;width:100%;min-width:0;padding:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in}
+.detail-image img{width:100%;height:auto}.overview-layout figcaption{margin-top:12px}
+.overview-facts,.district-facts{margin:0}.overview-facts>div,.district-facts>div{display:grid;grid-template-columns:95px minmax(0,1fr);gap:14px;padding:17px 0;border-bottom:1px solid var(--line)}
+.overview-facts>div:first-child{border-top:1px solid var(--line)}.overview-facts dt,.district-facts dt{color:var(--muted);font-size:14px}.overview-facts dd,.district-facts dd{margin:0;font-size:16px;font-weight:700}
+.unit-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px}.unit-summary article{padding:26px;background:var(--soft);border-radius:12px}
+.unit-summary article>span{font-size:15px;color:var(--muted)}.unit-summary strong{display:block;font-size:36px;letter-spacing:-.04em;color:var(--ink);line-height:1.4;margin:9px 0}.unit-summary strong small{font-size:16px;font-weight:400;margin-left:8px}.unit-summary p{font-size:14px;color:var(--muted)}
+.district-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center}.info-badge{display:inline-block;padding:5px 10px;border-radius:5px;background:#e6eddf;color:var(--green);font-size:14px;font-weight:700}
+.district-copy h3{font-size:28px;line-height:1.4;margin:18px 0}.district-copy>p{font-size:16px;color:var(--muted);line-height:1.8}.district-facts{margin:20px 0}.district-copy>p.fine{font-size:14px}
+.info-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px}.info-card-grid article{min-width:0;padding:26px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.info-index{display:block;font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.05em;margin-bottom:13px}.info-card-grid h3{font-size:21px;margin-bottom:14px;line-height:1.4}.info-card-grid p{font-size:16px;color:var(--muted);line-height:1.85}
+.complex-section{background:#fff;border-block:1px solid var(--line)}.siteplan-window{aspect-ratio:1200/711}.siteplan-window img{position:absolute;top:0;left:0;width:100%;height:auto;max-width:none}
+.complex-points article{background:var(--paper)}.detail-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.community-section{background:#edf0e7}.community-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.community-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.community-window{position:relative;display:block;width:100%;aspect-ratio:626/320;overflow:hidden;border:0;padding:0;background:#fff;cursor:zoom-in}.community-window svg{display:block;width:100%;height:100%}
+.community-copy{padding:26px;border-top:1px solid var(--line)}.community-copy h3{font-size:24px;line-height:1.4;margin:15px 0 12px}.community-copy>p{font-size:16px;color:var(--muted);line-height:1.85}
+.facility-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.facility-tags li{font-size:14px;line-height:1.6;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:7px 10px}
+.community-outro{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:32px;padding:28px;background:#fff;border-radius:12px}.community-outro h3{font-size:23px;line-height:1.4}.community-outro p{color:var(--muted);font-size:15px;margin-top:8px}.community-outro .btn{flex-shrink:0}
+@media(min-width:801px){.desktop-nav{gap:18px}.brand-copy{display:none}}
+@media(max-width:1100px){.desktop-nav{display:none}.header-cta{margin-left:auto}}
+@media(max-width:800px){
+ .section-directory{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding-block:4px 8px}.section-directory a{font-size:15px;min-height:49px;padding:10px 4px}.section-directory a span{display:none}
+ .overview-layout,.district-layout{grid-template-columns:minmax(0,1fr);gap:24px}.overview-facts>div,.district-facts>div{grid-template-columns:78px minmax(0,1fr);gap:12px;padding-block:15px}.overview-facts dd,.district-facts dd{font-size:16px}
+ .unit-summary{grid-template-columns:minmax(0,1fr);gap:10px;margin-top:25px}.unit-summary article{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;padding:18px 20px}.unit-summary strong{grid-column:2;grid-row:1/3;font-size:29px;margin:0}.unit-summary p{grid-column:1;font-size:14px;margin-top:5px}.unit-summary strong small{font-size:14px;margin-left:4px}
+ .district-copy h3{font-size:25px}.district-copy>p,.info-card-grid p,.community-copy>p{font-size:17px}.info-card-grid{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:24px}.info-card-grid article{padding:22px}.info-index{font-size:14px}.info-card-grid h3{font-size:21px}
+ .complex-section .section-head>.btn,.community-section .section-head>.btn{margin-top:20px}.detail-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}.siteplan-window .expand-label{font-size:14px;bottom:10px;right:10px}
+ .community-grid{grid-template-columns:minmax(0,1fr);gap:20px}.community-copy{padding:22px}.community-copy h3{font-size:23px}.facility-tags{gap:7px}.facility-tags li{font-size:14px;padding:6px 9px}.community-outro{display:block;padding:24px 22px}.community-outro h3{font-size:22px}.community-outro p{font-size:16px}.community-outro .btn{margin-top:20px;width:100%}
+}
+
+/* Standalone sky lounge video: always visible, with an explicit play button. */
+.section-directory .video-directory-link{grid-column:1/-1;background:var(--ink);border-color:var(--ink);color:#fff}
+.section-directory .video-directory-link:hover{background:var(--green)}
+.skylounge-section{background:var(--ink);color:#fff}
+.skylounge-section .eyebrow{color:#dcc6a5}.skylounge-section .section-head p{color:#d2ddd0}
+.skylounge-player{position:relative;border-radius:16px;overflow:hidden;border:1px solid #ffffff38;background:#102018}
+.skylounge-player video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#102018}
+.skylounge-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:12px;border:1px solid #ffffff85;border-radius:50px;padding:17px 27px;background:#ffffffed;color:var(--ink);font-size:18px;font-weight:700;white-space:nowrap;box-shadow:0 6px 30px #0004}
+.skylounge-play:hover{background:#fff}.skylounge-play svg{width:27px;height:27px;fill:currentColor}.skylounge-play:disabled{opacity:.8}
+.skylounge-section .fine,.video-status{color:#d2ddd0;font-size:14px;line-height:1.75}.video-status{margin-top:14px}
+@media(max-width:800px){.skylounge-player{border-radius:12px}.skylounge-play{font-size:16px;padding:12px 21px;gap:9px}.skylounge-play svg{width:24px;height:24px}}

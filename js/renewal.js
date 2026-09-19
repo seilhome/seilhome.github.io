@@ -291,10 +291,26 @@
   document.getElementById('imageZoomOut').addEventListener('click',()=>{imageZoom=Math.max(1,imageZoom-.5);renderImageZoom();});
   document.getElementById('imageZoomReset').addEventListener('click',()=>{imageZoom=1;renderImageZoom();});
   window.addEventListener('resize',()=>{if(imageDialog.open)renderImageZoom();});
-  for(const details of document.querySelectorAll('.video-details')) details.addEventListener('toggle',()=>{
-    const video=details.querySelector('video');
-    if(details.open){video.preload='metadata';track('view_video_section');}else video.pause();
-  });
+  const loungeVideo=document.getElementById('skyloungeVideo');
+  const loungePlay=document.getElementById('skyloungePlay');
+  const loungeStatus=document.getElementById('skyloungeStatus');
+  if(loungeVideo&&loungePlay){
+    loungePlay.hidden=false;
+    loungePlay.addEventListener('click',async()=>{
+      loungeStatus.hidden=true;
+      loungePlay.disabled=true;
+      try{await loungeVideo.play();}
+      catch(_){
+        loungeStatus.textContent='영상을 재생하지 못했습니다. 잠시 후 다시 시도해 주세요.';
+        loungeStatus.hidden=false;
+        loungePlay.hidden=false;
+      }finally{loungePlay.disabled=false;}
+    });
+    loungeVideo.addEventListener('play',()=>{loungePlay.hidden=true;loungeStatus.hidden=true;});
+    loungeVideo.addEventListener('play',()=>track('view_video_section'),{once:true});
+    loungeVideo.addEventListener('pause',()=>{loungePlay.hidden=false;});
+    loungeVideo.addEventListener('ended',()=>{loungePlay.hidden=false;});
+  }
   for(const details of document.querySelectorAll('.faq-list details'))details.addEventListener('toggle',()=>{if(details.open)track('faq_open',{question:details.querySelector('summary').textContent});});
   // Preserve links used by older ads, messages and bookmarks.
   function openLegacyAnchor(){
