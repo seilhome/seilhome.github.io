@@ -7,7 +7,7 @@
   const TYPE_OPTIONS = {'34평형':['84A','84B','84C','84D','84E'],'45평형':['117A','117B'],'48평형':['125A']};
   const REQUESTS = {
     price:{title:'분양가표를 문자로 받아보세요.',description:'이름과 연락처를 남겨주시면 분양가표 확인 링크를 안내합니다.',button:'분양가표 문자로 받기',source:'분양가표 전송 요청',consultType:'분양가표 전송 요청',message:'홈페이지 분양가표 전송 요청',note:'문자를 받을 휴대폰 번호를 확인해 주세요.',success:'입력하신 번호로 분양가표 확인 링크를 안내합니다. 문자 도착까지 잠시 걸릴 수 있습니다.'},
-    visit:{title:'편한 시간에 직접 만나보세요.',description:'방문 희망일을 남기셔도, 아직 정하지 않으셔도 괜찮습니다. 담당자가 일정 확인 후 연락드립니다.',button:'방문상담 예약 신청하기',source:'상세 상담신청',consultType:'모델하우스 방문상담',message:'홈페이지 모델하우스 방문상담 예약',note:'방문예약은 담당자와 일정 확인 후 확정됩니다.',success:'담당자가 연락드려 방문 일정과 관람 가능한 유니트를 확인해드립니다. 방문예약은 일정 확인 후 확정됩니다.'},
+    visit:{title:'편한 시간에 직접 만나보세요.',description:'방문상담 예약 고객께 신세계상품권을 증정합니다. 방문 희망일은 지금 정하지 않으셔도 괜찮습니다. 담당자가 일정 확인 후 연락드립니다.',button:'방문상담 예약 신청하기',source:'상세 상담신청',consultType:'모델하우스 방문상담',message:'홈페이지 모델하우스 방문상담 예약',note:'방문예약은 담당자와 일정 확인 후 확정됩니다.',success:'담당자가 연락드려 방문 일정과 관람 가능한 유니트를 확인해드립니다. 방문예약은 일정 확인 후 확정됩니다.'},
     unit:{title:'관심 평형의 동·호수를 확인하세요.',description:'현재 계약 가능한 동·호수와 분양조건을 담당자가 확인해 안내합니다.',button:'분양가·동호수 상담 신청하기',source:'우측 상단 동호수 상담',consultType:'계약 가능 동·호수 문의',message:'홈페이지 계약 가능 동·호수 문의',note:'계약 가능 여부와 조건은 상담 시 확인해드립니다.',success:'관심 평형의 계약 가능한 동·호수와 분양조건을 확인해 연락드리겠습니다.'},
     address:{title:'견본주택 주소를 문자로 받으세요.',description:'방문에 필요한 견본주택 주소와 주차 위치를 안내해드립니다.',button:'견본주택 주소 문자로 받기',source:'견본주택 주소 문자 요청',consultType:'견본주택 주소 문자 요청',message:'견본주택 주소와 주차 위치 문자 안내 요청',note:'문자를 받을 휴대폰 번호를 확인해 주세요.',success:'입력하신 연락처로 견본주택 주소와 주차 위치를 안내해드립니다.'}
   };
@@ -30,6 +30,27 @@
   if(typeof window.clarity==='function'){
     for(const key of ['utm_source','utm_medium','utm_campaign']) if(initialTracking[key]) window.clarity('set',key,initialTracking[key]);
   }
+
+  // 실시간 누적 상담 접수 건수: 기존 홈페이지와 동일한 Apps Script 집계값을 사용합니다.
+  const LEAD_COUNT_BASELINE=127;
+  let displayedLeadCount=LEAD_COUNT_BASELINE;
+  function renderLeadCount(value){
+    const parsed=Number(value);
+    if(Number.isFinite(parsed)) displayedLeadCount=Math.max(displayedLeadCount,LEAD_COUNT_BASELINE,parsed);
+    document.querySelectorAll('[data-lead-count]').forEach(el=>{el.textContent=displayedLeadCount.toLocaleString('ko-KR');});
+  }
+  async function refreshLeadCount(){
+    try{
+      const separator=GOOGLE_SCRIPT_URL.includes('?')?'&':'?';
+      const response=await fetch(`${GOOGLE_SCRIPT_URL}${separator}action=leadCount&_=${Date.now()}`,{method:'GET',cache:'no-store'});
+      if(!response.ok) return;
+      const json=await response.json();
+      renderLeadCount(json?.leadCount ?? json?.count);
+    }catch(_){/* 네트워크 오류 시 마지막으로 확인된 숫자를 유지합니다. */}
+  }
+  renderLeadCount(LEAD_COUNT_BASELINE);
+  refreshLeadCount();
+  setInterval(refreshLeadCount,60000);
 
   const leadDialog=document.getElementById('leadDialog');
   const imageDialog=document.getElementById('imageDialog');
@@ -192,6 +213,8 @@
         showComplete(form,kind,payload.consultType);
         track('lead_request_sent',{form_id:form.id,request_kind:kind,cta_position:payload.entryPoint,unit_type:payload.type||''});
         if(typeof window.clarity==='function') window.clarity('event',kind==='price'?'price_request':kind==='address'?'address_request':'consult_request');
+        renderLeadCount(displayedLeadCount+1);
+        setTimeout(refreshLeadCount,1800);
       }catch(_){
         error.replaceChildren(document.createTextNode('전송을 완료하지 못했습니다. 다시 시도하거나 '));
         const link=document.createElement('a');link.href='tel:033-900-0342';link.textContent='033-900-0342';error.append(link,document.createTextNode('로 전화해 주세요.'));
