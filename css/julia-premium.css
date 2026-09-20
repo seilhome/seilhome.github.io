@@ -17,7 +17,7 @@ body.julia-premium .btn-light{background:#fff;border-color:#d4ddd7}
 /* Header */
 body.julia-premium .site-header{background:rgba(255,255,255,.94);border-bottom:1px solid rgba(22,63,49,.10);box-shadow:0 8px 30px rgba(18,49,38,.04)}
 body.julia-premium .header-inner{height:78px}
-body.julia-premium .brand img{width:106px}
+body.julia-premium .brand img{width:200px}
 body.julia-premium .desktop-nav{gap:22px;font-size:13px;color:#43574f}
 body.julia-premium .desktop-nav a{position:relative;padding-block:28px}
 body.julia-premium .desktop-nav a:after{content:'';position:absolute;left:0;right:100%;bottom:19px;height:2px;background:var(--accent);transition:right .2s}
@@ -173,7 +173,7 @@ body.julia-premium .dialog-modes button{border-radius:999px}
   body.julia-premium .wrap{width:calc(100% - 28px)}
   body.julia-premium .section{padding-block:72px}
   body.julia-premium .header-inner{height:64px}
-  body.julia-premium .brand img{width:98px}
+  body.julia-premium .brand img{width:150px}
   body.julia-premium .header-cta .btn{min-height:40px;font-size:12px;padding-inline:12px}
   body.julia-premium .hero{padding:12px 0 58px}
   body.julia-premium .hero-grid{min-height:650px;border-radius:22px}
@@ -230,6 +230,7 @@ body.julia-premium .dialog-modes button{border-radius:999px}
   body.julia-premium .site-footer{padding-bottom:138px}
 }
 @media(max-width:370px){
+  body.julia-premium .brand img{width:140px}
   body.julia-premium .wrap{width:calc(100% - 22px)}
   body.julia-premium .hero-grid{min-height:630px}
   body.julia-premium .hero-copy{padding-inline:19px}
