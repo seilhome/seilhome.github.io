@@ -1,0 +1,241 @@
+/* Julia premium redesign — visual layer only. Core content, forms, tracking and integrations remain unchanged. */
+body.julia-premium{
+  --ink:#132f26;--text:#21352d;--muted:#65756d;--paper:#f3f5f1;--white:#fff;
+  --line:#d8e0da;--accent:#c6a066;--green:#174d3b;--green-2:#0e382c;--soft:#eaf0eb;
+  --shadow:0 24px 70px rgba(16,48,37,.11);
+  background:#f3f5f1;
+}
+body.julia-premium .wrap{width:min(1220px,calc(100% - 64px))}
+body.julia-premium .section{padding-block:108px}
+body.julia-premium h2{font-size:clamp(30px,3.45vw,48px);line-height:1.18}
+body.julia-premium .eyebrow{color:#a77b43;letter-spacing:.22em}
+body.julia-premium .btn{border-radius:999px;min-height:56px;padding-inline:25px}
+body.julia-premium .btn-primary{background:var(--green)}
+body.julia-premium .btn-primary:hover{background:#0e3d2f;box-shadow:0 10px 28px rgba(18,71,54,.20)}
+body.julia-premium .btn-light{background:#fff;border-color:#d4ddd7}
+
+/* Header */
+body.julia-premium .site-header{background:rgba(255,255,255,.94);border-bottom:1px solid rgba(22,63,49,.10);box-shadow:0 8px 30px rgba(18,49,38,.04)}
+body.julia-premium .header-inner{height:78px}
+body.julia-premium .brand img{width:106px}
+body.julia-premium .desktop-nav{gap:22px;font-size:13px;color:#43574f}
+body.julia-premium .desktop-nav a{position:relative;padding-block:28px}
+body.julia-premium .desktop-nav a:after{content:'';position:absolute;left:0;right:100%;bottom:19px;height:2px;background:var(--accent);transition:right .2s}
+body.julia-premium .desktop-nav a:hover:after{right:0}
+body.julia-premium .header-cta .btn{background:#123d30}
+
+/* Hero — project-first, cinematic, conversion focused */
+body.julia-premium .hero{padding:26px 0 72px;background:linear-gradient(#f5f6f2,#eef2ee)}
+body.julia-premium .hero-grid{position:relative;display:block;min-height:650px;border-radius:30px;overflow:hidden;box-shadow:0 28px 80px rgba(9,34,25,.18);isolation:isolate;background:#17372c}
+body.julia-premium .hero-photo{position:absolute;inset:0;border-radius:0;overflow:hidden;background:#17372c;z-index:-2}
+body.julia-premium .hero-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,28,20,.92) 0%,rgba(7,34,25,.72) 40%,rgba(8,30,24,.22) 72%,rgba(8,25,20,.08) 100%),linear-gradient(0deg,rgba(5,27,21,.55),transparent 45%);z-index:1}
+body.julia-premium .hero-photo>img{width:100%;height:100%;object-fit:cover;object-position:center 48%;transform:scale(1.01)}
+body.julia-premium .hero-copy{position:relative;z-index:3;max-width:710px;padding:76px 68px 92px;color:#fff}
+body.julia-premium .hero-kicker{color:#ecd5ae;font-size:13px;letter-spacing:.03em;margin-bottom:21px}
+body.julia-premium .hero-kicker:before{background:#d8b274;width:30px}
+body.julia-premium .hero h1{font-size:clamp(44px,5.15vw,72px);line-height:1.05;color:#fff;letter-spacing:-.07em;text-shadow:0 3px 22px rgba(0,0,0,.18)}
+body.julia-premium .hero h1 span{color:#f0d7ad}
+body.julia-premium .hero-lead{max-width:580px;color:#edf4ef;font-size:18px;line-height:1.75;margin-top:27px}
+body.julia-premium .hero-tags{gap:8px;margin-top:27px}
+body.julia-premium .hero-tags span{font-size:12px;color:#fff;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:7px 12px;backdrop-filter:blur(10px)}
+body.julia-premium .hero-actions{display:flex;gap:10px;margin-top:32px;max-width:570px}
+body.julia-premium .hero-actions .btn{flex:1;min-height:58px}
+body.julia-premium .hero-actions .btn-primary{background:#e6c38c;color:#18372b}
+body.julia-premium .hero-actions .btn-primary:hover{background:#f1d6aa}
+body.julia-premium .hero-actions .btn-light{background:rgba(255,255,255,.94);border-color:transparent}
+body.julia-premium .hero-note{color:#d7e4dc;font-size:12px;margin-top:14px}
+body.julia-premium .hero-trust{display:flex;flex-wrap:wrap;gap:16px;margin-top:27px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);max-width:570px}
+body.julia-premium .hero-trust span{font-size:12px;color:#e1e9e4;display:flex;align-items:center;gap:7px}
+body.julia-premium .hero-trust span:before{content:'✓';width:19px;height:19px;display:grid;place-items:center;border-radius:50%;background:rgba(237,210,166,.18);color:#efd4a4;font-size:11px;font-weight:800}
+body.julia-premium .photo-label{left:auto;right:28px;bottom:28px;background:rgba(8,37,28,.78);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:13px 16px}
+body.julia-premium .photo-label strong{font-size:14px}
+body.julia-premium .hero-photo-top{right:28px;top:27px;color:#f6e8ce;font-size:10px;letter-spacing:.2em}
+body.julia-premium .hero-photo-link{right:28px;bottom:100px;background:#f0d7ad;color:#17372c}
+
+/* Benefits float under hero */
+body.julia-premium .benefit-strip{position:relative;z-index:5;margin-top:-42px;background:transparent;border:0}
+body.julia-premium .benefit-inner{background:#fff;border:1px solid rgba(25,70,53,.10);border-radius:20px;padding:26px 30px;box-shadow:0 20px 55px rgba(18,56,42,.12);grid-template-columns:1.15fr repeat(3,1fr)}
+body.julia-premium .benefit-title{font-size:16px;color:#203a30}
+body.julia-premium .benefit-item{padding-left:28px}
+body.julia-premium .benefit-item strong{font-size:28px;color:#183b2f}
+body.julia-premium .benefit-item small{font-size:11px}
+body.julia-premium .benefit-note{background:transparent;padding:11px 20px 0;color:#728078}
+
+/* Quick paths and directory */
+body.julia-premium .path-section{padding:34px 0 18px}
+body.julia-premium .path-grid{gap:12px}
+body.julia-premium .path-card{border-radius:18px;border-color:#dce3de;padding:24px;background:#fff;box-shadow:0 8px 26px rgba(15,48,36,.04);transition:transform .18s,border-color .18s,box-shadow .18s}
+body.julia-premium .path-card:hover{transform:translateY(-3px);border-color:#a8bdb3;background:#fff;box-shadow:0 14px 34px rgba(15,48,36,.08)}
+body.julia-premium .path-number{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#edf2ee;color:#8f6b3d;margin:0}
+body.julia-premium .path-card strong{font-size:17px}
+body.julia-premium .path-arrow{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:#f4f1ea;color:#987447}
+body.julia-premium .section-directory{padding:10px 0 25px;gap:7px}
+body.julia-premium .section-directory a{min-height:52px;border-radius:999px;background:#f8faf8;border-color:#dbe2dc;font-size:13px}
+body.julia-premium .section-directory .video-directory-link{border-radius:999px;background:#143f31;border-color:#143f31}
+
+/* Shared section look */
+body.julia-premium .section-head{margin-bottom:42px}
+body.julia-premium .section-head p{font-size:15px;line-height:1.8;color:#6e7b74}
+body.julia-premium .gallery-section{padding-top:80px}
+body.julia-premium .gallery-view,body.julia-premium .detail-image,body.julia-premium .community-card,body.julia-premium .plan-card,body.julia-premium .form-card{border-radius:22px;box-shadow:0 16px 44px rgba(20,54,41,.07);border:1px solid rgba(27,67,52,.10)}
+body.julia-premium .gallery-layout{gap:50px}
+body.julia-premium .gallery-story h3{font-size:34px}
+body.julia-premium .pill-tab{border-radius:999px;padding-inline:22px;background:#fff}
+body.julia-premium .pill-tab[aria-selected=true]{background:#153e31;border-color:#153e31}
+body.julia-premium .gallery-thumb{border-radius:10px}
+
+/* Overview */
+body.julia-premium .overview-section{background:#fff;border:0}
+body.julia-premium .overview-layout{gap:54px}
+body.julia-premium .overview-facts>div{padding:20px 0}
+body.julia-premium .overview-facts dd{font-size:17px}
+body.julia-premium .unit-summary{gap:12px;margin-top:42px}
+body.julia-premium .unit-summary article{border-radius:18px;padding:28px;background:linear-gradient(145deg,#eef3ef,#f8faf8);border:1px solid #dde5df}
+body.julia-premium .unit-summary strong{color:#173e31;font-size:40px}
+
+/* District / complex / community */
+body.julia-premium .district-section{background:#f4f6f3}
+body.julia-premium .district-layout{gap:54px}
+body.julia-premium .info-badge{border-radius:999px;padding:6px 12px;background:#e8efe9;color:#285944}
+body.julia-premium .info-card-grid{gap:14px}
+body.julia-premium .info-card-grid article{border-radius:18px;padding:28px;border-color:#dce4de;box-shadow:0 10px 34px rgba(20,56,42,.04)}
+body.julia-premium .complex-section{background:#fff;border:0}
+body.julia-premium .complex-points article{background:#f5f7f4}
+body.julia-premium .community-section{background:#e9efea}
+body.julia-premium .community-grid{gap:18px}
+body.julia-premium .community-card{overflow:hidden;background:#fff}
+body.julia-premium .community-copy{padding:29px}
+body.julia-premium .facility-tags li{border-radius:999px;background:#f3f6f3;padding:6px 11px}
+body.julia-premium .community-outro{border-radius:20px;padding:32px;border:1px solid #dbe3dc;box-shadow:0 16px 40px rgba(20,54,41,.06)}
+
+/* Sky lounge becomes a strong visual break */
+body.julia-premium .skylounge-section{background:radial-gradient(circle at 78% 16%,#235748 0,#123b30 36%,#0c2d24 78%);padding-block:110px}
+body.julia-premium .skylounge-player{border-radius:24px;border-color:rgba(255,255,255,.18);box-shadow:0 28px 70px rgba(0,0,0,.22)}
+body.julia-premium .skylounge-play{background:#f3d7a9;border-color:transparent;color:#16392d;box-shadow:0 12px 38px rgba(0,0,0,.22)}
+
+/* Plans */
+body.julia-premium #floor{background:#f5f6f2}
+body.julia-premium .plan-layout{gap:34px}
+body.julia-premium .plan-tabs{border-radius:16px}
+body.julia-premium .plan-tabs button{border-radius:999px}
+body.julia-premium .plan-summary{border-radius:22px;background:#133c30;color:#fff;padding:34px}
+body.julia-premium .plan-summary .eyebrow{color:#d9b87d}
+body.julia-premium .plan-summary>p,body.julia-premium .plan-summary .fine,body.julia-premium .plan-specs dt{color:#cbd9d1}
+body.julia-premium .plan-summary h3,body.julia-premium .plan-specs dd{color:#fff}
+body.julia-premium .plan-summary .btn-light{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+body.julia-premium .plan-summary .btn-primary{background:#e4c18a;color:#17372c}
+
+/* Visit gift — more visible without popup clutter */
+body.julia-premium .visit-band{background:#d9bb88;color:#17372c;border:0}
+body.julia-premium .visit-band-inner{padding-block:38px}
+body.julia-premium .visit-band .eyebrow{color:#6f522d}
+body.julia-premium .visit-band h3{font-size:30px}
+body.julia-premium .visit-band p{color:#574b39;margin-top:8px}
+body.julia-premium .visit-band .btn-primary{background:#143e31;color:#fff}
+
+/* Consultation — dedicated conversion section */
+body.julia-premium #reservation{background:#10362b;color:#fff;padding-block:112px}
+body.julia-premium #reservation .eyebrow{color:#d9b77f}
+body.julia-premium #reservation .advisor-copy>p,body.julia-premium #reservation .advisor-steps p{color:#c8d6cf}
+body.julia-premium #reservation .advisor-tag{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#eef5f1}
+body.julia-premium #reservation .advisor-steps li{border-color:rgba(255,255,255,.16)}
+body.julia-premium #reservation .advisor-phone{color:#f0d3a4}
+body.julia-premium #reservation .form-card{background:#fff;color:#24362f;padding:34px}
+body.julia-premium #reservation .form-card .fine,body.julia-premium #reservation .form-note{color:#6d7872}
+body.julia-premium #reservation .field input,body.julia-premium #reservation .field select,body.julia-premium #reservation .field textarea{background:#f7f8f5;border-radius:12px;border-color:#d7dfd9}
+
+/* FAQ, directions and footer */
+body.julia-premium .faq-section{background:#fff}
+body.julia-premium .faq-list details{border-color:#dce3de}
+body.julia-premium .faq-list summary{font-size:16px}
+body.julia-premium #contact-map{background:#f3f5f1}
+body.julia-premium .location-image{border-radius:22px;box-shadow:0 18px 48px rgba(19,51,39,.07)}
+body.julia-premium .news-strip{background:#fff}
+body.julia-premium .site-footer{background:#0c2b22;color:#adbbb4}
+body.julia-premium .site-footer strong{color:#fff}
+
+/* Fixed conversion bar */
+body.julia-premium .mobile-bar{background:rgba(255,255,255,.96);border-top-color:#d7e0da;box-shadow:0 -12px 40px rgba(13,46,34,.10)}
+body.julia-premium .mobile-bar .btn{border-radius:999px}
+body.julia-premium .bar-call{color:#244c3d}
+
+/* Dialogs */
+body.julia-premium .lead-dialog .dialog-inner,body.julia-premium .image-dialog .dialog-inner{border-radius:24px}
+body.julia-premium .dialog-modes{border-radius:999px}
+body.julia-premium .dialog-modes button{border-radius:999px}
+
+@media(max-width:1100px){
+  body.julia-premium .wrap{width:min(100% - 44px,1120px)}
+  body.julia-premium .hero-copy{padding:64px 52px 84px}
+}
+@media(max-width:800px){
+  body.julia-premium{font-size:16px;line-height:1.75}
+  body.julia-premium .wrap{width:calc(100% - 28px)}
+  body.julia-premium .section{padding-block:72px}
+  body.julia-premium .header-inner{height:64px}
+  body.julia-premium .brand img{width:98px}
+  body.julia-premium .header-cta .btn{min-height:40px;font-size:12px;padding-inline:12px}
+  body.julia-premium .hero{padding:12px 0 58px}
+  body.julia-premium .hero-grid{min-height:650px;border-radius:22px}
+  body.julia-premium .hero-photo>img{object-position:58% center}
+  body.julia-premium .hero-photo:after{background:linear-gradient(0deg,rgba(5,29,21,.95) 0%,rgba(5,29,21,.82) 47%,rgba(5,29,21,.26) 78%,rgba(5,29,21,.12) 100%)}
+  body.julia-premium .hero-copy{position:absolute;left:0;right:0;bottom:0;padding:31px 24px 32px;max-width:none}
+  body.julia-premium .hero-kicker{font-size:11px;margin-bottom:13px}
+  body.julia-premium .hero h1{font-size:39px;line-height:1.08}
+  body.julia-premium .hero-lead{font-size:15px;line-height:1.65;margin-top:16px}
+  body.julia-premium .hero-tags{margin-top:16px;gap:6px}
+  body.julia-premium .hero-tags span{font-size:11px;padding:5px 9px}
+  body.julia-premium .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+  body.julia-premium .hero-actions .btn{min-height:52px;font-size:13px;padding:11px 8px}
+  body.julia-premium .hero-note{font-size:11px;margin-top:10px}
+  body.julia-premium .hero-trust{display:none}
+  body.julia-premium .hero-photo-top{right:18px;top:16px;font-size:9px}
+  body.julia-premium .photo-label{display:none}
+  body.julia-premium .hero-photo-link{display:none}
+  body.julia-premium .benefit-strip{margin-top:-34px}
+  body.julia-premium .benefit-inner{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:18px 16px;border-radius:18px}
+  body.julia-premium .benefit-title{grid-column:1/-1;margin-bottom:14px;font-size:13px}
+  body.julia-premium .benefit-title small{font-size:10px}
+  body.julia-premium .benefit-item{padding-left:11px}
+  body.julia-premium .benefit-item:nth-child(2){padding-left:0;border-left:0}
+  body.julia-premium .benefit-item strong{font-size:22px}
+  body.julia-premium .benefit-note{font-size:10px;padding-top:8px}
+  body.julia-premium .path-section{padding-top:20px}
+  body.julia-premium .path-card{padding:18px;border-radius:15px}
+  body.julia-premium .path-card strong{font-size:15px}
+  body.julia-premium .path-card small{font-size:12px}
+  body.julia-premium .path-number{width:31px;height:31px;font-size:10px}
+  body.julia-premium .section-directory{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding-top:2px}
+  body.julia-premium .section-directory a{min-height:46px;font-size:12px;padding:8px 5px}
+  body.julia-premium .section-head{margin-bottom:28px}
+  body.julia-premium h2{font-size:30px}
+  body.julia-premium .gallery-layout{gap:28px}
+  body.julia-premium .gallery-story h3{font-size:28px}
+  body.julia-premium .overview-layout,body.julia-premium .district-layout{gap:26px}
+  body.julia-premium .unit-summary article{padding:20px}
+  body.julia-premium .unit-summary strong{font-size:31px}
+  body.julia-premium .info-card-grid article{padding:22px}
+  body.julia-premium .community-copy{padding:22px}
+  body.julia-premium .community-outro{padding:24px}
+  body.julia-premium .skylounge-section{padding-block:76px}
+  body.julia-premium .plan-summary{padding:24px 21px}
+  body.julia-premium .visit-band-inner{padding-block:31px}
+  body.julia-premium .visit-band h3{font-size:25px}
+  body.julia-premium #reservation{padding-block:76px}
+  body.julia-premium #reservation .form-card{padding:24px 20px}
+  body.julia-premium .mobile-bar{padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+  body.julia-premium .mobile-bar-inner{grid-template-columns:58px minmax(0,1.15fr) minmax(0,1fr);gap:6px}
+  body.julia-premium .mobile-bar .btn{min-height:52px;font-size:13px}
+  body.julia-premium .bar-call{min-height:52px;font-size:11px}
+  body.julia-premium .site-footer{padding-bottom:138px}
+}
+@media(max-width:370px){
+  body.julia-premium .wrap{width:calc(100% - 22px)}
+  body.julia-premium .hero-grid{min-height:630px}
+  body.julia-premium .hero-copy{padding-inline:19px}
+  body.julia-premium .hero h1{font-size:35px}
+  body.julia-premium .hero-actions{grid-template-columns:1fr}
+  body.julia-premium .benefit-inner{grid-template-columns:1fr}
+  body.julia-premium .benefit-title{margin-bottom:3px}
+  body.julia-premium .benefit-item,body.julia-premium .benefit-item:nth-child(2){border-left:0;border-top:1px solid #e2e7e3;padding:10px 0 0;margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+}

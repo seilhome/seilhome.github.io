@@ -1,0 +1,5 @@
+BC카드 LMS 발송용 짧은 주소
+http://gn-premier.com/bc/
+
+접속 시 자동으로 아래 UTM 주소로 이동합니다.
+http://gn-premier.com/?utm_source=bc_card&utm_medium=lms&utm_campaign=20260826_bc_lms
