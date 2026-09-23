@@ -282,3 +282,87 @@ body.julia-premium .live-lead-float{display:none}
   body.julia-premium .live-lead-float strong{font-size:11px}
   body.julia-premium .live-lead-float small{font-size:8.5px}
 }
+
+/* 2026-09-24: 파비콘 느낌의 웜톤 배경 적용 */
+body.julia-premium{
+  --paper:#faf5ee;
+  --white:#fffdf9;
+  --line:#e7dccd;
+  background:
+    radial-gradient(circle at 12% 2%, rgba(201,149,90,.14) 0, rgba(201,149,90,0) 22%),
+    radial-gradient(circle at 88% 16%, rgba(176,132,90,.10) 0, rgba(176,132,90,0) 20%),
+    linear-gradient(180deg,#fcfaf7 0%,#f7f1e8 52%,#fbf8f3 100%);
+  background-attachment:fixed;
+}
+body.julia-premium .site-header{
+  background:rgba(255,251,245,.94);
+  border-bottom:1px solid rgba(160,121,77,.12);
+}
+body.julia-premium .hero{
+  background:linear-gradient(180deg,#fcf8f2 0%,#f5eee5 100%);
+}
+body.julia-premium .live-consult-strip{
+  background:#f8f1e6;
+  border-bottom:1px solid #eadbc7;
+}
+body.julia-premium .section-directory a,
+body.julia-premium .path-card,
+body.julia-premium .benefit-inner,
+body.julia-premium .community-card,
+body.julia-premium .plan-card,
+body.julia-premium .form-card,
+body.julia-premium .info-card-grid article,
+body.julia-premium .community-outro,
+body.julia-premium .faq-list details,
+body.julia-premium .location-image,
+body.julia-premium .gallery-view,
+body.julia-premium .detail-image{
+  border-color:#eadfce;
+}
+body.julia-premium .path-card,
+body.julia-premium .section-directory a,
+body.julia-premium .pill-tab,
+body.julia-premium .community-card,
+body.julia-premium .info-card-grid article,
+body.julia-premium .complex-points article,
+body.julia-premium .unit-summary article,
+body.julia-premium .faq-list details,
+body.julia-premium .news-strip{
+  background:rgba(255,251,246,.96);
+}
+body.julia-premium .overview-section{
+  background:linear-gradient(180deg,rgba(255,252,248,.94) 0%,rgba(249,242,233,.98) 100%);
+}
+body.julia-premium .district-section{
+  background:#f6efe6;
+}
+body.julia-premium .complex-section{
+  background:#fffaf4;
+}
+body.julia-premium .community-section{
+  background:#f2e8dc;
+}
+body.julia-premium #floor{
+  background:#f7f1e8;
+}
+body.julia-premium .faq-section{
+  background:#fffaf5;
+}
+body.julia-premium #contact-map{
+  background:#f6efe6;
+}
+body.julia-premium .path-number{
+  background:#f6ede1;
+  color:#9c7240;
+}
+body.julia-premium .path-arrow{
+  background:#f5ebdf;
+  color:#9b7040;
+}
+body.julia-premium .info-badge{
+  background:#f2e7d9;
+  color:#8a6435;
+}
+@media(max-width:800px){
+  body.julia-premium{background-attachment:scroll;}
+}
