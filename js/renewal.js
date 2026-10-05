@@ -217,7 +217,7 @@
         setTimeout(refreshLeadCount,1800);
       }catch(_){
         error.replaceChildren(document.createTextNode('전송을 완료하지 못했습니다. 다시 시도하거나 '));
-        const link=document.createElement('a');link.href='tel:033-900-0342';link.textContent='033-900-0342';error.append(link,document.createTextNode('로 전화해 주세요.'));
+        const link=document.createElement('a');link.href='tel:010-6383-5879';link.textContent='전화상담 버튼';error.append(link,document.createTextNode('을 이용해 주세요.'));
         error.hidden=false;
         track('lead_submit_error',{form_id:form.id,request_kind:kind});
       }finally{

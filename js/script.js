@@ -367,7 +367,7 @@ function bindLeadForm(formId){
       if(typeof clarity==='function'){ clarity('set','consult_type', data.source||''); }
       }
     }catch(err){
-      alert('접수 중 오류가 발생했습니다. 033-900-0342로 연락 부탁드립니다.');
+      alert('접수 중 오류가 발생했습니다. 홈페이지의 전화상담 버튼을 이용해 주세요.');
     }finally{
       submit.disabled=false;
       submit.classList.remove('loading');
