@@ -342,4 +342,24 @@
   }
   openLegacyAnchor();
   window.addEventListener('hashchange',openLegacyAnchor);
+
+  // 분양가표 페이지에서 방문상담을 누르면 홈페이지 예약폼으로 바로 안내합니다.
+  function openVisitReservationFromPrice(){
+    const params=new URLSearchParams(location.search);
+    if(params.get('visit')!=='1') return;
+    const section=document.getElementById('reservation');
+    const form=document.getElementById('leadForm');
+    if(!section||!form) return;
+    const consultType=form.querySelector('[name="consultType"]');
+    if(consultType) consultType.value='모델하우스 방문상담';
+    const options=form.querySelector('.optional-fields');
+    if(options) options.open=true;
+    const date=form.querySelector('[name="visitDate"]');
+    requestAnimationFrame(()=>{
+      section.scrollIntoView({behavior:'smooth',block:'start'});
+      setTimeout(()=>date?.focus({preventScroll:true}),450);
+    });
+    track('visit_reservation_entry',{source:'price_page'});
+  }
+  openVisitReservationFromPrice();
 })();
