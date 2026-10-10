@@ -52,6 +52,42 @@
   refreshLeadCount();
   setInterval(refreshLeadCount,60000);
 
+  // 메인 주요 사업정보 숫자 카운트 애니메이션
+  (()=>{
+    const numbers=[...document.querySelectorAll('.countUp')];
+    if(!numbers.length) return;
+
+    const reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const format=value=>Number(value).toLocaleString('ko-KR');
+    const run=el=>{
+      if(el.dataset.played==='1') return;
+      el.dataset.played='1';
+      const target=Number(el.dataset.count||0);
+      if(reduce){el.textContent=format(target);return;}
+      const start=performance.now();
+      const duration=1200;
+      const frame=now=>{
+        const progress=Math.min(1,(now-start)/duration);
+        const eased=1-Math.pow(1-progress,3);
+        el.textContent=format(Math.round(target*eased));
+        if(progress<1) requestAnimationFrame(frame);
+        else el.textContent=format(target);
+      };
+      requestAnimationFrame(frame);
+    };
+    const runAll=()=>numbers.forEach((el,index)=>setTimeout(()=>run(el),index*120));
+    const section=document.querySelector('.projectStats');
+    if(!section){runAll();return;}
+    if(!('IntersectionObserver' in window)){runAll();return;}
+    const observer=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){
+        runAll();
+        observer.disconnect();
+      }
+    },{threshold:0.18});
+    observer.observe(section);
+  })();
+
   const leadDialog=document.getElementById('leadDialog');
   const imageDialog=document.getElementById('imageDialog');
   const dialogForm=document.getElementById('priceLeadForm');

@@ -378,3 +378,75 @@ body.julia-premium .benefit-note strong{color:#173e31;font-weight:800}
   body.julia-premium .benefit-deadline{font-size:9px;padding:3px 6px;margin-bottom:3px}
   body.julia-premium .benefit-interest small{margin-top:1px}
 }
+
+
+/* 2026-10-10: 메인 히어로 간소화 + 주요 사업정보 카운트 */
+body.julia-premium .project-stats-section{
+  position:relative;
+  z-index:6;
+  margin-top:-38px;
+  padding:0 0 54px;
+  background:transparent;
+}
+body.julia-premium .projectStats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  background:#fff;
+  border:1px solid rgba(25,70,53,.10);
+  border-radius:22px;
+  box-shadow:0 20px 55px rgba(18,56,42,.12);
+  padding:28px 22px;
+}
+body.julia-premium .projectStats .statItem{
+  position:relative;
+  text-align:center;
+  padding:10px 18px;
+}
+body.julia-premium .projectStats .statItem:not(:last-child):after{
+  content:'';
+  position:absolute;
+  right:0;
+  top:12%;
+  width:1px;
+  height:76%;
+  background:#dfe6e1;
+}
+body.julia-premium .projectStats .statItem strong{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:5px;
+  color:#173e31;
+  font-size:clamp(38px,4vw,54px);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.055em;
+}
+body.julia-premium .projectStats .statItem strong small{
+  color:#a77b43;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+body.julia-premium .projectStats .statItem p{
+  margin-top:10px;
+  color:#6d7972;
+  font-size:13px;
+  font-weight:700;
+}
+body.julia-premium .project-stats-section + .benefit-strip{margin-top:0}
+
+@media(max-width:800px){
+  body.julia-premium .hero-grid{min-height:600px}
+  body.julia-premium .project-stats-section{margin-top:-28px;padding-bottom:30px}
+  body.julia-premium .projectStats{padding:20px 6px;border-radius:18px}
+  body.julia-premium .projectStats .statItem{padding:8px 5px}
+  body.julia-premium .projectStats .statItem strong{font-size:29px;gap:3px}
+  body.julia-premium .projectStats .statItem strong small{font-size:11px}
+  body.julia-premium .projectStats .statItem p{font-size:11px;margin-top:8px}
+}
+@media(max-width:370px){
+  body.julia-premium .hero-grid{min-height:620px}
+  body.julia-premium .projectStats .statItem strong{font-size:26px}
+  body.julia-premium .projectStats .statItem strong small{font-size:10px}
+}
