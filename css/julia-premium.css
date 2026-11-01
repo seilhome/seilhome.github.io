@@ -495,3 +495,11 @@ body.julia-premium .project-stats-section + .benefit-strip{margin-top:0}
 .visit-gift-popup p{margin:0 0 20px;color:#6b786f;font-size:15px;line-height:1.65}
 .visit-gift-popup small{display:block;margin-top:12px;color:#7d8881;font-size:11px;line-height:1.5}
 @media(max-width:600px){.visit-gift-popup-inner{padding:30px 22px 24px}.visit-gift-popup h2{font-size:30px}}
+
+/* Transfer category quick path */
+@media(min-width:801px){body.julia-premium .path-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+body.julia-premium .transfer-path-card{background:linear-gradient(145deg,#153f32,#1e5b46);border-color:#153f32;color:#fff}
+body.julia-premium .transfer-path-card:hover{background:linear-gradient(145deg,#0f3529,#184b3a);border-color:#0f3529}
+body.julia-premium .transfer-path-card small{color:#d5e2dc}
+body.julia-premium .transfer-path-card .path-number{background:rgba(255,255,255,.11);color:#e7c996}
+body.julia-premium .transfer-path-card .path-arrow{background:rgba(255,255,255,.11);color:#efd7aa}

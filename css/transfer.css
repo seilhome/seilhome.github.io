@@ -1,0 +1,62 @@
+/* Transfer page — designed to be easy to expand from one project to broader Gangneung presale-right listings. */
+body.transfer-page{background:#f3f5f1;color:#21352d}
+.transfer-hero{padding:58px 0 70px;background:linear-gradient(145deg,#10362b,#1c5a45);color:#fff}
+.transfer-hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:44px;align-items:center}
+.transfer-hero .eyebrow{color:#e1c08d}
+.transfer-hero h1{font-size:clamp(40px,5vw,66px);line-height:1.08;letter-spacing:-.055em;margin:10px 0 22px;color:#fff}
+.transfer-hero h1 span{color:#efd4a5}
+.transfer-hero p{font-size:17px;line-height:1.8;color:#d8e6df;max-width:720px}
+.transfer-hero-actions{display:flex;gap:10px;margin-top:30px;max-width:620px}
+.transfer-hero-actions .btn{flex:1}
+.transfer-hero-actions .btn-primary{background:#e4c08a;color:#17372c}
+.transfer-hero-actions .btn-light{background:rgba(255,255,255,.96);border-color:transparent}
+.transfer-hero-panel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:28px;backdrop-filter:blur(8px)}
+.transfer-hero-panel small{display:block;color:#d5e2dc;margin-bottom:7px}
+.transfer-hero-panel strong{display:block;font-size:23px;color:#fff;margin-bottom:16px}
+.transfer-hero-panel ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.transfer-hero-panel li{display:flex;gap:9px;color:#e4eee8;font-size:13px;line-height:1.6}
+.transfer-hero-panel li:before{content:'✓';color:#e9c78f;font-weight:900}
+.transfer-section{padding:88px 0}
+.transfer-section.white{background:#fff}
+.transfer-section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:32px}
+.transfer-section-head h2{margin:8px 0 0;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.045em;color:#17372c}
+.transfer-section-head p{max-width:570px;color:#6b7972;line-height:1.75}
+.transfer-listing-empty{border:1px solid #dbe3dd;background:#f8faf8;border-radius:22px;padding:42px;text-align:center}
+.transfer-listing-empty strong{display:block;font-size:22px;color:#183e31;margin-bottom:9px}
+.transfer-listing-empty p{color:#738078;line-height:1.7;margin-bottom:20px}
+.transfer-listing-guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.transfer-listing-guide article{background:#fff;border:1px solid #dee5e0;border-radius:18px;padding:24px}
+.transfer-listing-guide small{color:#a37a45;font-weight:800;letter-spacing:.08em}
+.transfer-listing-guide strong{display:block;font-size:18px;color:#17372c;margin:8px 0 7px}
+.transfer-listing-guide p{font-size:13px;color:#6c7972;line-height:1.65}
+.transfer-forms{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.transfer-form-card{background:#fff;border:1px solid rgba(25,65,50,.12);border-radius:24px;padding:30px;box-shadow:0 16px 44px rgba(20,54,41,.07)}
+.transfer-form-card h3{font-size:28px;color:#17372c;margin:6px 0 8px}
+.transfer-form-card>p{font-size:13px;color:#6a7871;line-height:1.7;margin-bottom:23px}
+.transfer-form{display:grid;gap:13px}
+.transfer-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.transfer-field{display:grid;gap:7px}
+.transfer-field span{font-size:12px;font-weight:750;color:#3d5148}
+.transfer-field input,.transfer-field select,.transfer-field textarea{width:100%;border:1px solid #d7dfd9;background:#fbfcfb;border-radius:12px;padding:13px 14px;font:inherit;color:#1f342b;outline:none}
+.transfer-field input:focus,.transfer-field select:focus,.transfer-field textarea:focus{border-color:#6a9382;box-shadow:0 0 0 3px rgba(49,105,82,.09)}
+.transfer-field textarea{min-height:112px;resize:vertical}
+.transfer-form .agree{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#586860;line-height:1.5}
+.transfer-form .agree input{margin-top:2px}
+.transfer-help{font-size:11px;color:#7b8881;line-height:1.6}
+.transfer-form-status{font-size:12px;line-height:1.55;min-height:19px}
+.transfer-form-status.success{color:#1c704e}.transfer-form-status.error{color:#a13c30}
+.transfer-rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.transfer-rules article{background:#f6f8f5;border:1px solid #dfe6e1;border-radius:18px;padding:25px}
+.transfer-rules span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#173f31;color:#fff;font-size:12px;font-weight:800}
+.transfer-rules h3{font-size:18px;color:#17372c;margin:15px 0 8px}
+.transfer-rules p{font-size:13px;color:#69766f;line-height:1.65}
+.transfer-note{margin-top:26px;padding:20px 22px;border-radius:15px;background:#f4f0e8;color:#655640;font-size:12px;line-height:1.7}
+.transfer-footer-cta{background:#11382d;color:#fff;padding:58px 0}
+.transfer-footer-cta .wrap{display:flex;justify-content:space-between;gap:30px;align-items:center}
+.transfer-footer-cta h2{color:#fff;font-size:30px;margin:4px 0 7px}.transfer-footer-cta p{color:#cbd8d1}
+.transfer-footer-cta .btn{background:#e3c08a;color:#17372c}
+@media(max-width:900px){.transfer-hero-grid,.transfer-forms{grid-template-columns:1fr}.transfer-listing-guide,.transfer-rules{grid-template-columns:1fr}.transfer-hero-actions{display:grid;grid-template-columns:1fr 1fr}.transfer-section-head{display:block}.transfer-section-head p{margin-top:12px}.transfer-footer-cta .wrap{display:block}.transfer-footer-cta .btn{margin-top:22px;width:100%}}
+@media(max-width:600px){.transfer-hero{padding:36px 0 48px}.transfer-hero h1{font-size:39px}.transfer-hero p{font-size:14px}.transfer-hero-actions{grid-template-columns:1fr}.transfer-section{padding:62px 0}.transfer-form-card{padding:23px 19px}.transfer-form-grid{grid-template-columns:1fr}.transfer-listing-empty{padding:30px 20px}.transfer-footer-cta h2{font-size:26px}}
+.transfer-filter{display:flex;gap:10px;align-items:end;margin:0 0 24px;padding:18px;background:#f7f9f7;border:1px solid #dfe6e1;border-radius:16px}.transfer-filter label{display:grid;gap:6px;min-width:160px}.transfer-filter label span{font-size:12px;font-weight:800;color:#51645b}.transfer-filter select{border:1px solid #d6dfd9;background:#fff;border-radius:10px;padding:11px 34px 11px 12px;color:#22382e;font:inherit}.transfer-listing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.listing-card{border:1px solid #dce4de;background:#fff;border-radius:20px;padding:24px;box-shadow:0 12px 34px rgba(22,58,44,.06);display:flex;flex-direction:column;min-height:290px}.listing-card-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.listing-status{font-size:11px;font-weight:850;background:#e6f2eb;color:#1d6747;padding:6px 9px;border-radius:999px}.listing-id{font-size:11px;color:#87938d}.listing-card h3{font-size:24px;color:#17372c;margin:0 0 6px}.listing-type{font-size:14px;color:#7b674d;font-weight:800;margin-bottom:17px}.listing-info{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:0 0 18px}.listing-info div{border-top:1px solid #edf0ed;padding-top:9px}.listing-info dt{font-size:11px;color:#8a9690;margin-bottom:4px}.listing-info dd{margin:0;font-size:14px;font-weight:750;color:#31463c}.listing-premium{margin-top:auto;background:#f4f0e8;border-radius:12px;padding:13px 14px}.listing-premium small{display:block;font-size:11px;color:#8f7554;margin-bottom:3px}.listing-premium strong{font-size:19px;color:#3b2f20}.listing-card .btn{margin-top:14px;width:100%}.transfer-listing-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding:18px 22px;border-radius:14px;background:#173f31;color:#fff}.transfer-listing-bottom p{margin:0;color:#dce7e1}.transfer-listing-bottom a{color:#f0d5a7;font-weight:800}.selected-listing{border:1px solid #d8c399;background:#fbf7ef;border-radius:12px;padding:12px 13px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}.selected-listing span{font-size:11px;color:#8a7558}.selected-listing strong{font-size:13px;color:#3a3023}.selected-listing button{border:0;background:transparent;color:#8b6a3f;font-size:11px;text-decoration:underline;cursor:pointer}
+@media(max-width:900px){.transfer-listing-grid{grid-template-columns:1fr 1fr}.transfer-filter{flex-wrap:wrap}.transfer-filter label{min-width:0;flex:1}.transfer-listing-bottom{display:block}.transfer-listing-bottom a{display:inline-block;margin-top:9px}}
+@media(max-width:600px){.transfer-listing-grid{grid-template-columns:1fr}.transfer-filter{display:grid;grid-template-columns:1fr 1fr}.transfer-filter .btn{grid-column:1/-1}.selected-listing{grid-template-columns:1fr}.selected-listing button{text-align:left;padding:0}}
