@@ -27,6 +27,279 @@
   <link rel="stylesheet" href="css/renewal.css?v=20260919-r5-skylounge">
   <link rel="stylesheet" href="css/julia-premium.css?v=20261101-transfer">
   <link rel="stylesheet" href="css/transfer.css?v=20261101-1">
+
+  <style>
+    /* 2026-11-01 전매 문의 섹션 타이포/정렬 개선 */
+    :root{
+      --transfer-text:#173f31;
+      --transfer-muted:#66756e;
+      --transfer-border:#dbe4df;
+      --transfer-soft:#f7f9f8;
+    }
+
+    .transfer-page,
+    .transfer-page input,
+    .transfer-page select,
+    .transfer-page textarea,
+    .transfer-page button{
+      font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif;
+      letter-spacing:-0.02em;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .transfer-section-head{
+      align-items:flex-start;
+      gap:28px;
+    }
+
+    .transfer-section-head h2{
+      margin:4px 0 0;
+      line-height:1.22;
+      letter-spacing:-0.035em;
+    }
+
+    .transfer-section-head > p{
+      max-width:620px;
+      line-height:1.75;
+      color:var(--transfer-muted);
+      margin-top:2px;
+    }
+
+    .transfer-forms{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .transfer-form-card{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      padding:28px 26px;
+    }
+
+    .transfer-form-card > .eyebrow{
+      display:block;
+      margin-bottom:10px;
+      line-height:1;
+      letter-spacing:0.18em;
+    }
+
+    .transfer-form-card h3{
+      margin:0 0 10px;
+      min-height:38px;
+      display:flex;
+      align-items:flex-end;
+      font-size:clamp(25px,2vw,31px);
+      line-height:1.22;
+      font-weight:800;
+      letter-spacing:-0.045em;
+      color:var(--transfer-text);
+      word-break:keep-all;
+    }
+
+    .transfer-form-card > p{
+      margin:0 0 24px;
+      min-height:54px;
+      font-size:14px;
+      line-height:1.75;
+      font-weight:400;
+      color:var(--transfer-muted);
+      word-break:keep-all;
+    }
+
+    .transfer-form{
+      display:flex;
+      flex-direction:column;
+      flex:1 1 auto;
+      gap:16px;
+    }
+
+    .transfer-form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      align-items:start;
+    }
+
+    .transfer-field{
+      display:block;
+      margin:0;
+    }
+
+    .transfer-field > span{
+      display:flex;
+      align-items:baseline;
+      gap:6px;
+      min-height:22px;
+      margin:0 0 7px;
+      font-size:13px;
+      line-height:1.45;
+      font-weight:700;
+      letter-spacing:-0.025em;
+      color:var(--transfer-text);
+    }
+
+    .transfer-field > span em{
+      font-size:12px;
+      line-height:1.4;
+      font-style:normal;
+      font-weight:500;
+      color:#8a9690;
+      letter-spacing:-0.02em;
+    }
+
+    .transfer-form input,
+    .transfer-form select,
+    .transfer-form textarea{
+      width:100%;
+      border:1px solid var(--transfer-border);
+      border-radius:12px;
+      background:#fff;
+      color:#263b32;
+      font-size:15px;
+      font-weight:400;
+      line-height:1.45;
+      letter-spacing:-0.02em;
+      box-sizing:border-box;
+      box-shadow:none;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+
+    .transfer-form input,
+    .transfer-form select{
+      height:48px;
+      padding:0 14px;
+    }
+
+    .transfer-form textarea{
+      min-height:112px;
+      padding:14px;
+      resize:vertical;
+    }
+
+    .transfer-form input::placeholder,
+    .transfer-form textarea::placeholder{
+      color:#9aa59f;
+      opacity:1;
+    }
+
+    .transfer-form input:focus,
+    .transfer-form select:focus,
+    .transfer-form textarea:focus{
+      border-color:#769487;
+      box-shadow:0 0 0 3px rgba(23,63,49,.08);
+      background:#fff;
+    }
+
+    .transfer-form .agree{
+      display:grid;
+      grid-template-columns:18px 1fr;
+      gap:9px;
+      align-items:start;
+      margin:2px 0 0;
+      font-size:12px;
+      line-height:1.55;
+      font-weight:500;
+      color:#66756e;
+      letter-spacing:-0.02em;
+    }
+
+    .transfer-form .agree input{
+      width:16px;
+      height:16px;
+      margin:2px 0 0;
+      padding:0;
+    }
+
+    .transfer-help{
+      margin:-4px 0 0;
+      min-height:20px;
+      font-size:12px;
+      line-height:1.6;
+      color:#89958f;
+      letter-spacing:-0.02em;
+    }
+
+    .transfer-form-status{
+      min-height:0;
+      margin:0;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .transfer-form .btn-wide{
+      margin-top:auto;
+      min-height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:15px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-0.025em;
+      border-radius:999px;
+    }
+
+    .selected-listing{
+      margin-bottom:2px;
+    }
+
+    .transfer-filter{
+      align-items:end;
+      gap:12px;
+    }
+
+    .transfer-filter label > span{
+      display:block;
+      margin-bottom:7px;
+      font-size:12px;
+      line-height:1.4;
+      font-weight:700;
+      color:#607068;
+    }
+
+    .transfer-filter select,
+    .transfer-filter .btn{
+      min-height:44px;
+    }
+
+    @media (max-width: 900px){
+      .transfer-forms{
+        grid-template-columns:1fr;
+      }
+
+      .transfer-form-card{
+        padding:24px 20px;
+      }
+
+      .transfer-form-card h3,
+      .transfer-form-card > p{
+        min-height:0;
+      }
+    }
+
+    @media (max-width: 620px){
+      .transfer-form-grid{
+        grid-template-columns:1fr;
+        gap:14px;
+      }
+
+      .transfer-form-card h3{
+        font-size:24px;
+      }
+
+      .transfer-form-card > p{
+        font-size:13.5px;
+        line-height:1.7;
+      }
+    }
+  </style>
+
 </head>
 <body class="julia-premium transfer-page">
 <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -57,7 +330,7 @@
   <section class="transfer-section" id="transfer-forms"><div class="wrap">
     <div class="transfer-section-head"><div><span class="eyebrow">BUY · SELL REQUEST</span><h2>매수 문의 · 매도 의뢰</h2></div><p>관심 매물이 있다면 해당 매물 기준으로 문의하시고, 원하는 조건이 따로 있다면 희망 조건을 남겨주세요.</p></div>
     <div class="transfer-forms">
-      <article class="transfer-form-card" id="buy-form"><span class="eyebrow">BUY REQUEST</span><h3>전매 매수 문의</h3><p>원하시는 평형과 층, 프리미엄 조건을 남겨주세요. 현재 공개되지 않은 매물까지 포함해 확인 가능한 내용을 상담해드립니다.</p>
+      <article class="transfer-form-card" id="buy-form"><span class="eyebrow">BUY REQUEST</span><h3>분양권 매수 문의</h3><p>원하시는 평형과 층, 프리미엄 조건을 남겨주세요. 현재 공개되지 않은 매물까지 포함해 확인 가능한 내용을 상담해드립니다.</p>
         <form class="transfer-form" data-transfer-form="buy">
           <input type="hidden" name="listingId" value="">
           <div class="selected-listing" data-selected-listing hidden><span>선택한 매물</span><strong data-selected-listing-text></strong><button type="button" data-clear-listing>선택 해제</button></div>
