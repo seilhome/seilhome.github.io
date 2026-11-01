@@ -14,7 +14,7 @@
   function clean(v){return String(v||'').trim();}
   function add(parts,label,value){if(clean(value)) parts.push(`${label}: ${clean(value)}`);}
 
-  const listings=Array.isArray(window.TRANSFER_LISTINGS)?window.TRANSFER_LISTINGS:[];
+  let listings=[];
   const grid=document.getElementById('transfer-listing-grid');
   const empty=document.getElementById('transfer-listing-empty');
   const buildingFilter=document.getElementById('listing-building');
@@ -44,7 +44,25 @@
   buildingFilter?.addEventListener('change',renderListings); typeFilter?.addEventListener('change',renderListings);
   resetFilter?.addEventListener('click',()=>{if(buildingFilter) buildingFilter.value='';if(typeFilter) typeFilter.value='';renderListings();});
   document.querySelector('[data-clear-listing]')?.addEventListener('click',()=>{const form=document.querySelector('[data-transfer-form="buy"]');if(!form)return;form.querySelector('[name="listingId"]').value='';form.querySelector('[data-selected-listing]').hidden=true;});
-  renderListings();
+  async function loadListings(){
+    if(grid) grid.setAttribute('aria-busy','true');
+    if(empty) empty.hidden=true;
+
+    try{
+      if(window.TRANSFER_LISTINGS_PROMISE){
+        listings=await window.TRANSFER_LISTINGS_PROMISE;
+      }else{
+        listings=Array.isArray(window.TRANSFER_LISTINGS)?window.TRANSFER_LISTINGS:[];
+      }
+    }catch(_){
+      listings=[];
+    }finally{
+      if(grid) grid.removeAttribute('aria-busy');
+      renderListings();
+    }
+  }
+
+  loadListings();
 
   for(const form of document.querySelectorAll('[data-transfer-form]')){
     form.addEventListener('focusin',()=>track('transfer_form_start',{form_type:form.dataset.transferForm}),{once:true});
