@@ -503,3 +503,205 @@ body.julia-premium .transfer-path-card:hover{background:linear-gradient(145deg,#
 body.julia-premium .transfer-path-card small{color:#d5e2dc}
 body.julia-premium .transfer-path-card .path-number{background:rgba(255,255,255,.11);color:#e7c996}
 body.julia-premium .transfer-path-card .path-arrow{background:rgba(255,255,255,.11);color:#efd7aa}
+
+
+/* 2026-11-02: 45평·48평 40평대 특별혜택 */
+body.julia-premium .hero-40-benefit{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:max-content;
+  max-width:100%;
+  margin:15px 0 0;
+  padding:9px 13px;
+  border:1px solid rgba(180,122,40,.26);
+  border-radius:999px;
+  background:linear-gradient(90deg,#fff8eb 0%,#f7ead4 100%);
+  color:#173e31;
+  box-shadow:0 8px 22px rgba(70,48,20,.06);
+}
+body.julia-premium .hero-40-benefit span{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#173e31;
+  color:#f2d5a5;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+body.julia-premium .hero-40-benefit strong{
+  font-size:14px;
+  line-height:1.35;
+  letter-spacing:-.035em;
+}
+
+body.julia-premium .forty-benefit-section{
+  padding:26px 0 34px;
+  background:linear-gradient(180deg,#f4eadc 0%,#fbf7f0 100%);
+  border-bottom:1px solid #eadbc7;
+}
+body.julia-premium .forty-benefit-card{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(250px,.62fr);
+  gap:28px;
+  align-items:stretch;
+  padding:30px;
+  border:1px solid rgba(169,119,54,.22);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(218,181,121,.13),transparent 30%),
+    #fffdf9;
+  box-shadow:0 18px 46px rgba(46,35,20,.07);
+}
+body.julia-premium .forty-benefit-kicker{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#173e31;
+  color:#f3d9ae;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+body.julia-premium .forty-benefit-copy h2{
+  margin:13px 0 9px;
+  color:#173e31;
+  font-size:clamp(25px,3.2vw,38px);
+  line-height:1.2;
+  letter-spacing:-.055em;
+}
+body.julia-premium .forty-benefit-copy h2 strong{
+  color:#a66f27;
+  font-weight:900;
+}
+body.julia-premium .forty-benefit-copy>p:not(.forty-benefit-note){
+  margin:0 0 18px;
+  color:#66736c;
+  font-size:14px;
+  line-height:1.75;
+}
+body.julia-premium .forty-benefit-copy>p b{color:#173e31}
+body.julia-premium .forty-benefit-options{
+  display:grid;
+  grid-template-columns:1fr 44px 1fr;
+  gap:10px;
+  align-items:stretch;
+}
+body.julia-premium .forty-benefit-options article{
+  display:grid;
+  align-content:center;
+  gap:5px;
+  min-height:118px;
+  padding:17px 18px;
+  border:1px solid #eadcc6;
+  border-radius:16px;
+  background:#fbf7ef;
+}
+body.julia-premium .forty-benefit-options article>span{
+  color:#ad7b36;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+body.julia-premium .forty-benefit-options article strong{
+  color:#173e31;
+  font-size:16px;
+  line-height:1.4;
+  letter-spacing:-.035em;
+}
+body.julia-premium .forty-benefit-options article small{
+  color:#7b8781;
+  font-size:11px;
+  line-height:1.45;
+}
+body.julia-premium .forty-benefit-or{
+  display:grid;
+  place-items:center;
+  color:#a47639;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+body.julia-premium .forty-benefit-note{
+  margin:13px 1px 0;
+  color:#87918c;
+  font-size:10.5px;
+  line-height:1.6;
+}
+body.julia-premium .forty-benefit-action{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100%;
+  padding:26px 22px;
+  border-radius:19px;
+  background:linear-gradient(150deg,#123a2d,#1c5340);
+  color:#fff;
+  text-align:center;
+}
+body.julia-premium .forty-benefit-action>span{
+  color:#e6c998;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+body.julia-premium .forty-benefit-action>strong{
+  margin:13px 0 19px;
+  font-size:24px;
+  line-height:1.25;
+  letter-spacing:-.045em;
+}
+body.julia-premium .forty-benefit-action em{
+  color:#e9c98f;
+  font-size:16px;
+  font-style:normal;
+}
+body.julia-premium .forty-benefit-action .btn{
+  width:100%;
+  min-height:46px;
+  background:#f2d6a6;
+  color:#173e31;
+  border-color:#f2d6a6;
+  font-weight:900;
+}
+
+@media(max-width:860px){
+  body.julia-premium .forty-benefit-card{
+    grid-template-columns:1fr;
+    gap:18px;
+    padding:23px 18px;
+  }
+  body.julia-premium .forty-benefit-action{
+    padding:21px 18px;
+  }
+}
+@media(max-width:620px){
+  body.julia-premium .hero-40-benefit{
+    width:100%;
+    align-items:flex-start;
+    border-radius:15px;
+  }
+  body.julia-premium .hero-40-benefit strong{font-size:12.5px}
+  body.julia-premium .forty-benefit-section{padding:18px 0 25px}
+  body.julia-premium .forty-benefit-copy h2{font-size:27px}
+  body.julia-premium .forty-benefit-options{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  body.julia-premium .forty-benefit-or{
+    min-height:24px;
+  }
+  body.julia-premium .forty-benefit-options article{
+    min-height:auto;
+    padding:15px 16px;
+  }
+  body.julia-premium .forty-benefit-action>strong{font-size:22px}
+}
+
